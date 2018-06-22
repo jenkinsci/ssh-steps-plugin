@@ -1,0 +1,10 @@
+= Release Notes.
+
+== 1.0.0 (Unreleased)
+* Initial release.
+* Supported Steps.
+** sshExecuteCommand
+** sshExecuteScript
+** sshGet
+** sshPut
+** sshRemove

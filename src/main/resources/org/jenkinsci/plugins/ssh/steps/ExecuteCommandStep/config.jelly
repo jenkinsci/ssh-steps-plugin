@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?jelly escape-by-default='true'?>
+<j:jelly xmlns:f="/lib/form" xmlns:j="jelly:core">
+  <f:entry field="remote" title="Remote">
+    <f:expandableTextbox/>
+  </f:entry>
+  <f:entry field="command" title="Command">
+    <f:expandableTextbox/>
+  </f:entry>
+  <f:entry field="sudo">
+    <f:checkbox default="false" title="Sudo Command?"/>
+  </f:entry>
+  <f:advanced>
+    <f:entry field="failOnError">
+      <f:checkbox default="true" title="Fail On Error"/>
+    </f:entry>
+    <f:entry field="dryRun">
+      <f:checkbox default="false" title="Dry Run"/>
+    </f:entry>
+  </f:advanced>
+</j:jelly>
