@@ -18,7 +18,7 @@ import org.kohsuke.stapler.DataBoundSetter;
  *
  * @author Naresh Rayapati
  */
-public class ExecuteCommandStep extends BasicSSHStep {
+public class CommandStep extends BasicSSHStep {
 
   private static final long serialVersionUID = 7492916747486604582L;
 
@@ -30,7 +30,7 @@ public class ExecuteCommandStep extends BasicSSHStep {
   private boolean sudo = false;
 
   @DataBoundConstructor
-  public ExecuteCommandStep(final String command) {
+  public CommandStep(final String command) {
     this.command = command;
   }
 
@@ -44,7 +44,7 @@ public class ExecuteCommandStep extends BasicSSHStep {
 
     @Override
     public String getFunctionName() {
-      return "sshExecuteCommand";
+      return "sshCommand";
     }
 
     @Override
@@ -57,29 +57,29 @@ public class ExecuteCommandStep extends BasicSSHStep {
 
     private static final long serialVersionUID = -5293952534324828128L;
 
-    protected Execution(final ExecuteCommandStep step, final StepContext context)
+    protected Execution(final CommandStep step, final StepContext context)
         throws IOException, InterruptedException {
       super(step, context);
     }
 
     @Override
     protected Object run() throws Exception {
-      ExecuteCommandStep step = (ExecuteCommandStep) getStep();
+      CommandStep step = (CommandStep) getStep();
       if (Util.fixEmpty(step.getCommand()) == null) {
         throw new IllegalArgumentException("command is null or empty");
       }
-      return getLauncher().getChannel().call(new ExecuteCommandCallable(step, getListener()));
+      return getLauncher().getChannel().call(new CommandCallable(step, getListener()));
     }
 
-    private static class ExecuteCommandCallable extends SSHMasterToSlaveCallable {
+    private static class CommandCallable extends SSHMasterToSlaveCallable {
 
-      public ExecuteCommandCallable(final ExecuteCommandStep step, final TaskListener listener) {
+      public CommandCallable(final CommandStep step, final TaskListener listener) {
         super(step, listener);
       }
 
       @Override
       public Object execute() {
-        ExecuteCommandStep step = (ExecuteCommandStep) getStep();
+        CommandStep step = (CommandStep) getStep();
         return getService().executeCommand(step.getCommand(), step.isSudo());
       }
     }

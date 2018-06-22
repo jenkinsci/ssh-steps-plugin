@@ -18,7 +18,7 @@ import org.kohsuke.stapler.DataBoundConstructor;
  *
  * @author Naresh Rayapati
  */
-public class ExecuteScriptStep extends BasicSSHStep {
+public class ScriptStep extends BasicSSHStep {
 
   private static final long serialVersionUID = 7358533459289529723L;
 
@@ -26,7 +26,7 @@ public class ExecuteScriptStep extends BasicSSHStep {
   private final String script;
 
   @DataBoundConstructor
-  public ExecuteScriptStep(final String script) {
+  public ScriptStep(final String script) {
     this.script = script;
   }
 
@@ -40,7 +40,7 @@ public class ExecuteScriptStep extends BasicSSHStep {
 
     @Override
     public String getFunctionName() {
-      return "sshExecuteScript";
+      return "sshScript";
     }
 
     @Override
@@ -53,14 +53,14 @@ public class ExecuteScriptStep extends BasicSSHStep {
 
     private static final long serialVersionUID = 6008070200393301960L;
 
-    protected Execution(final ExecuteScriptStep step, final StepContext context)
+    protected Execution(final ScriptStep step, final StepContext context)
         throws IOException, InterruptedException {
       super(step, context);
     }
 
     @Override
     protected Object run() throws Exception {
-      ExecuteScriptStep step = (ExecuteScriptStep) getStep();
+      ScriptStep step = (ScriptStep) getStep();
       FilePath ws = getContext().get(FilePath.class);
       assert ws != null;
       FilePath path;
@@ -79,14 +79,14 @@ public class ExecuteScriptStep extends BasicSSHStep {
       }
 
       return getLauncher().getChannel()
-          .call(new ExecuteScriptCallable(step, getListener(), path.getRemote()));
+          .call(new ScriptCallable(step, getListener(), path.getRemote()));
     }
 
-    private static class ExecuteScriptCallable extends SSHMasterToSlaveCallable {
+    private static class ScriptCallable extends SSHMasterToSlaveCallable {
 
       private final String script;
 
-      public ExecuteScriptCallable(final ExecuteScriptStep step, final TaskListener listener,
+      public ScriptCallable(final ScriptStep step, final TaskListener listener,
           final String script) {
         super(step, listener);
         this.script = script;

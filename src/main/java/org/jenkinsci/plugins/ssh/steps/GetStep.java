@@ -87,7 +87,8 @@ public class GetStep extends BasicSSHStep {
       intoPath = ws.child(step.getInto());
 
       if (intoPath.exists() && !step.isOverride()) {
-        throw new IllegalArgumentException(intoPath.getRemote() + " already exist. Please set override to true just in case.");
+        throw new IllegalArgumentException(
+            intoPath.getRemote() + " already exist. Please set override to true just in case.");
       }
 
       return getLauncher().getChannel()

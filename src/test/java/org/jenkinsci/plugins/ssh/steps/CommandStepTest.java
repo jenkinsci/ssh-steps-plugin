@@ -9,7 +9,6 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import hudson.EnvVars;
-import hudson.FilePath;
 import hudson.Launcher;
 import hudson.model.Run;
 import hudson.model.TaskListener;
@@ -27,15 +26,13 @@ import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
 /**
- * Unit test cases for ExecuteScriptStep class.
+ * Unit test cases for CommandStep class.
  *
  * @author Naresh Rayapati
  */
 @RunWith(PowerMockRunner.class)
-@PrepareForTest({ExecuteScriptStepTest.class, SSHService.class, FilePath.class})
-public class ExecuteScriptStepTest {
-
-  final String scriptName = "test.sh";
+@PrepareForTest({CommandStepTest.class, SSHService.class})
+public class CommandStepTest {
 
   @Mock
   TaskListener taskListenerMock;
@@ -51,10 +48,8 @@ public class ExecuteScriptStepTest {
   StepContext contextMock;
   @Mock
   Launcher launcherMock;
-  @Mock
-  FilePath filePathMock;
 
-  ExecuteScriptStep.Execution stepExecution;
+  CommandStep.Execution stepExecution;
 
   @Before
   public void setup() throws IOException, InterruptedException {
@@ -67,42 +62,36 @@ public class ExecuteScriptStepTest {
     PowerMockito.mockStatic(SSHService.class);
     when(SSHService.create(any(), anyBoolean(), anyBoolean(), any())).thenReturn(sshServiceMock);
 
-    when(filePathMock.child(any())).thenReturn(filePathMock);
-    when(filePathMock.exists()).thenReturn(true);
-    when(filePathMock.isDirectory()).thenReturn(false);
-    when(filePathMock.getRemote()).thenReturn(scriptName);
-
     when(contextMock.get(Run.class)).thenReturn(runMock);
     when(contextMock.get(TaskListener.class)).thenReturn(taskListenerMock);
     when(contextMock.get(EnvVars.class)).thenReturn(envVarsMock);
     when(contextMock.get(Launcher.class)).thenReturn(launcherMock);
-    when(contextMock.get(FilePath.class)).thenReturn(filePathMock);
 
   }
 
   @Test
   public void testWithEmptyCommandThrowsIllegalArgumentException() throws Exception {
-    final ExecuteScriptStep step = new ExecuteScriptStep("");
-    stepExecution = new ExecuteScriptStep.Execution(step, contextMock);
+    final CommandStep step = new CommandStep("");
+    stepExecution = new CommandStep.Execution(step, contextMock);
 
     // Execute and assert Test.
     assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
       stepExecution.run();
-    }).withMessage("script is null or empty").withStackTraceContaining("IllegalArgumentException")
+    }).withMessage("command is null or empty").withStackTraceContaining("IllegalArgumentException")
         .withNoCause();
   }
 
   @Test
-  public void testSuccessfulExecuteScript() throws Exception {
-    final ExecuteScriptStep step = new ExecuteScriptStep(scriptName);
+  public void testSuccessfulExecuteCommand() throws Exception {
+    final CommandStep step = new CommandStep("ls -lrt");
 
     // Since SSHService is a mock, it is not validating remote.
-    stepExecution = new ExecuteScriptStep.Execution(step, contextMock);
+    stepExecution = new CommandStep.Execution(step, contextMock);
 
     // Execute Test.
     stepExecution.run();
 
     // Assert Test
-    verify(sshServiceMock, times(1)).executeScriptFromFile(scriptName);
+    verify(sshServiceMock, times(1)).executeCommand("ls -lrt", false);
   }
 }

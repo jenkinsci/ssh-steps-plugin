@@ -3,8 +3,8 @@
 == 1.0.0 (Unreleased)
 * Initial release.
 * Supported Steps.
-** sshExecuteCommand
-** sshExecuteScript
+** sshCommand
+** sshScript
 ** sshGet
 ** sshPut
 ** sshRemove

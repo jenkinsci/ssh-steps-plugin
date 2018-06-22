@@ -144,7 +144,7 @@ Most of the steps in this plugin require a common step variable called `remote`,
 
 The following pipeline steps are available with the initial version of this plugin.
 
-=== sshExecuteCommand
+=== sshCommand
 
 This step executes given command on remote node and responds with output.
 
@@ -187,12 +187,12 @@ This step executes given command on remote node and responds with output.
   remote.password = 'password'
   remote.allowAnyHosts = true
   stage('Remote SSH') {
-    sshExecuteCommand remote: remote, command: "ls -lrt"
-    sshExecuteCommand remote: remote, command: "for i in {1..5}; do echo -n \"Loop \$i \"; date ; sleep 1; done"
+    sshCommand remote: remote, command: "ls -lrt"
+    sshCommand remote: remote, command: "for i in {1..5}; do echo -n \"Loop \$i \"; date ; sleep 1; done"
   }
 ```
 
-=== sshExecuteScript
+=== sshScript
 
 This step executes given script(file) on remote node and responds with output.
 
@@ -232,7 +232,7 @@ This step executes given script(file) on remote node and responds with output.
   remote.allowAnyHosts = true
   stage('Remote SSH') {
     writeFile file: 'abc.sh', text: 'ls -lrt'
-    sshExecuteScript remote: remote, script: "abc.sh"
+    sshScript remote: remote, script: "abc.sh"
   }
 ```
 
@@ -390,17 +390,21 @@ node {
         remote.identityFile = identity
         stage("SSH Steps Rocks!") {
             writeFile file: 'abc.sh', text: 'ls'
-            sshExecuteCommand remote: remote, command: 'for i in {1..5}; do echo -n \"Loop \$i \"; date ; sleep 1; done'
+            sshCommand remote: remote, command: 'for i in {1..5}; do echo -n \"Loop \$i \"; date ; sleep 1; done'
             sshPut remote: remote, from: 'abc.sh', into: '.'
             sshGet remote: remote, from: 'abc.sh', into: 'bac.sh', override: true
-            sshExecuteScript remote: remote, script: 'abc.sh'
+            sshScript remote: remote, script: 'abc.sh'
             sshRemove remote: remote, path: 'abc.sh'
         }
     }
 }
 ```
 
-image::docs/static/ExampleWithCredentials.png[Example,300]
+==== Classic View:
+image::docs/static/ExampleWithCredentials.png[ExampleWithCredentials,900]
+
+==== Blue Ocean View:
+image::docs/static/ExampleWithCredentialsBlueOcean.png[ExampleWithCredentialsBlueOcean,900]
 
 == Maintainers
 
