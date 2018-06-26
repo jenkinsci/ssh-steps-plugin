@@ -1,0 +1,18 @@
+<div>
+  <p>
+    Takes a remote (map) of settings and script a shell script file to execute it on the remote node and returns output.
+    See docs on the <a href="https://github.com/ThoughtsLive/ssh-steps-plugin" target="_blank">README</a> for more information.</p>
+  </p>
+  <pre>
+    def remote = [:]
+    remote.name = 'test'
+    remote.host = 'test.domain.com'
+    remote.user = 'root'
+    remote.password = 'password'
+    remote.allowAnyHosts = true
+    stage('Remote SSH') {
+      writeFile file: 'abc.sh', text: 'ls -lrt'
+      sshScript remote: remote, script: "abc.sh"
+    }
+  </pre>
+</div>

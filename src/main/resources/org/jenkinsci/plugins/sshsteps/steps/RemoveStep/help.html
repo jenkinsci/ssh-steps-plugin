@@ -1,0 +1,17 @@
+<div>
+  <p>
+    Takes a remote (map) of settings and <code>path</code> (file/directory) to remove from remote node.
+    See docs on the <a href="https://github.com/ThoughtsLive/ssh-steps-plugin" target="_blank">README</a> for more information.</p>
+  </p>
+  <pre>
+    def remote = [:]
+    remote.name = 'test'
+    remote.host = 'test.domain.com'
+    remote.user = 'root'
+    remote.password = 'password'
+    remote.allowAnyHosts = true
+    stage('Remote SSH') {
+      sshRemove remote: remote, path: "abc.sh"
+    }
+  </pre>
+</div>
