@@ -1,18 +1,18 @@
 = Contributing
-:1: https://issues.jenkins-ci.org/secure/Dashboard.jspan/issues
+:1: https://issues.jenkins-ci.org/issues/?filter=18640
 :2: http://gun.io/blog/how-to-github-fork-branch-and-pull-request
 :3: http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html
 :4: ./CHANGELOG.adoc
 :5: http://gitready.com/advanced/2009/02/10/squashing-commits-with-rebase.html
 :6: https://help.github.com/articles/using-pull-requests
 
-Help us to make this project better by contributing. Whether it's new features, bug fixes, or simply improving documentation, your contributions are welcome. Please start with logging a {1}[Github Issue] or submit a pull request.
+Help us to make this project better by contributing. Whether it's new features, bug fixes, or simply improving documentation, your contributions are welcome. Please start with logging a {1}[JIRA] or submit a pull request.
 
 Before you contribute, please review these guidelines to help ensure a smooth process for everyone.
 
 == Issue reporting
 
-* Please browse the {1}[issues] before logging new JIRA.
+* Please browse the existing {1}[JIRAs] before logging new JIRA.
 * Check that the issue has not already been fixed in the `master` branch.
 * Create JIRA with a descriptive title and a summary.
 * Please be as clear and explicit as you can in your description of the problem.

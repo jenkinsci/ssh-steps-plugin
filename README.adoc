@@ -3,7 +3,7 @@
 :note-caption: :information_source:
 :tip-caption: :bulb:
 
-image::docs/static/JenkinsPlusSSH.png[Jenkins,300]
+image::docs/static/images/JenkinsPlusSSH.png[Jenkins,300]
 
 Jenkins pipeline steps which provides SSH facilities such as command execution or file transfer for continuous delivery. It internally uses the library of https://github.com/int128/groovy-ssh[Groovy SSH].
 
@@ -401,10 +401,14 @@ node {
 ```
 
 ==== Classic View:
-image::docs/static/ExampleWithCredentials.png[ExampleWithCredentials,900]
+image::docs/static/images/ExampleWithCredentials.png[ExampleWithCredentials,900]
 
 ==== Blue Ocean View:
-image::docs/static/ExampleWithCredentialsBlueOcean.png[ExampleWithCredentialsBlueOcean,900]
+image::docs/static/images/ExampleWithCredentialsBlueOcean.png[ExampleWithCredentialsBlueOcean,900]
+
+== link:CONTRIBUTING.adoc[Contributing Guide]
+
+== link:CHANGELOG.adoc[Changelog]
 
 == Maintainers
 

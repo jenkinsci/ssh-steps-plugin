@@ -14,7 +14,7 @@
   <name>SSH Pipeline Steps</name>
   <description>SSH Pipeline Steps</description>
   <inceptionYear>2018</inceptionYear>
-  <url>https://wiki.jenkins-ci.org/display/JENKINS/SSH+Steps+Plugin</url>
+  <url>https://wiki.jenkins.io/display/JENKINS/SSH+Steps+Plugin</url>
   <properties>
     <java.level>8</java.level>
     <jenkins.version>2.7.3</jenkins.version>
@@ -22,8 +22,6 @@
     <pipeline.version>2.5</pipeline.version>
     <groovy.version>2.4.11</groovy.version>
     <groovy.ssh.version>2.9.0</groovy.ssh.version>
-    <jsch.version>0.1.54</jsch.version>
-    <jsch.agentproxy.version>0.0.9</jsch.agentproxy.version>
     <lombok.version>1.16.12</lombok.version>
 
      <!--Test dependency versions-->
@@ -98,21 +96,6 @@
       <artifactId>lombok</artifactId>
       <version>${lombok.version}</version>
       <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>com.jcraft</groupId>
-      <artifactId>jsch</artifactId>
-      <version>${jsch.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>com.jcraft</groupId>
-      <artifactId>jsch.agentproxy.connector-factory</artifactId>
-      <version>${jsch.agentproxy.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>com.jcraft</groupId>
-      <artifactId>jsch.agentproxy.jsch</artifactId>
-      <version>${jsch.agentproxy.version}</version>
     </dependency>
     <dependency>
       <groupId>org.codehaus.groovy</groupId>
