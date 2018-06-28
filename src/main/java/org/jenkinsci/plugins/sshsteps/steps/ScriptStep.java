@@ -45,7 +45,7 @@ public class ScriptStep extends BasicSSHStep {
 
     @Override
     public String getDisplayName() {
-      return getPrefix() + "Execute script(file) on remote node.";
+      return getPrefix() + "sshScript - Execute script(file) on remote node.";
     }
   }
 
@@ -77,6 +77,8 @@ public class ScriptStep extends BasicSSHStep {
       if (path.isDirectory()) {
         throw new IllegalArgumentException(path.getRemote() + " is a directory.");
       }
+
+      getListener().getLogger().println("Started Script from workspace: " + step.getScript());
 
       return getLauncher().getChannel()
           .call(new ScriptCallable(step, getListener(), path.getRemote()));

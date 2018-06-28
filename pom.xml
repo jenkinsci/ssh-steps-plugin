@@ -18,6 +18,7 @@
     <jenkins.version>2.7.3</jenkins.version>
     <jenkins-test-harness.version>2.15</jenkins-test-harness.version>
     <pipeline.version>2.5</pipeline.version>
+    <jsch.version>0.1.54</jsch.version>
     <groovy.version>2.4.11</groovy.version>
     <groovy.ssh.version>2.9.0</groovy.ssh.version>
     <lombok.version>1.16.12</lombok.version>
@@ -94,6 +95,11 @@
       <artifactId>lombok</artifactId>
       <version>${lombok.version}</version>
       <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.jcraft</groupId>
+      <artifactId>jsch</artifactId>
+      <version>${jsch.version}</version>
     </dependency>
     <dependency>
       <groupId>org.codehaus.groovy</groupId>
