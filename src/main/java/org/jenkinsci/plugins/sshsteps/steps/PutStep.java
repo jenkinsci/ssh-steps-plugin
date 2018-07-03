@@ -49,7 +49,7 @@ public class PutStep extends BasicSSHStep {
 
     @Override
     public String getDisplayName() {
-      return getPrefix() + "sshPut - Put a file/directory on remote node.";
+      return getPrefix() + getFunctionName() + " - Put a file/directory on remote node.";
     }
   }
 

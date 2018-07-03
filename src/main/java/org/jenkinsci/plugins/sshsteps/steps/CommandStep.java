@@ -49,7 +49,7 @@ public class CommandStep extends BasicSSHStep {
 
     @Override
     public String getDisplayName() {
-      return getPrefix() + "sshCommand - Execute command on remote node.";
+      return getPrefix() + getFunctionName() + " - Execute command on remote node.";
     }
   }
 

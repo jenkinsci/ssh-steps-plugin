@@ -44,7 +44,7 @@ public class RemoveStep extends BasicSSHStep {
 
     @Override
     public String getDisplayName() {
-      return getPrefix() + "sshRemove - Remove a file/directory from remote node.";
+      return getPrefix() + getFunctionName() + " - Remove a file/directory from remote node.";
     }
   }
 

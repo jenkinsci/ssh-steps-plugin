@@ -45,7 +45,7 @@ public class ScriptStep extends BasicSSHStep {
 
     @Override
     public String getDisplayName() {
-      return getPrefix() + "sshScript - Execute script(file) on remote node.";
+      return getPrefix() + getFunctionName() + " - Execute script(file) on remote node.";
     }
   }
 
