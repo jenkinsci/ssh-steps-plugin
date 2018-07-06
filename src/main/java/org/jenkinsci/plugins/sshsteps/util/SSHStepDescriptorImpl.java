@@ -2,6 +2,8 @@ package org.jenkinsci.plugins.sshsteps.util;
 
 import com.google.common.collect.ImmutableSet;
 import hudson.EnvVars;
+import hudson.FilePath;
+import hudson.Launcher;
 import hudson.model.Run;
 import hudson.model.TaskListener;
 import java.util.Set;
@@ -20,6 +22,6 @@ public abstract class SSHStepDescriptorImpl extends StepDescriptor {
 
   @Override
   public Set<? extends Class<?>> getRequiredContext() {
-    return ImmutableSet.of(Run.class, TaskListener.class, EnvVars.class);
+    return ImmutableSet.of(Launcher.class, FilePath.class, Run.class, TaskListener.class, EnvVars.class);
   }
 }

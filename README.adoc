@@ -180,6 +180,7 @@ This step executes given command on remote node and responds with output.
 ==== Example
 
 ```groovy
+node {
   def remote = [:]
   remote.name = 'test'
   remote.host = 'test.domain.com'
@@ -190,6 +191,7 @@ This step executes given command on remote node and responds with output.
     sshCommand remote: remote, command: "ls -lrt"
     sshCommand remote: remote, command: "for i in {1..5}; do echo -n \"Loop \$i \"; date ; sleep 1; done"
   }
+}
 ```
 
 === sshScript
@@ -224,6 +226,7 @@ This step executes given script(file) on remote node and responds with output.
 ==== Example
 
 ```groovy
+node {
   def remote = [:]
   remote.name = 'test'
   remote.host = 'test.domain.com'
@@ -234,6 +237,7 @@ This step executes given script(file) on remote node and responds with output.
     writeFile file: 'abc.sh', text: 'ls -lrt'
     sshScript remote: remote, script: "abc.sh"
   }
+}
 ```
 
 === sshPut
@@ -272,6 +276,7 @@ Put a file or directory into the remote host.
 ==== Example
 
 ```groovy
+node {
   def remote = [:]
   remote.name = 'test'
   remote.host = 'test.domain.com'
@@ -282,6 +287,7 @@ Put a file or directory into the remote host.
     writeFile file: 'abc.sh', text: 'ls -lrt'
     sshPut remote: remote, from: 'abc.sh', into: '.'
   }
+}
 ```
 
 === sshGet
@@ -320,6 +326,7 @@ Get a file or directory from the remote host.
 ==== Example
 
 ```groovy
+node {
   def remote = [:]
   remote.name = 'test'
   remote.host = 'test.domain.com'
@@ -329,6 +336,7 @@ Get a file or directory from the remote host.
   stage('Remote SSH') {
     sshGet remote: remote, from: 'abc.sh', into: 'abc_get.sh', override: true
   }
+}
 ```
 
 === sshRemove
@@ -363,6 +371,7 @@ Remove a file or directory on the remote host.
 ==== Example
 
 ```groovy
+node {
   def remote = [:]
   remote.name = 'test'
   remote.host = 'test.domain.com'
@@ -372,6 +381,7 @@ Remove a file or directory on the remote host.
   stage('Remote SSH') {
     sshRemove remote: remote, path: "abc.sh"
   }
+}
 ```
 == Examples
 
