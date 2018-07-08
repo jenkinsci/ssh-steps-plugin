@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Remove on </title>
+    <link>https://jenkinsci.github.io/ssh-steps-plugin/tags/remove/</link>
+    <description>Recent content in Remove on </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 27 Jun 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://jenkinsci.github.io/ssh-steps-plugin/tags/remove/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Remove</title>
+      <link>https://jenkinsci.github.io/ssh-steps-plugin/steps/remove/</link>
+      <pubDate>Wed, 27 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://jenkinsci.github.io/ssh-steps-plugin/steps/remove/</guid>
+      <description>sshRemove Remove a file or directory on the remote host.
+ Usage     Key Type Description     remote
+ Remote, Mandatory, Refer to the Remote config for more details.
+ Host config to run the command on.
+   path
+ String, Mandatory
+ file or directory path on the remote node
+   failOnError
+ boolean, default: true.
+ If this is false, no job failure would occur though there is an error while running the command.</description>
+    </item>
+    
+  </channel>
+</rss>

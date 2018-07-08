@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Examples on </title>
+    <link>https://jenkinsci.github.io/ssh-steps-plugin/getting-started/examples/</link>
+    <description>Recent content in Examples on </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 27 Jun 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://jenkinsci.github.io/ssh-steps-plugin/getting-started/examples/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>With Credentials</title>
+      <link>https://jenkinsci.github.io/ssh-steps-plugin/getting-started/examples/withcreds/</link>
+      <pubDate>Wed, 27 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://jenkinsci.github.io/ssh-steps-plugin/getting-started/examples/withcreds/</guid>
+      <description>withCredentials An example how these steps can leverage withCredentails to read private key from Jenkins credentials store.
+ def remote = [:] remote.name = &#34;node-1&#34; remote.host = &#34;10.000.000.153&#34; remote.allowAnyHosts = true node { withCredentials([sshUserPrivateKey(credentialsId: &#39;sshUser&#39;, keyFileVariable: &#39;identity&#39;, passphraseVariable: &#39;&#39;, usernameVariable: &#39;userName&#39;)]) { remote.user = userName remote.identityFile = identity stage(&#34;SSH Steps Rocks!&#34;) { writeFile file: &#39;abc.sh&#39;, text: &#39;ls&#39; sshCommand remote: remote, command: &#39;for i in {1..5}; do echo -n \&#34;Loop \$i \&#34;</description>
+    </item>
+    
+  </channel>
+</rss>

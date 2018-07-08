@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+    
+      <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="generator" content="Hugo 0.42.1" />
+<title>Examples :: </title>
+<link rel="shortcut icon" href="/ssh-steps-plugin/images/favicon.png" type="image/x-icon" />
+<link href="/ssh-steps-plugin/css/font-awesome.min.css" rel="stylesheet">
+<link href="/ssh-steps-plugin/css/nucleus.css" rel="stylesheet">
+<link href="/ssh-steps-plugin/theme-flex/style.css" rel="stylesheet">
+
+<link rel="stylesheet" href="/ssh-steps-plugin/css/bootstrap.min.css">
+<script src="/ssh-steps-plugin/js/jquery-2.x.min.js"></script>
+<script type="text/javascript">
+      var baseurl = "https:\/\/jenkinsci.github.io\/ssh-steps-plugin\/";
+</script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-86684907-4', 'auto');
+  ga('send', 'pageview');
+</script>
+
+    
+  </head>
+  <body data-url="/ssh-steps-plugin/getting-started/examples/">
+    
+      <header>
+  <div class="logo">
+    
+	
+  
+    <p>Jenkins SSH Pipeline Steps</p>
+
+  
+
+  </div>
+  <div class="burger"><a href="javascript:void(0);" style="font-size:15px;">&#9776;</a></div>
+    <nav class="shortcuts">
+            <li class="" role="">
+                <a href="https://github.com/jenkinsci/ssh-steps-plugin"  rel="noopener">
+                  <i class='fa fa-github'></i> Github repo
+                </a>
+            </li>
+            <li class="" role="">
+                <a href="/ssh-steps-plugin/changelog"  rel="noopener">
+                  <i class='fa fa-road'></i> Release Notes
+                </a>
+            </li>
+            <li class="" role="">
+                <a href="/ssh-steps-plugin/contributing"  rel="noopener">
+                  <i class='fa fa-heart'></i> Contributing
+                </a>
+            </li>
+            <li class="" role="">
+                <a href="/ssh-steps-plugin/credits"  rel="noopener">
+                  <i class='fa fa-bullhorn'></i> Credits
+                </a>
+            </li>
+            <li class="" role="">
+                <a href="/ssh-steps-plugin/terms"  rel="noopener">
+                  <i class='fa fa-thumbs-o-up'></i> Privacy Policy
+                </a>
+            </li>
+    </nav>
+</header>
+<article>
+  <aside>
+    <ul class="menu">
+          <li data-nav-id="/ssh-steps-plugin/" class="dd-item">
+          <a href="/ssh-steps-plugin/">
+            <i class="fa fa-fw fa-home"></i>
+          </a>
+          </li>
+    <li data-nav-id="/ssh-steps-plugin/getting-started/" class="dd-item parent alwaysopen haschildren
+        ">
+      <div>
+      <a href="/ssh-steps-plugin/getting-started/">Get started</a>
+            <i class="fa fa-angle-down fa-lg category-icon"></i><i class="fa fa-circle-thin read-icon"></i>
+      </div>
+        <ul>
+    <li data-nav-id="/ssh-steps-plugin/getting-started/config/" class="dd-item
+        ">
+      <div>
+      <a href="/ssh-steps-plugin/getting-started/config/">Configuration</a><i class="fa fa-circle-thin read-icon"></i>
+      </div>
+    </li>
+    <li data-nav-id="/ssh-steps-plugin/getting-started/examples/" class="dd-item parent active haschildren
+        ">
+      <div>
+      <a href="/ssh-steps-plugin/getting-started/examples/">Examples</a>
+            <i class="fa fa-angle-down fa-lg category-icon"></i><i class="fa fa-circle-thin read-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/ssh-steps-plugin/getting-started/examples/withcreds/" class="dd-item">
+        <div>
+          <a href="/ssh-steps-plugin/getting-started/examples/withcreds/">
+            With Credentials
+          </a><i class="fa fa-circle-thin read-icon"></i>
+        </div>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/ssh-steps-plugin/steps/" class="dd-item alwaysopen haschildren
+        ">
+      <div>
+      <a href="/ssh-steps-plugin/steps/">Pipeline Steps</a>
+            <i class="fa fa-angle-down fa-lg category-icon"></i><i class="fa fa-circle-thin read-icon"></i>
+      </div>
+        <ul>
+      <li data-nav-id="/ssh-steps-plugin/steps/command/" class="dd-item">
+        <div>
+          <a href="/ssh-steps-plugin/steps/command/">
+            Command
+          </a><i class="fa fa-circle-thin read-icon"></i>
+        </div>
+    </li>
+      <li data-nav-id="/ssh-steps-plugin/steps/script/" class="dd-item">
+        <div>
+          <a href="/ssh-steps-plugin/steps/script/">
+            Script
+          </a><i class="fa fa-circle-thin read-icon"></i>
+        </div>
+    </li>
+      <li data-nav-id="/ssh-steps-plugin/steps/get/" class="dd-item">
+        <div>
+          <a href="/ssh-steps-plugin/steps/get/">
+            Get
+          </a><i class="fa fa-circle-thin read-icon"></i>
+        </div>
+    </li>
+      <li data-nav-id="/ssh-steps-plugin/steps/put/" class="dd-item">
+        <div>
+          <a href="/ssh-steps-plugin/steps/put/">
+            Put
+          </a><i class="fa fa-circle-thin read-icon"></i>
+        </div>
+    </li>
+      <li data-nav-id="/ssh-steps-plugin/steps/remove/" class="dd-item">
+        <div>
+          <a href="/ssh-steps-plugin/steps/remove/">
+            Remove
+          </a><i class="fa fa-circle-thin read-icon"></i>
+        </div>
+    </li>
+        </ul>
+    </li>
+
+
+
+
+    </ul>
+    <section><center>
+  <a class="github-button" href="https://github.com/jenkinsci/ssh-steps-plugin" data-icon="octicon-star" data-show-count="true" aria-label="Star jenkinsci/ssh-steps-plugin on GitHub">Star</a>
+  <a class="github-button" href="https://github.com/jenkinsci/ssh-steps-plugin" data-icon="octicon-repo-forked" data-show-count="false" aria-label="Fork jenkinsci/ssh-steps-plugin on GitHub">Fork</a>
+</center>
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+    </section>
+  </aside>
+  <section class="page">
+    
+    <div class="nav-select">
+      <center>Navigation : 
+        <select onchange="javascript:location.href = this.value;">
+          
+    <option value="/ssh-steps-plugin/getting-started/" >
+   Get started</option> 
+    <option value="/ssh-steps-plugin/getting-started/config/" >
+  - 
+   Configuration</option>
+    <option value="/ssh-steps-plugin/getting-started/examples/"  selected>
+  - 
+   Examples</option> 
+      <option value="/ssh-steps-plugin/getting-started/examples/withcreds/" >-- With Credentials</option>
+  
+  
+    <option value="/ssh-steps-plugin/steps/" >
+   Pipeline Steps</option> 
+      <option value="/ssh-steps-plugin/steps/command/" >- Command</option>
+      <option value="/ssh-steps-plugin/steps/script/" >- Script</option>
+      <option value="/ssh-steps-plugin/steps/get/" >- Get</option>
+      <option value="/ssh-steps-plugin/steps/put/" >- Put</option>
+      <option value="/ssh-steps-plugin/steps/remove/" >- Remove</option>
+  
+
+
+
+        </select>
+      </center>
+    </div>
+      <div>
+        <div class="searchbox">
+          <input data-search-input id="search-by" type="text" placeholder="Search...">
+        </div>
+        <script type="text/javascript" src="/ssh-steps-plugin/js/lunr.min.js"></script>
+        <script type="text/javascript" src="/ssh-steps-plugin/js/auto-complete.js"></script>
+        <link href="/ssh-steps-plugin/css/auto-complete.css" rel="stylesheet">
+        <script type="text/javascript">
+          
+              var baseurl = "https:\/\/jenkinsci.github.io\/ssh-steps-plugin\/";
+          
+        </script>
+        <script type="text/javascript" src="/ssh-steps-plugin/js/search.js"></script>
+      </div>
+    
+
+    <h1>Examples</h1>
+    
+    
+    
+
+<div class="sect2">
+<h3 id="_few_common_examples">Few Common Examples</h3>
+<div class="paragraph">
+
+
+<ul class="children children-li">
+
+<span><li>
+		<a href="/ssh-steps-plugin/getting-started/examples/withcreds/" >With Credentials</a></li>
+</span>
+<ul>
+</ul>
+</ul>
+
+
+
+
+
+</div>
+</div>
+
+
+
+    
+    
+        <div class="chevrons">
+    <div id="navigation">
+<a class="nav nav-prev" href="/ssh-steps-plugin/getting-started/config/" title="Configuration"> <i class="fa fa-chevron-left"></i><label>Configuration</label></a>
+    <a class="nav nav-next" href="/ssh-steps-plugin/getting-started/examples/withcreds/" title="With Credentials" style="margin-right: 0px;"><label>With Credentials</label><i class="fa fa-chevron-right"></i></a></div>
+  </div>
+
+  </section>
+</article>
+
+<footer>
+
+<div class="footline">
+    
+
+    
+    <div class="author">
+        <i class='fa fa-user'></i> <a href="mailto:">Naresh Rayapati</a>
+    </div>
+    
+
+  
+    <div class="date">
+        <i class='fa fa-calendar'></i> Last update on 27/06/2018
+    </div>
+    
+
+    <div class="github-link">
+      <a href="https://github.com/jenkinsci/ssh-steps-plugin/edit/master/docs/content/getting-started/examples/_index.adoc" target="blank"><i class="fa fa-code-fork"></i>
+        Improve this page</a>
+    </div>
+  </div>
+
+
+	<div>
+
+
+  
+    <p><center> SSH Plugin is released under the Apache License, Version 2.0 </center></p>
+
+  
+
+
+
+	</div>
+</footer>
+
+<script src="/ssh-steps-plugin/js/clipboard.min.js"></script>
+
+<link href="/ssh-steps-plugin/css/featherlight.min.css" rel="stylesheet">
+<script src="/ssh-steps-plugin/js/featherlight.min.js"></script>
+
+
+
+<script src="/ssh-steps-plugin/theme-flex/script.js"></script>
+
+    
+
+    
+    
+
+    
+  </body>
+</html>

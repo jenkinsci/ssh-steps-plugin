@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>https://jenkinsci.github.io/ssh-steps-plugin/steps/command/</loc>
+    <lastmod>2018-06-27T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jenkinsci.github.io/ssh-steps-plugin/getting-started/</loc>
+    <lastmod>2018-06-27T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jenkinsci.github.io/ssh-steps-plugin/getting-started/config/</loc>
+    <lastmod>2018-06-27T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jenkinsci.github.io/ssh-steps-plugin/steps/</loc>
+    <lastmod>2018-06-27T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jenkinsci.github.io/ssh-steps-plugin/steps/script/</loc>
+    <lastmod>2018-06-27T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jenkinsci.github.io/ssh-steps-plugin/getting-started/examples/</loc>
+    <lastmod>2018-06-27T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jenkinsci.github.io/ssh-steps-plugin/steps/get/</loc>
+    <lastmod>2018-06-27T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jenkinsci.github.io/ssh-steps-plugin/steps/put/</loc>
+    <lastmod>2018-06-27T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jenkinsci.github.io/ssh-steps-plugin/steps/remove/</loc>
+    <lastmod>2018-06-27T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jenkinsci.github.io/ssh-steps-plugin/changelog/</loc>
+    <lastmod>2018-06-27T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jenkinsci.github.io/ssh-steps-plugin/contributing/</loc>
+    <lastmod>2018-06-27T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jenkinsci.github.io/ssh-steps-plugin/credits/</loc>
+    <lastmod>2018-06-27T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jenkinsci.github.io/ssh-steps-plugin/</loc>
+    <lastmod>2018-06-27T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jenkinsci.github.io/ssh-steps-plugin/terms/</loc>
+    <lastmod>2018-06-27T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jenkinsci.github.io/ssh-steps-plugin/getting-started/examples/withcreds/</loc>
+    <lastmod>2018-06-27T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jenkinsci.github.io/ssh-steps-plugin/_header/</loc>
+    <lastmod>2018-06-27T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jenkinsci.github.io/ssh-steps-plugin/_footer/</loc>
+  </url>
+  
+  <url>
+    <loc>https://jenkinsci.github.io/ssh-steps-plugin/categories/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://jenkinsci.github.io/ssh-steps-plugin/tags/command/</loc>
+    <lastmod>2018-06-27T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://jenkinsci.github.io/ssh-steps-plugin/tags/directory/</loc>
+    <lastmod>2018-06-27T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://jenkinsci.github.io/ssh-steps-plugin/tags/file/</loc>
+    <lastmod>2018-06-27T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://jenkinsci.github.io/ssh-steps-plugin/tags/get/</loc>
+    <lastmod>2018-06-27T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://jenkinsci.github.io/ssh-steps-plugin/tags/put/</loc>
+    <lastmod>2018-06-27T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://jenkinsci.github.io/ssh-steps-plugin/tags/remove/</loc>
+    <lastmod>2018-06-27T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://jenkinsci.github.io/ssh-steps-plugin/tags/script/</loc>
+    <lastmod>2018-06-27T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://jenkinsci.github.io/ssh-steps-plugin/tags/steps/</loc>
+    <lastmod>2018-06-27T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://jenkinsci.github.io/ssh-steps-plugin/tags/</loc>
+    <lastmod>2018-06-27T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+</urlset>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Command on </title>
+    <link>https://jenkinsci.github.io/ssh-steps-plugin/tags/command/</link>
+    <description>Recent content in Command on </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 27 Jun 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://jenkinsci.github.io/ssh-steps-plugin/tags/command/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Command</title>
+      <link>https://jenkinsci.github.io/ssh-steps-plugin/steps/command/</link>
+      <pubDate>Wed, 27 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://jenkinsci.github.io/ssh-steps-plugin/steps/command/</guid>
+      <description>sshCommand This step executes given command on remote node and responds with output.
+ Usage     Key Type Description     remote
+ Remote, Mandatory, Refer to the Remote config for more details.
+ Host config to run the command on.
+   command
+ String, Mandatory
+ Shell command to run. Appending sudo is optional when sudo is true.
+   sudo</description>
+    </item>
+    
+  </channel>
+</rss>

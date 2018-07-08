@@ -1,0 +1,190 @@
+[
+{
+	"uri": "https://jenkinsci.github.io/ssh-steps-plugin/steps/command/",
+	"title": "Command",
+	"tags": ["steps", "command"],
+	"description": "More about sshCommand step.",
+	"content": "sshCommand This step executes given command on remote node and responds with output.\n Usage     Key Type Description     remote\n Remote, Mandatory, Refer to the Remote config for more details.\n Host config to run the command on.\n   command\n String, Mandatory\n Shell command to run. Appending sudo is optional when sudo is true.\n   sudo\n boolean, default: false.\n Interactively supplies the password, not required for password less sudo commands.\n   failOnError\n boolean, default: true.\n If this is false, no job failure would occur though there is an error while running the command.\n   dryRun\n boolean, default: false\n If this is true, no actual connection or operation is performed.\n    More about remote key can be found in configuration section.\n    Example node { def remote = [:] remote.name = 'test' remote.host = 'test.domain.com' remote.user = 'root' remote.password = 'password' remote.allowAnyHosts = true stage('Remote SSH') { sshCommand remote: remote, command: \"ls -lrt\" sshCommand remote: remote, command: \"for i in {1..5}; do echo -n \\\"Loop \\$i \\\"; date ; sleep 1; done\" } }   Please take note to surround the code with a node.\n     "
+},
+{
+	"uri": "https://jenkinsci.github.io/ssh-steps-plugin/getting-started/",
+	"title": "Get started",
+	"tags": [],
+	"description": "",
+	"content": "Get Started  Configuration     Examples    With Credentials      "
+},
+{
+	"uri": "https://jenkinsci.github.io/ssh-steps-plugin/getting-started/config/",
+	"title": "Configuration",
+	"tags": [],
+	"description": "",
+	"content": "Remote Most of the steps in this plugin require a common step variable called remote, which is Map of remote node settings such as user name, password and so on. Here is list of all possible keys that can be set.\n Example def remote = [:] remote.name = 'test' remote.host = 'test.domain.com' remote.user = 'root' remote.password = 'password' remote.allowAnyHosts = true stage('Remote SSH') { sshCommand remote: remote, command: \"ls -lrt\" sshCommand remote: remote, command: \"for i in {1..5}; do echo -n \\\"Loop \\$i \\\"; date ; sleep 1; done\" }       Key Type Description     name\n String, Mandatory\n Remote name, usually this is same as host name.\n   host\n String, Mandatory\n Hostname or IP address of the remote host.\n   port\n int\n Port. Defaults to port 22.\n   user\n String, Mandatory\n User name.\n   allowAnyHosts\n boolean\n If this is true, knownHosts is optional. Defaults to false.\n   knownHosts\n String, Mandatory\n Known hosts file for host key checking.\n   password\n String, one of password, identity or identityFile is required\n Password for password authentication.\n   identity\n String, one of password, identity or identityFile is required\n Private key for public-key authentication.\n   identityFile\n String, one of password, identity or identityFile is required\n Private key file name for public-key authentication.\n   passphrase\n String\n Pass-phrase for the private key.\n   agent\n boolean\n If this is true, Putty Agent or ssh-agent is used on authentication. Defaults to false.\n   timeoutSec\n int\n Connection timeout and socket read timeout. Defaults to 0 (OS default).\n   retryCount\n int\n Retry count to establish connection. Defaults to 0 (no retry).\n   retryWaitSec\n int\n Interval time between each retries. Defaults to 0 (immediately).\n   keepAliveSec\n int\n Interval time of keep alive messages sent to the remote host. Defaults to 60 seconds.\n   agentForwarding\n boolean\n If this is true, the agent forwarding is requested on the command execution. Defaults to false.\n   fileTransfer\n String\n File transfer method, that is SFTP or SCP. Defaults to SFTP.\n   encoding\n String\n Encoding of input and output on the command or shell execution. Defaults to UTF-8.\n   proxy\n Proxy, refer below.\n If this is set, the proxy server is used to reach the remote host. Defaults to no proxy.\n   gateway\n Remote\n Gateway remote host. If this is set, the port-forwarding tunnel is used to reach the remote host. Defaults to no gateway.\n      Proxy     Key Type Description     name\n String, Mandatory\n Proxy name\n   host\n String, Mandatory\n Hostname or IP address of the proxy server.\n   port\n int, Mandatory\n Port of the proxy server.\n   type\n String, Mandatory\n Type of the proxy server: SOCKS or HTTP.\n   user\n String\n User name of the proxy server.\n   password\n String\n Password of the proxy server.\n   socksVersion\n int\n Protocol version when using SOCKS: 4 or 5. Defaults to 5.\n     "
+},
+{
+	"uri": "https://jenkinsci.github.io/ssh-steps-plugin/steps/",
+	"title": "Pipeline Steps",
+	"tags": [],
+	"description": "",
+	"content": "List of Pipeline Steps  Command     Script     Get     Put     Remove       "
+},
+{
+	"uri": "https://jenkinsci.github.io/ssh-steps-plugin/steps/script/",
+	"title": "Script",
+	"tags": ["steps", "script"],
+	"description": "More about sshScript step.",
+	"content": "sshScript This step executes given script(file) on remote node and responds with output.\n Usage     Key Type Description     remote\n Remote, Mandatory, Refer to the Remote config for more details.\n Host config to run the command on.\n   script\n String, Mandatory\n Script file name from the workspace, current this doesn\u0026#8217;t support script with arguments. For that option you would need to copy over the file to remote node and run it as a command.\n   failOnError\n boolean, default: true.\n If this is false, no job failure would occur though there is an error while running the command.\n   dryRun\n boolean, default: false\n If this is true, no actual connection or operation is performed.\n    More about remote key can be found in configuration section.\n    Example node { def remote = [:] remote.name = 'test' remote.host = 'test.domain.com' remote.user = 'root' remote.password = 'password' remote.allowAnyHosts = true stage('Remote SSH') { writeFile file: 'abc.sh', text: 'ls -lrt' sshScript remote: remote, script: \"abc.sh\" } }   Please take note to surround the code with a node.\n     "
+},
+{
+	"uri": "https://jenkinsci.github.io/ssh-steps-plugin/getting-started/examples/",
+	"title": "Examples",
+	"tags": [],
+	"description": "",
+	"content": "Few Common Examples  With Credentials       "
+},
+{
+	"uri": "https://jenkinsci.github.io/ssh-steps-plugin/steps/get/",
+	"title": "Get",
+	"tags": ["steps", "get", "file", "directory"],
+	"description": "More about sshGet step.",
+	"content": "sshGet Get a file or directory from the remote host.\n Usage     Key Type Description     remote\n Remote, Mandatory, Refer to the Remote config for more details.\n Host config to run the command on.\n   from\n String, Mandatory\n file or directory path from the remote node.\n   to\n String, Mandatory\n file or directory path on current worksapce.\n   failOnError\n boolean, default: true.\n If this is false, no job failure would occur though there is an error while running the command.\n   dryRun\n boolean, default: false\n If this is true, no actual connection or operation is performed.\n    More about remote key can be found in configuration section.\n    Example node { def remote = [:] remote.name = 'test' remote.host = 'test.domain.com' remote.user = 'root' remote.password = 'password' remote.allowAnyHosts = true stage('Remote SSH') { sshGet remote: remote, from: 'abc.sh', into: 'abc_get.sh', override: true } }   Please take note to surround the code with a node.\n     "
+},
+{
+	"uri": "https://jenkinsci.github.io/ssh-steps-plugin/steps/put/",
+	"title": "Put",
+	"tags": ["steps", "put", "file", "directory"],
+	"description": "More about sshPut step.",
+	"content": "sshPut Put a file or directory into the remote host.\n Usage     Key Type Description     remote\n Remote, Mandatory, Refer to the Remote config for more details.\n Host config to run the command on.\n   from\n String, Mandatory\n file or directory path from the workspace.\n   to\n String, Mandatory\n file or directory path on the remote node.\n   failOnError\n boolean, default: true.\n If this is false, no job failure would occur though there is an error while running the command.\n   dryRun\n boolean, default: false\n If this is true, no actual connection or operation is performed.\n    More about remote key can be found in configuration section.\n    Example node { def remote = [:] remote.name = 'test' remote.host = 'test.domain.com' remote.user = 'root' remote.password = 'password' remote.allowAnyHosts = true stage('Remote SSH') { writeFile file: 'abc.sh', text: 'ls -lrt' sshPut remote: remote, from: 'abc.sh', into: '.' } }   Please take note to surround the code with a node.\n     "
+},
+{
+	"uri": "https://jenkinsci.github.io/ssh-steps-plugin/steps/remove/",
+	"title": "Remove",
+	"tags": ["steps", "remove", "file", "directory"],
+	"description": "More about sshRemove step.",
+	"content": "sshRemove Remove a file or directory on the remote host.\n Usage     Key Type Description     remote\n Remote, Mandatory, Refer to the Remote config for more details.\n Host config to run the command on.\n   path\n String, Mandatory\n file or directory path on the remote node\n   failOnError\n boolean, default: true.\n If this is false, no job failure would occur though there is an error while running the command.\n   dryRun\n boolean, default: false\n If this is true, no actual connection or operation is performed.\n    More about remote key can be found in configuration section.\n    Example node { def remote = [:] remote.name = 'test' remote.host = 'test.domain.com' remote.user = 'root' remote.password = 'password' remote.allowAnyHosts = true stage('Remote SSH') { sshRemove remote: remote, path: \"abc.sh\" } }   Please take note to surround the code with a node.\n     "
+},
+{
+	"uri": "https://jenkinsci.github.io/ssh-steps-plugin/changelog/",
+	"title": "Change Log",
+	"tags": [],
+	"description": "Change Log.",
+	"content": "Release Notes. 1.0.1 (Unreleased)  1.0.0   Initial release.\n  Supported Steps.\n  sshCommand\n  sshScript\n  sshGet\n  sshPut\n  sshRemove\n         "
+},
+{
+	"uri": "https://jenkinsci.github.io/ssh-steps-plugin/contributing/",
+	"title": "Contributing",
+	"tags": [],
+	"description": "Guidelines for Contributing.",
+	"content": "Contributing Help us to make this project better by contributing. Whether it\u0026#8217;s new features, bug fixes, or simply improving documentation, your contributions are welcome. Please start with logging a JIRA or submit a pull request.\n Before you contribute, please review these guidelines to help ensure a smooth process for everyone.\n Issue reporting   Please browse the existing JIRAs before logging new JIRA.\n  Check that the issue has not already been fixed in the master branch.\n  Create JIRA with a descriptive title and a summary.\n  Please be as clear and explicit as you can in your description of the problem.\n  Please state the version of the plugin you are using in the description.\n  Include any relevant code in the issue summary.\n    Pull requests   Read how to properly contribute to open source projects on Github.\n  Fork the project.\n  Use a feature branch.\n  Write good commit messages.\n  Use the same coding conventions as the rest of the project. This project is using Google StyleGuide\n  Download StyleGuides from Github.\n     Commit locally and push to your fork until you are happy with your contribution.\n  Make sure to add tests and verify all the tests are passing when merging upstream.\n  Add an entry to the Changelog accordingly.\n  Squash related commits together.\n  Open a pull request.\n  The pull request will be reviewed by the community and merged by the project committers.\n      "
+},
+{
+	"uri": "https://jenkinsci.github.io/ssh-steps-plugin/credits/",
+	"title": "Credits",
+	"tags": [],
+	"description": "contributors and packages used by ssh-pipeline-steps",
+	"content": "Maintainers   Naresh Rayapati.\n  Gabe Henkes.\n  Wuchen Wang.\n     GitHub Contributors .ghContributors{ display:flex; flex-flow: wrap; align-content: flex-start } .ghContributors  div{ width: 50% ; display: inline-flex; margin-bottom: 5px; } .ghContributors  div label{ padding-left: 4px ; } .ghContributors  div span{ font-size: x-small; padding-left: 4px ; }   @nrayapati 8 commits    Help us to make this project better by contributing.\n   Packages and Libraries   Groovy SSH - Thank you Hidetake Iwata for the great library.\n     Tooling   DocDock\n  Hugo    Thanks for the kind folks at JetBrains for allowing us to use Intellij IDEA to develop this plugin!\n     "
+},
+{
+	"uri": "https://jenkinsci.github.io/ssh-steps-plugin/",
+	"title": "SSH Pipline Steps",
+	"tags": [],
+	"description": "SSH Pipeline Steps",
+	"content": "  Jenkins Pipeline Jenkins 2 brings Pipeline as code, a new setup experience and other UI improvements, let you define delivery pipelines using concise Groovy scripts which deal elegantly with jobs involving persistence and asynchrony. Introduces a domain-specific language (DSL) that helps Jenkins users to model their software delivery pipelines as code, which can be checked in and version-controlled along with the rest of their project\u0026#8217;s source code.\n   "
+},
+{
+	"uri": "https://jenkinsci.github.io/ssh-steps-plugin/terms/",
+	"title": "Terms and Privacy Policy",
+	"tags": [],
+	"description": "Terms and Privacy Policy",
+	"content": " The privacy of visitors is extremely important to us (maintainers). This Privacy Policy outlines the types of personal information that is received and collected and how it is used.\nFirst and foremost, we will never share your personal information to anyone without your direct consent.\nGoogle Analytics Google Analytics is a web analytics tool we use to help understand how visitors engage with this website. This is purely to encourage ourself to work more on this plugin and provide more functionally. It reports website trends using cookies and web beacons without identifying individual visitors. You can read Google Analytics Privacy Policy.\n"
+},
+{
+	"uri": "https://jenkinsci.github.io/ssh-steps-plugin/getting-started/examples/withcreds/",
+	"title": "With Credentials",
+	"tags": [],
+	"description": "With Credentials.",
+	"content": "withCredentials An example how these steps can leverage withCredentails to read private key from Jenkins credentials store.\n def remote = [:] remote.name = \"node-1\" remote.host = \"10.000.000.153\" remote.allowAnyHosts = true node { withCredentials([sshUserPrivateKey(credentialsId: 'sshUser', keyFileVariable: 'identity', passphraseVariable: '', usernameVariable: 'userName')]) { remote.user = userName remote.identityFile = identity stage(\"SSH Steps Rocks!\") { writeFile file: 'abc.sh', text: 'ls' sshCommand remote: remote, command: 'for i in {1..5}; do echo -n \\\"Loop \\$i \\\"; date ; sleep 1; done' sshPut remote: remote, from: 'abc.sh', into: '.' sshGet remote: remote, from: 'abc.sh', into: 'bac.sh', override: true sshScript remote: remote, script: 'abc.sh' sshRemove remote: remote, path: 'abc.sh' } } }   Classic View:    Blue Ocean View:     "
+},
+{
+	"uri": "https://jenkinsci.github.io/ssh-steps-plugin/_header/",
+	"title": "header",
+	"tags": [],
+	"description": "",
+	"content": "Jenkins SSH Pipeline Steps\n"
+},
+{
+	"uri": "https://jenkinsci.github.io/ssh-steps-plugin/_footer/",
+	"title": "",
+	"tags": [],
+	"description": "",
+	"content": " SSH Plugin is released under the Apache License, Version 2.0 \n"
+},
+{
+	"uri": "https://jenkinsci.github.io/ssh-steps-plugin/categories/",
+	"title": "Categories",
+	"tags": [],
+	"description": "",
+	"content": ""
+},
+{
+	"uri": "https://jenkinsci.github.io/ssh-steps-plugin/tags/command/",
+	"title": "Command",
+	"tags": [],
+	"description": "",
+	"content": ""
+},
+{
+	"uri": "https://jenkinsci.github.io/ssh-steps-plugin/tags/directory/",
+	"title": "Directory",
+	"tags": [],
+	"description": "",
+	"content": ""
+},
+{
+	"uri": "https://jenkinsci.github.io/ssh-steps-plugin/tags/file/",
+	"title": "File",
+	"tags": [],
+	"description": "",
+	"content": ""
+},
+{
+	"uri": "https://jenkinsci.github.io/ssh-steps-plugin/tags/get/",
+	"title": "Get",
+	"tags": [],
+	"description": "",
+	"content": ""
+},
+{
+	"uri": "https://jenkinsci.github.io/ssh-steps-plugin/tags/put/",
+	"title": "Put",
+	"tags": [],
+	"description": "",
+	"content": ""
+},
+{
+	"uri": "https://jenkinsci.github.io/ssh-steps-plugin/tags/remove/",
+	"title": "Remove",
+	"tags": [],
+	"description": "",
+	"content": ""
+},
+{
+	"uri": "https://jenkinsci.github.io/ssh-steps-plugin/tags/script/",
+	"title": "Script",
+	"tags": [],
+	"description": "",
+	"content": ""
+},
+{
+	"uri": "https://jenkinsci.github.io/ssh-steps-plugin/tags/steps/",
+	"title": "Steps",
+	"tags": [],
+	"description": "",
+	"content": ""
+},
+{
+	"uri": "https://jenkinsci.github.io/ssh-steps-plugin/tags/",
+	"title": "Tags",
+	"tags": [],
+	"description": "",
+	"content": ""
+}]

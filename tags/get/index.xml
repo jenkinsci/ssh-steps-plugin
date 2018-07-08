@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Get on </title>
+    <link>https://jenkinsci.github.io/ssh-steps-plugin/tags/get/</link>
+    <description>Recent content in Get on </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 27 Jun 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://jenkinsci.github.io/ssh-steps-plugin/tags/get/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Get</title>
+      <link>https://jenkinsci.github.io/ssh-steps-plugin/steps/get/</link>
+      <pubDate>Wed, 27 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://jenkinsci.github.io/ssh-steps-plugin/steps/get/</guid>
+      <description>sshGet Get a file or directory from the remote host.
+ Usage     Key Type Description     remote
+ Remote, Mandatory, Refer to the Remote config for more details.
+ Host config to run the command on.
+   from
+ String, Mandatory
+ file or directory path from the remote node.
+   to
+ String, Mandatory
+ file or directory path on current worksapce.</description>
+    </item>
+    
+  </channel>
+</rss>

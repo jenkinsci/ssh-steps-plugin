@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Pipeline Steps on </title>
+    <link>https://jenkinsci.github.io/ssh-steps-plugin/steps/</link>
+    <description>Recent content in Pipeline Steps on </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 27 Jun 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://jenkinsci.github.io/ssh-steps-plugin/steps/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Command</title>
+      <link>https://jenkinsci.github.io/ssh-steps-plugin/steps/command/</link>
+      <pubDate>Wed, 27 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://jenkinsci.github.io/ssh-steps-plugin/steps/command/</guid>
+      <description>sshCommand This step executes given command on remote node and responds with output.
+ Usage     Key Type Description     remote
+ Remote, Mandatory, Refer to the Remote config for more details.
+ Host config to run the command on.
+   command
+ String, Mandatory
+ Shell command to run. Appending sudo is optional when sudo is true.
+   sudo</description>
+    </item>
+    
+    <item>
+      <title>Script</title>
+      <link>https://jenkinsci.github.io/ssh-steps-plugin/steps/script/</link>
+      <pubDate>Wed, 27 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://jenkinsci.github.io/ssh-steps-plugin/steps/script/</guid>
+      <description>sshScript This step executes given script(file) on remote node and responds with output.
+ Usage     Key Type Description     remote
+ Remote, Mandatory, Refer to the Remote config for more details.
+ Host config to run the command on.
+   script
+ String, Mandatory
+ Script file name from the workspace, current this doesn&amp;#8217;t support script with arguments. For that option you would need to copy over the file to remote node and run it as a command.</description>
+    </item>
+    
+    <item>
+      <title>Get</title>
+      <link>https://jenkinsci.github.io/ssh-steps-plugin/steps/get/</link>
+      <pubDate>Wed, 27 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://jenkinsci.github.io/ssh-steps-plugin/steps/get/</guid>
+      <description>sshGet Get a file or directory from the remote host.
+ Usage     Key Type Description     remote
+ Remote, Mandatory, Refer to the Remote config for more details.
+ Host config to run the command on.
+   from
+ String, Mandatory
+ file or directory path from the remote node.
+   to
+ String, Mandatory
+ file or directory path on current worksapce.</description>
+    </item>
+    
+    <item>
+      <title>Put</title>
+      <link>https://jenkinsci.github.io/ssh-steps-plugin/steps/put/</link>
+      <pubDate>Wed, 27 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://jenkinsci.github.io/ssh-steps-plugin/steps/put/</guid>
+      <description>sshPut Put a file or directory into the remote host.
+ Usage     Key Type Description     remote
+ Remote, Mandatory, Refer to the Remote config for more details.
+ Host config to run the command on.
+   from
+ String, Mandatory
+ file or directory path from the workspace.
+   to
+ String, Mandatory
+ file or directory path on the remote node.</description>
+    </item>
+    
+    <item>
+      <title>Remove</title>
+      <link>https://jenkinsci.github.io/ssh-steps-plugin/steps/remove/</link>
+      <pubDate>Wed, 27 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://jenkinsci.github.io/ssh-steps-plugin/steps/remove/</guid>
+      <description>sshRemove Remove a file or directory on the remote host.
+ Usage     Key Type Description     remote
+ Remote, Mandatory, Refer to the Remote config for more details.
+ Host config to run the command on.
+   path
+ String, Mandatory
+ file or directory path on the remote node
+   failOnError
+ boolean, default: true.
+ If this is false, no job failure would occur though there is an error while running the command.</description>
+    </item>
+    
+  </channel>
+</rss>

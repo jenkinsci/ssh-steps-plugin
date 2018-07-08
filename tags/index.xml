@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on </title>
+    <link>https://jenkinsci.github.io/ssh-steps-plugin/tags/</link>
+    <description>Recent content in Tags on </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 27 Jun 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://jenkinsci.github.io/ssh-steps-plugin/tags/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Command</title>
+      <link>https://jenkinsci.github.io/ssh-steps-plugin/tags/command/</link>
+      <pubDate>Wed, 27 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://jenkinsci.github.io/ssh-steps-plugin/tags/command/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Directory</title>
+      <link>https://jenkinsci.github.io/ssh-steps-plugin/tags/directory/</link>
+      <pubDate>Wed, 27 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://jenkinsci.github.io/ssh-steps-plugin/tags/directory/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>File</title>
+      <link>https://jenkinsci.github.io/ssh-steps-plugin/tags/file/</link>
+      <pubDate>Wed, 27 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://jenkinsci.github.io/ssh-steps-plugin/tags/file/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Get</title>
+      <link>https://jenkinsci.github.io/ssh-steps-plugin/tags/get/</link>
+      <pubDate>Wed, 27 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://jenkinsci.github.io/ssh-steps-plugin/tags/get/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Put</title>
+      <link>https://jenkinsci.github.io/ssh-steps-plugin/tags/put/</link>
+      <pubDate>Wed, 27 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://jenkinsci.github.io/ssh-steps-plugin/tags/put/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Remove</title>
+      <link>https://jenkinsci.github.io/ssh-steps-plugin/tags/remove/</link>
+      <pubDate>Wed, 27 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://jenkinsci.github.io/ssh-steps-plugin/tags/remove/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Script</title>
+      <link>https://jenkinsci.github.io/ssh-steps-plugin/tags/script/</link>
+      <pubDate>Wed, 27 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://jenkinsci.github.io/ssh-steps-plugin/tags/script/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Steps</title>
+      <link>https://jenkinsci.github.io/ssh-steps-plugin/tags/steps/</link>
+      <pubDate>Wed, 27 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://jenkinsci.github.io/ssh-steps-plugin/tags/steps/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
