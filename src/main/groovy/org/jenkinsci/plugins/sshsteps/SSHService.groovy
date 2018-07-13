@@ -63,19 +63,84 @@ class SSHService implements Serializable {
         new Common(logger).validateRemote(this.remote);
     }
 
-    private void defineRemote() {
-        registerLogHandler()
+    private void defineRemote(remote) {
         ssh.remotes {
             "$remote.name" {
                 host = remote.host
                 if (remote.port)
                     port = remote.port
+                user = remote.user
+                if (remote.password)
+                    password = remote.password
+
+                // Gateway.
+                if (remote.gateway) {
+                    defineRemote(remote.gateway)
+                    gateway = ssh.remotes."$remote.gateway.name"
+                }
+
+                // Connection Settings applicable for Command, Script, FTP/SCP Operations.
+                timeoutSec = remote.timeoutSec
+                retryCount = remote.retryCount
+                agent = remote.agent
+                dryRun = dryRunFlag
+                retryWaitSec = remote.retryWaitSec
+                if (remote.keepAliveSec)
+                    keepAliveSec = remote.keepAliveSec
+                jschLog = true
+
+                // Agent forwarding for command, need to find the difference between this and agent.
+                if (remote.agentForwarding)
+                    agentForwarding = remote.agentForwarding
+
+                // Ignore error don't fail the pipeline build
+                ignoreError = !failOnError
+
+                if (remote.fileTransfer)
+                    fileTransfer = remote.fileTransfer
+
+                // Avoid excessive logging in Jenkins master.
+                logging = LoggingMethod.none
+
+                // Pipe logs to TaskListener's print stream.
+                interaction = {
+                    when(line: _, from: standardOutput) {
+                        logger.println("$remote.name|$it")
+                    }
+                    when(line: _, from: standardError) {
+                        logger.println("$remote.name|$it")
+                    }
+                }
+                if (remote.pty) {
+                    pty = remote.pty
+                }
+
+                // Encoding
+                if (remote.encoding)
+                    encoding = remote.encoding
+
+                // Host authentication
+                if (remote.allowAnyHosts)
+                    knownHosts = AllowAnyHosts.instance
+                else if (remote.knownHosts)
+                    knownHosts = remote.knownHosts
+
+                // Public and private key authentication
+                if (remote.identity)
+                    identity = remote.identity
+                passphrase = remote.passphrase
+
+                // Proxy.
+                if (remote.proxy) {
+                    defineProxy(remote.proxy)
+                    proxy = ssh.proxies."$remote.proxy.name"
+                }
+
             }
         }
-        defineProxy()
     }
 
-    private void defineProxy() {
+    private void defineProxy(remote) {
         def proxy = remote.proxy
         if (proxy) {
             ssh.proxies {
@@ -95,68 +160,6 @@ class SSHService implements Serializable {
         }
     }
 
-    // Settings defined globally.
-    def defineSettings = {
-        user = remote.user
-        if (remote.password)
-            password = remote.password
-
-        // Gateway and proxy.
-        if (remote.gateway)
-            gateway = remote.gateway
-
-        // Connection Settings applicable for Command, Script, FTP/SCP Operations.
-        timeoutSec = remote.timeoutSec
-        retryCount = remote.retryCount
-        agent = remote.agent
-        dryRun = dryRunFlag
-        retryWaitSec = remote.retryWaitSec
-        if (remote.keepAliveSec)
-            keepAliveSec = remote.keepAliveSec
-        jschLog = true
-
-        // Agent forwarding for command, need to find the difference between this and agent.
-        if (remote.agentForwarding)
-            agentForwarding = remote.agentForwarding
-
-        // Ignore error don't fail the pipeline build
-        ignoreError = !failOnError
-
-        if (remote.fileTransfer)
-            fileTransfer = remote.fileTransfer
-
-        // Avoid excessive logging in Jenkins master.
-        logging = LoggingMethod.none
-
-        // Pipe logs to TaskListener's print stream.
-        interaction = {
-            when(line: _, from: standardOutput) {
-                logger.println("$remote.name|$it")
-            }
-            when(line: _, from: standardError) {
-                logger.println("$remote.name|$it")
-            }
-        }
-        if (remote.pty) {
-            pty = remote.pty
-        }
-
-        // Encoding
-        if (remote.encoding)
-            encoding = remote.encoding
-
-        // Host authentication
-        if (remote.allowAnyHosts)
-            knownHosts = AllowAnyHosts.instance
-        else if (remote.knownHosts)
-            knownHosts = remote.knownHosts
-
-        // Public and private key authentication
-        if (remote.identity)
-            identity = remote.identity
-        passphrase = remote.passphrase
-    }
-
     /**
      * Executes given command with sudo (optional).
      *
@@ -165,14 +168,9 @@ class SSHService implements Serializable {
      * @return response from ssh run.
      */
     def executeCommand(String command, boolean sudo) {
-        defineRemote()
+        registerLogHandler()
+        defineRemote(remote)
         ssh.run {
-            settings {
-                defineSettings.delegate = delegate
-                defineSettings()
-                if (remote.proxy)
-                    proxy = ssh.proxies."$remote.proxy.name"
-            }
             session(ssh.remotes."$remote.name") {
                 if (sudo)
                     executeSudo command, pty: true
@@ -189,14 +187,9 @@ class SSHService implements Serializable {
      * @return response from ssh run.
      */
     def executeScriptFromFile(String pathname) {
-        defineRemote()
+        registerLogHandler()
+        defineRemote(remote)
         ssh.run {
-            settings {
-                defineSettings.delegate = delegate
-                defineSettings()
-                if (remote.proxy)
-                    proxy = ssh.proxies."$remote.proxy.name"
-            }
             session(ssh.remotes."$remote.name") {
                 executeScript new File(pathname)
             }
@@ -211,15 +204,9 @@ class SSHService implements Serializable {
      * @return response from ssh run.
      */
     def put(String from, String into) {
-        defineRemote()
-
+        registerLogHandler()
+        defineRemote(remote)
         ssh.run {
-            settings {
-                defineSettings.delegate = delegate
-                defineSettings()
-                if (remote.proxy)
-                    proxy = ssh.proxies."$remote.proxy.name"
-            }
             session(ssh.remotes."$remote.name") {
                 put from: from, into: into
             }
@@ -234,15 +221,9 @@ class SSHService implements Serializable {
      * @return
      */
     def get(String from, String into) {
-        defineRemote()
-
+        registerLogHandler()
+        defineRemote(remote)
         ssh.run {
-            settings {
-                defineSettings.delegate = delegate
-                defineSettings()
-                if (remote.proxy)
-                    proxy = ssh.proxies."$remote.proxy.name"
-            }
             session(ssh.remotes."$remote.name") {
                 get from: from, into: into
             }
@@ -256,14 +237,9 @@ class SSHService implements Serializable {
      * @return output from ssh's remove operation.
      */
     def remove(String path) {
-        defineRemote()
+        registerLogHandler()
+        defineRemote(remote)
         ssh.run {
-            settings {
-                defineSettings.delegate = delegate
-                defineSettings()
-                if (remote.proxy)
-                    proxy = ssh.proxies."$remote.proxy.name"
-            }
             session(ssh.remotes."$remote.name") {
                 remove path
             }
