@@ -1,0 +1,13 @@
++++
+title = "SSH Pipline Steps"
+description = "SSH Pipeline Steps"
+date = "2018-06-27"
+lastmodifierdisplayname = "Naresh Rayapati"
++++
+
+image::https://raw.githubusercontent.com/jenkinsci/ssh-steps-plugin/master/docs/static/images/JenkinsPlusSSH.png[Jenkins SSH]
+
+
+== https://jenkins.io/doc/book/pipeline/[Jenkins Pipeline]
+
+Jenkins 2 brings Pipeline as code, a new setup experience and other UI improvements, let you define delivery pipelines using concise Groovy scripts which deal elegantly with jobs involving persistence and asynchrony. Introduces a domain-specific language (DSL) that helps Jenkins users to model their software delivery pipelines as code, which can be checked in and version-controlled along with the rest of their project's source code.

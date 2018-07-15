@@ -1,0 +1,27 @@
++++
+title = "Credits"
+description = "contributors and packages used by ssh-pipeline-steps"
+date = "2018-06-27"
+lastmodifierdisplayname = "Naresh Rayapati"
++++
+
+== Maintainers
+  * https://github.com/nrayapati[Naresh Rayapati].
+  * https://github.com/ghenkes[Gabe Henkes].
+  * https://github.com/wuchenwang[Wuchen Wang].
+
+== GitHub Contributors
+
+{{%ghcontributors "https://api.github.com/repos/jenkinsci/ssh-steps-plugin/contributors?per_page=100" %}}
+
+Help us to make this project better by contributing.
+
+== Packages and Libraries
+
+* https://github.com/int128/groovy-ssh[Groovy SSH] - Thank you https://github.com/int128[Hidetake Iwata] for the great library.
+
+== Tooling
+
+* http://docdock.netlify.com/[DocDock]
+* https://gohugo.io/[Hugo] {{%icon "fa-smile-o"%}}
+* Thanks for the kind folks at JetBrains for allowing us to use Intellij IDEA to develop this plugin!

@@ -1,0 +1,44 @@
+baseURL = "https://jenkinsci.github.io/ssh-steps-plugin/"
+languageCode = "en-us"
+DefaultContentLanguage = "en"
+theme = "docdock"
+publishDir = "../public"
+
+[params]
+title = "SSH Pipeline Steps"
+editURL = "https://github.com/jenkinsci/ssh-steps-plugin/edit/master/docs/content/"
+noHomeIcon = false # default is false
+noSearch = false # default is false
+showVisitedLinks = true # default is false
+themeVariant = "" # choose theme variant "green", "gold" , "gray", "blue" (default)
+ordersectionsby = "weight" # ordersectionsby = "title"
+
+[outputs]
+home = [ "HTML", "RSS", "JSON"]
+
+[[menu.shortcuts]]
+pre = "<h3>More</h3>"
+name = "<i class='fa fa-github'></i> Github repo"
+identifier = "ds"
+url = "https://github.com/jenkinsci/ssh-steps-plugin"
+weight = 10
+
+[[menu.shortcuts]]
+name = "<i class='fa fa-road'></i> Release Notes"
+url = "/changelog"
+weight = 11
+
+[[menu.shortcuts]]
+name = "<i class='fa fa-heart'></i> Contributing"
+url = "/contributing"
+weight = 20
+
+[[menu.shortcuts]]
+name = "<i class='fa fa-bullhorn'></i> Credits"
+url = "/credits"
+weight = 30
+
+[[menu.shortcuts]]
+name = "<i class='fa fa-thumbs-o-up'></i> Privacy Policy"
+url = "/terms"
+weight = 40

@@ -1,35 +1,3 @@
-= Contributing
-:1: https://issues.jenkins-ci.org/issues/?filter=18640
-:2: http://gun.io/blog/how-to-github-fork-branch-and-pull-request
-:3: http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html
-:4: ./CHANGELOG.adoc
-:5: http://gitready.com/advanced/2009/02/10/squashing-commits-with-rebase.html
-:6: https://help.github.com/articles/using-pull-requests
+== CONTRIBUTING
 
-Help us to make this project better by contributing. Whether it's new features, bug fixes, or simply improving documentation, your contributions are welcome. Please start with logging a {1}[JIRA] or submit a pull request.
-
-Before you contribute, please review these guidelines to help ensure a smooth process for everyone.
-
-== Issue reporting
-
-* Please browse the existing {1}[JIRAs] before logging new JIRA.
-* Check that the issue has not already been fixed in the `master` branch.
-* Create JIRA with a descriptive title and a summary.
-* Please be as clear and explicit as you can in your description of the problem.
-* Please state the version of the plugin you are using in the description.
-* Include any relevant code in the issue summary.
-
-== Pull requests
-
-* Read {2}[how to properly contribute to open source projects on Github].
-* Fork the project.
-* Use a feature branch.
-* Write {3}[good commit messages].
-* Use the same coding conventions as the rest of the project. This project is using Google https://google.github.io/styleguide/javaguide.html[StyleGuide]
-** Download StyleGuides from https://github.com/google/styleguide[Github].
-* Commit locally and push to your fork until you are happy with your contribution.
-* Make sure to add tests and verify all the tests are passing when merging upstream.
-* Add an entry to the link:{4}[Changelog] accordingly.
-* {5}[Squash related commits together].
-* Open a {6}[pull request].
-* The pull request will be reviewed by the community and merged by the project committers.
+Please refer to the https://jenkinsci.github.io/ssh-steps-plugin/contributing[Guidelines] for more information.

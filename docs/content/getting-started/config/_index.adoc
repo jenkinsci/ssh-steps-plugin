@@ -1,0 +1,152 @@
++++
+title = "Configuration"
+description = ""
+weight = 2
+date = "2018-06-27"
+lastmodifierdisplayname = "Naresh Rayapati"
++++
+
+=== Remote
+
+Most of the steps in this plugin require a common step variable called `remote`, which is Map of remote node settings such as user name, password and so on. Here is list of all possible keys that can be set.
+
+==== Example
+
+```groovy
+  def remote = [:]
+  remote.name = 'test'
+  remote.host = 'test.domain.com'
+  remote.user = 'root'
+  remote.password = 'password'
+  remote.allowAnyHosts = true
+  stage('Remote SSH') {
+    sshCommand remote: remote, command: "ls -lrt"
+    sshCommand remote: remote, command: "for i in {1..5}; do echo -n \"Loop \$i \"; date ; sleep 1; done"
+  }
+```
+
+[width="60%",cols="^2,4,6",options="header"]
+|===
+|Key
+|Type
+|Description
+
+|name
+|String, *Mandatory*
+|Remote name, usually this is same as host name.
+
+|host
+|String, *Mandatory*
+|Hostname or IP address of the remote host.
+
+|port
+|int
+|Port. Defaults to port `22`.
+
+|user
+|String, *Mandatory*
+|User name.
+
+|allowAnyHosts
+|boolean
+|If this is `true`, knownHosts is optional. Defaults to `false`.
+
+|knownHosts
+|String, *Mandatory*
+|Known hosts file for host key checking.
+
+|password
+|String, *one of password, identity or identityFile is required*
+|Password for password authentication.
+
+|identity
+|String, *one of password, identity or identityFile is required*
+|Private key for public-key authentication.
+
+|identityFile
+|String, *one of password, identity or identityFile is required*
+|Private key file name for public-key authentication.
+
+|passphrase
+|String
+|Pass-phrase for the private key.
+
+|agent
+|boolean
+|If this is `true`, Putty Agent or ssh-agent is used on authentication. Defaults to `false`.
+
+|timeoutSec
+|int
+|Connection timeout and socket read timeout. Defaults to 0 (OS default).
+
+|retryCount
+|int
+|Retry count to establish connection. Defaults to 0 (no retry).
+
+|retryWaitSec
+|int
+|Interval time between each retries. Defaults to 0 (immediately).
+
+|keepAliveSec
+|int
+|Interval time of keep alive messages sent to the remote host. Defaults to 60 seconds.
+
+|agentForwarding
+|boolean
+|If this is `true`, the agent forwarding is requested on the command execution. Defaults to false.
+
+|fileTransfer
+|String
+|File transfer method, that is `SFTP` or `SCP`. Defaults to `SFTP`.
+
+|encoding
+|String
+|Encoding of input and output on the command or shell execution. Defaults to `UTF-8`.
+
+
+|proxy
+|Proxy, refer below.
+|If this is set, the proxy server is used to reach the remote host. Defaults to no proxy.
+
+|gateway
+|Remote
+|Gateway remote host. If this is set, the port-forwarding tunnel is used to reach the remote host. Defaults to no gateway.
+|===
+
+=== Proxy
+
+[width="60%",cols="1,^2,6",options="header"]
+|===
+|Key
+|Type
+|Description
+
+|name
+|String, *Mandatory*
+|Proxy name
+
+|host
+|String, *Mandatory*
+|Hostname or IP address of the proxy server.
+
+|port
+|int, *Mandatory*
+|Port of the proxy server.
+
+|type
+|String, *Mandatory*
+|Type of the proxy server: `SOCKS` or `HTTP`.
+
+|user
+|String
+|User name of the proxy server.
+
+|password
+|String
+|Password of the proxy server.
+
+|socksVersion
+|int
+|Protocol version when using `SOCKS`: 4 or 5. Defaults to 5.
+|===
+

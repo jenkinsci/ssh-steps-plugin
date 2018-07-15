@@ -1,0 +1,66 @@
++++
+title = "Command"
+description = "More about sshCommand step."
+tags = ["steps", "command"]
+weight = 1
+date = "2018-06-27"
+lastmodifierdisplayname = "Naresh Rayapati"
++++
+
+=== sshCommand
+
+This step executes given command on remote node and responds with output.
+
+==== Usage
+
+[width="60%",cols="^2,4,6",options="header"]
+|===
+|Key
+|Type
+|Description
+
+|*remote*
+|Remote, *Mandatory*, Refer to the Remote config for more details.
+|Host config to run the command on.
+
+|*command*
+|String, *Mandatory*
+|Shell command to run. Appending sudo is optional when `sudo` is `true`.
+
+|*sudo*
+|boolean, default: `false`.
+|Interactively supplies the password, not required for password less sudo commands.
+
+|*failOnError*
+|boolean, default: `true`.
+|If this is `false`, no job failure would occur though there is an error while running the command.
+
+|*dryRun*
+|boolean, default: `false`
+|If this is true, no actual connection or operation is performed.
+|===
+
+{{% notice note %}}
+More about remote key can be found in configuration section.
+{{% /notice %}}
+
+==== Example
+
+```groovy
+node {
+  def remote = [:]
+  remote.name = 'test'
+  remote.host = 'test.domain.com'
+  remote.user = 'root'
+  remote.password = 'password'
+  remote.allowAnyHosts = true
+  stage('Remote SSH') {
+    sshCommand remote: remote, command: "ls -lrt"
+    sshCommand remote: remote, command: "for i in {1..5}; do echo -n \"Loop \$i \"; date ; sleep 1; done"
+  }
+}
+```
+
+{{% notice tip %}}
+Please take note to surround the code with a node.
+{{% /notice %}}
