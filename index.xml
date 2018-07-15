@@ -102,7 +102,10 @@
       <pubDate>Wed, 27 Jun 2018 00:00:00 +0000</pubDate>
       
       <guid>https://jenkinsci.github.io/ssh-steps-plugin/changelog/</guid>
-      <description>Release Notes. 1.0.1 (Unreleased)  1.0.0   Initial release.
+      <description>Release Notes. 1.1.0 (Unreleased)   JENKINS-52225 - Upgrade to latest JSch version.
+  JENKINS-52390 - Throw appropriate error when the code is not in node block.
+  JENKINS-52532 - Throws exception when used remote with gateway option.
+    1.0.0   Initial release.
   Supported Steps.
   sshCommand
   sshScript

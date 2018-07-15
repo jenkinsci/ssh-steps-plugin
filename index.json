@@ -67,7 +67,7 @@
 	"title": "Change Log",
 	"tags": [],
 	"description": "Change Log.",
-	"content": "Release Notes. 1.0.1 (Unreleased)  1.0.0   Initial release.\n  Supported Steps.\n  sshCommand\n  sshScript\n  sshGet\n  sshPut\n  sshRemove\n         "
+	"content": "Release Notes. 1.1.0 (Unreleased)   JENKINS-52225 - Upgrade to latest JSch version.\n  JENKINS-52390 - Throw appropriate error when the code is not in node block.\n  JENKINS-52532 - Throws exception when used remote with gateway option.\n    1.0.0   Initial release.\n  Supported Steps.\n  sshCommand\n  sshScript\n  sshGet\n  sshPut\n  sshRemove\n         "
 },
 {
 	"uri": "https://jenkinsci.github.io/ssh-steps-plugin/contributing/",
