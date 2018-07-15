@@ -7,7 +7,7 @@
     <version>2.21</version>
   </parent>
   <artifactId>ssh-steps</artifactId>
-  <version>1.0.1-SNAPSHOT</version>
+  <version>1.2.0-SNAPSHOT</version>
   <packaging>hpi</packaging>
   <name>SSH Pipeline Steps</name>
   <description>SSH Pipeline Steps</description>

@@ -1,12 +1,15 @@
 = Release Notes.
 
-== 1.1.0 (Unreleased)
+== 1.2.0 (Unreleased)
+
+== 1.1.0
 
 * https://issues.jenkins-ci.org/browse/JENKINS-52225[JENKINS-52225] - Upgrade to latest JSch version.
 * https://issues.jenkins-ci.org/browse/JENKINS-52390[JENKINS-52390] - Throw appropriate error when the code is not in node block.
 * https://issues.jenkins-ci.org/browse/JENKINS-52532[JENKINS-52532] - Throws exception when used remote with gateway option.
 
 == 1.0.0
+
 * Initial release.
 * Supported Steps.
 ** sshCommand
