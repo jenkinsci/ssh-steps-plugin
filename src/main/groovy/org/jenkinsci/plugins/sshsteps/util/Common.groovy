@@ -85,7 +85,6 @@ class Common {
             if (!ProxyType.values().contains(ProxyType.valueOf(proxy.type))) {
                 throw new IllegalArgumentException(getPrefix() + "Unsupported ProxyType ${proxy.type}. Supported types: ${ProxyType.collect { "$it" }.join(', ')}.")
             }
-            proxy.type = ProxyType.valueOf(proxy.type)
             if (!proxy.user && proxy.password) {
                 logger.println(getPrefix() + "proxy.password is set but proxy.user is null. Credentials are ignored for proxy '${proxy.name}'")
             }
