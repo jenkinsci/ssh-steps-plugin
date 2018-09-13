@@ -140,22 +140,19 @@ class SSHService implements Serializable {
         }
     }
 
-    private void defineProxy(remote) {
-        def proxy = remote.proxy
-        if (proxy) {
-            ssh.proxies {
-                "$proxy.name" {
-                    host = proxy.host
-                    type = proxy.type
-                    if (proxy.port)
-                        port = proxy.port
-                    if (proxy.socksVersion)
-                        socksVersion = proxy.socksVersion
-                    if (proxy.user)
-                        user = proxy.user
-                    if (proxy.password)
-                        password = proxy.password
-                }
+    private void defineProxy(proxy) {
+        ssh.proxies {
+            "$proxy.name" {
+                host = proxy.host
+                type = proxy.type
+                if (proxy.port)
+                    port = proxy.port
+                if (proxy.socksVersion)
+                    socksVersion = proxy.socksVersion
+                if (proxy.user)
+                    user = proxy.user
+                if (proxy.password)
+                    password = proxy.password
             }
         }
     }
