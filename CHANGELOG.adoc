@@ -2,6 +2,10 @@
 
 == 1.2.0 (Unreleased)
 
+== 1.1.1
+
+* https://issues.jenkins-ci.org/browse/JENKINS-53556[JENKINS-53556] - Fix invalid proxy settings and validation.
+
 == 1.1.0
 
 * https://issues.jenkins-ci.org/browse/JENKINS-52225[JENKINS-52225] - Upgrade to latest JSch version.
