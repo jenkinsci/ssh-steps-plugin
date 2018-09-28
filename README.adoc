@@ -9,6 +9,8 @@ link:https://ci.jenkins.io/job/Plugins/job/ssh-steps-plugin/job/master/[image:ht
 
 Jenkins pipeline steps which provides SSH facilities such as command execution or file transfer for continuous delivery. It internally uses the library of https://github.com/int128/groovy-ssh[Groovy SSH].
 
+Read more about the YAML extension of this plugin at https://engineering.cerner.com/blog/ssh-steps-for-jenkins-pipeline/[this blog post]
+
 '''
 toc::[]
 
