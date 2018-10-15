@@ -211,11 +211,11 @@ class SSHService implements Serializable {
     }
 
     /**
-     * Get a file from remote.
+     * Gets a file from remote node.
      *
      * @param from location to get file from.
      * @param into location to get file into.
-     * @return
+     * @return response from ssh run.
      */
     def get(String from, String into) {
         registerLogHandler()
@@ -228,7 +228,7 @@ class SSHService implements Serializable {
     }
 
     /**
-     * Remove's a file from remote node.
+     * Removes a file from remote node.
      *
      * @param name name of the file/dir.
      * @return output from ssh's remove operation.
