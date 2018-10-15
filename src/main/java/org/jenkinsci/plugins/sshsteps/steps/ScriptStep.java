@@ -26,7 +26,7 @@ public class ScriptStep extends BasicSSHStep {
   private final String script;
 
   @DataBoundConstructor
-  public ScriptStep(final String script) {
+  public ScriptStep(String script) {
     this.script = script;
   }
 
@@ -53,8 +53,7 @@ public class ScriptStep extends BasicSSHStep {
 
     private static final long serialVersionUID = 6008070200393301960L;
 
-    protected Execution(final ScriptStep step, final StepContext context)
-        throws IOException, InterruptedException {
+    protected Execution(ScriptStep step, StepContext context) throws IOException, InterruptedException {
       super(step, context);
     }
 
@@ -88,8 +87,7 @@ public class ScriptStep extends BasicSSHStep {
 
       private final String script;
 
-      public ScriptCallable(final ScriptStep step, final TaskListener listener,
-          final String script) {
+      public ScriptCallable(ScriptStep step, TaskListener listener, String script) {
         super(step, listener);
         this.script = script;
       }

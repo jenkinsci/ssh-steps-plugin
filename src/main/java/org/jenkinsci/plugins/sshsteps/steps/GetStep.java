@@ -36,7 +36,7 @@ public class GetStep extends BasicSSHStep {
   private boolean override = false;
 
   @DataBoundConstructor
-  public GetStep(final String from, final String into) {
+  public GetStep(String from, String into) {
     this.from = from;
     this.into = into;
   }
@@ -64,8 +64,7 @@ public class GetStep extends BasicSSHStep {
 
     private static final long serialVersionUID = 8544114488028417422L;
 
-    protected Execution(final GetStep step, final StepContext context)
-        throws IOException, InterruptedException {
+    protected Execution(GetStep step, StepContext context) throws IOException, InterruptedException {
       super(step, context);
     }
 
@@ -99,7 +98,7 @@ public class GetStep extends BasicSSHStep {
 
       private final String into;
 
-      public GetCallable(final GetStep step, final TaskListener listener, final String into) {
+      public GetCallable(GetStep step, TaskListener listener, String into) {
         super(step, listener);
         this.into = into;
       }

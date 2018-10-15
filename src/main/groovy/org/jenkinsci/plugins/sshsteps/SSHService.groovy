@@ -21,11 +21,11 @@ import java.util.logging.Logger
 @SuppressFBWarnings
 class SSHService implements Serializable {
 
-    private Map remote
-    private boolean failOnError = true
-    private boolean dryRunFlag = false
-    private transient PrintStream logger
-    private transient Service ssh
+    private final Map remote
+    private final boolean failOnError
+    private final boolean dryRunFlag
+    private final transient PrintStream logger
+    private final transient Service ssh
 
     /**
      * Constructor.
@@ -35,9 +35,7 @@ class SSHService implements Serializable {
      * @param dryRun
      * @param logger
      */
-    private SSHService(
-            final Map remote,
-            final boolean failOnError, final boolean dryRun, final PrintStream logger) {
+    private SSHService(Map remote, boolean failOnError, boolean dryRun, PrintStream logger) {
         this.remote = remote
         this.logger = logger
         this.failOnError = failOnError
@@ -46,9 +44,7 @@ class SSHService implements Serializable {
         ssh = Ssh.newService()
     }
 
-    static SSHService create(final Map remote,
-                             final boolean failOnError,
-                             final boolean dryRun, final PrintStream logger) {
+    static SSHService create(Map remote, boolean failOnError, boolean dryRun, PrintStream logger) {
         new SSHService(remote, failOnError, dryRun, logger)
     }
 

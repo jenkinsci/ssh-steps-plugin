@@ -16,11 +16,11 @@ import org.jenkinsci.plugins.sshsteps.steps.BasicSSHStep;
  */
 public abstract class SSHMasterToSlaveCallable extends MasterToSlaveCallable<Object, IOException> {
 
-  private BasicSSHStep step;
-  private TaskListener listener;
+  private final BasicSSHStep step;
+  private final TaskListener listener;
   private SSHService service;
 
-  public SSHMasterToSlaveCallable(final BasicSSHStep step, final TaskListener listener) {
+  public SSHMasterToSlaveCallable(BasicSSHStep step, TaskListener listener) {
     this.step = step;
     this.listener = listener;
   }

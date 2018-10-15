@@ -29,14 +29,13 @@ import org.jenkinsci.plugins.workflow.steps.StepExecution;
 public abstract class SSHStepExecution<T> extends StepExecution {
 
   private static ExecutorService executorService;
-  private transient TaskListener listener;
-  private transient Launcher launcher;
+  private final transient TaskListener listener;
+  private final transient Launcher launcher;
   private transient volatile Future<?> task;
   private transient String threadName;
-  private BasicSSHStep step;
+  private final BasicSSHStep step;
 
-  protected SSHStepExecution(final BasicSSHStep step, @Nonnull StepContext context)
-      throws IOException, InterruptedException {
+  protected SSHStepExecution(BasicSSHStep step, @Nonnull StepContext context) throws IOException, InterruptedException {
     super(context);
     listener = context.get(TaskListener.class);
     launcher = context.get(Launcher.class);
