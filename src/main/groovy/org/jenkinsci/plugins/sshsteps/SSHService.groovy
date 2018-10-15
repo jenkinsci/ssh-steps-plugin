@@ -43,13 +43,13 @@ class SSHService implements Serializable {
         this.failOnError = failOnError
         this.dryRunFlag = dryRun
         validateRemote()
-        ssh = Ssh.newService();
+        ssh = Ssh.newService()
     }
 
     static SSHService create(final Map remote,
                              final boolean failOnError,
                              final boolean dryRun, final PrintStream logger) {
-        new SSHService(remote, failOnError, dryRun, logger);
+        new SSHService(remote, failOnError, dryRun, logger)
     }
 
     /**
@@ -60,7 +60,7 @@ class SSHService implements Serializable {
     }
 
     private void validateRemote() {
-        new Common(logger).validateRemote(this.remote);
+        new Common(logger).validateRemote(this.remote)
     }
 
     private void defineRemote(remote) {
