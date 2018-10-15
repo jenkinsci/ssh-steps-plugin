@@ -86,9 +86,10 @@ public class RemoveStepTest {
     stepExecution = new RemoveStep.Execution(step, contextMock);
 
     // Execute and assert Test.
-    assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
-      stepExecution.run();
-    }).withMessage("path is null or empty").withStackTraceContaining("IllegalArgumentException")
+    assertThatExceptionOfType(IllegalArgumentException.class)
+        .isThrownBy(() -> stepExecution.run())
+        .withMessage("path is null or empty")
+        .withStackTraceContaining("IllegalArgumentException")
         .withNoCause();
   }
 
