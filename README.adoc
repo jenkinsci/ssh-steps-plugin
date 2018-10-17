@@ -264,7 +264,7 @@ Put a file or directory into the remote host.
 |String, *Mandatory*
 |file or directory path from the workspace.
 
-|to
+|into
 |String, *Mandatory*
 |file or directory path on the remote node.
 
@@ -314,7 +314,7 @@ Get a file or directory from the remote host.
 |String, *Mandatory*
 |file or directory path from the remote node.
 
-|to
+|into
 |String, *Mandatory*
 |file or directory path on current worksapce.
 
