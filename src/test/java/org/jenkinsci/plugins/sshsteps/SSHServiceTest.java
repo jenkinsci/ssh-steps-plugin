@@ -31,7 +31,8 @@ public class SSHServiceTest {
 
     assertThatExceptionOfType(AssertionError.class)
         .isThrownBy(() -> SSHService.create(remote, false, false, null))
-        .withMessage("SSH Steps:  a remote (or a gateway) is missing the required field 'name'. Expression: remote.name")
+        .withMessage(
+            "SSH Steps:  a remote (or a gateway) is missing the required field 'name'. Expression: remote.name")
         .withStackTraceContaining("AssertionError")
         .withNoCause();
   }

@@ -57,7 +57,8 @@ public class PutStep extends BasicSSHStep {
 
     private static final long serialVersionUID = -4497192469254138827L;
 
-    protected Execution(PutStep step, StepContext context) throws IOException, InterruptedException {
+    protected Execution(PutStep step, StepContext context)
+        throws IOException, InterruptedException {
       super(step, context);
     }
 

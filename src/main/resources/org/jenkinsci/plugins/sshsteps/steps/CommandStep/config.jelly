@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-  <?jelly escape-by-default='true'?>
+<?jelly escape-by-default='true'?>
 <j:jelly xmlns:f="/lib/form" xmlns:j="jelly:core">
-<f:block>
   <f:block>
-    <p>This is a special step. No snippet generation available. See inline help or docs on the <a href="https://github.com/jenkinsci/ssh-steps-plugin" target="_blank">README</a> for more information.</p>
+    <f:block>
+      <p>This is a special step. No snippet generation available. See inline help or docs on the <a
+        href="https://github.com/jenkinsci/ssh-steps-plugin" target="_blank">README
+      </a> for more information.
+      </p>
+    </f:block>
   </f:block>
-</f:block>
 </j:jelly>

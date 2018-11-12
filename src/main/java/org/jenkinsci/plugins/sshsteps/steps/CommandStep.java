@@ -57,7 +57,8 @@ public class CommandStep extends BasicSSHStep {
 
     private static final long serialVersionUID = -5293952534324828128L;
 
-    protected Execution(CommandStep step, StepContext context) throws IOException, InterruptedException {
+    protected Execution(CommandStep step, StepContext context)
+        throws IOException, InterruptedException {
       super(step, context);
     }
 

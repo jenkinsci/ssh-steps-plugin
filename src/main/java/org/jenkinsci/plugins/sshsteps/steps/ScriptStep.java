@@ -53,7 +53,8 @@ public class ScriptStep extends BasicSSHStep {
 
     private static final long serialVersionUID = 6008070200393301960L;
 
-    protected Execution(ScriptStep step, StepContext context) throws IOException, InterruptedException {
+    protected Execution(ScriptStep step, StepContext context)
+        throws IOException, InterruptedException {
       super(step, context);
     }
 

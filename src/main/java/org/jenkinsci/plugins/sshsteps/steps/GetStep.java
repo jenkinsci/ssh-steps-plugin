@@ -64,7 +64,8 @@ public class GetStep extends BasicSSHStep {
 
     private static final long serialVersionUID = 8544114488028417422L;
 
-    protected Execution(GetStep step, StepContext context) throws IOException, InterruptedException {
+    protected Execution(GetStep step, StepContext context)
+        throws IOException, InterruptedException {
       super(step, context);
     }
 

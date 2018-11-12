@@ -77,7 +77,8 @@ public class CommandStepTest {
     // Execute and assert Test.
     assertThatExceptionOfType(IllegalArgumentException.class)
         .isThrownBy(() -> stepExecution.run())
-        .withMessage("command is null or empty").withStackTraceContaining("IllegalArgumentException")
+        .withMessage("command is null or empty")
+        .withStackTraceContaining("IllegalArgumentException")
         .withNoCause();
   }
 

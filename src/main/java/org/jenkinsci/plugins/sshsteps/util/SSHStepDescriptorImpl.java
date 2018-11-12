@@ -22,6 +22,7 @@ public abstract class SSHStepDescriptorImpl extends StepDescriptor {
 
   @Override
   public Set<? extends Class<?>> getRequiredContext() {
-    return ImmutableSet.of(Launcher.class, FilePath.class, Run.class, TaskListener.class, EnvVars.class);
+    return ImmutableSet
+        .of(Launcher.class, FilePath.class, Run.class, TaskListener.class, EnvVars.class);
   }
 }

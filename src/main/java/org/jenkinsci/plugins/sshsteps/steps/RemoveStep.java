@@ -52,7 +52,8 @@ public class RemoveStep extends BasicSSHStep {
 
     private static final long serialVersionUID = 862708152481251266L;
 
-    protected Execution(RemoveStep step, StepContext context) throws IOException, InterruptedException {
+    protected Execution(RemoveStep step, StepContext context)
+        throws IOException, InterruptedException {
       super(step, context);
     }
 

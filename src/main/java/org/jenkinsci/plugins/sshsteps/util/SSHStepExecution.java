@@ -31,11 +31,12 @@ public abstract class SSHStepExecution<T> extends StepExecution {
   private static ExecutorService executorService;
   private final transient TaskListener listener;
   private final transient Launcher launcher;
+  private final BasicSSHStep step;
   private transient volatile Future<?> task;
   private transient String threadName;
-  private final BasicSSHStep step;
 
-  protected SSHStepExecution(BasicSSHStep step, @Nonnull StepContext context) throws IOException, InterruptedException {
+  protected SSHStepExecution(BasicSSHStep step, @Nonnull StepContext context)
+      throws IOException, InterruptedException {
     super(context);
     listener = context.get(TaskListener.class);
     launcher = context.get(Launcher.class);
@@ -63,14 +64,15 @@ public abstract class SSHStepExecution<T> extends StepExecution {
     Authentication auth = Jenkins.getAuthentication();
     task = getExecutorService().submit(() -> {
       try {
-        getContext().onSuccess(ACL.impersonate(auth, new NotReallyRoleSensitiveCallable<T, Exception>() {
-          @Override
-          public T call() throws Exception {
-            threadName = Thread.currentThread().getName();
-            MDC.put("execution.id", UUID.randomUUID().toString());
-            return SSHStepExecution.this.run();
-          }
-        }));
+        getContext()
+            .onSuccess(ACL.impersonate(auth, new NotReallyRoleSensitiveCallable<T, Exception>() {
+              @Override
+              public T call() throws Exception {
+                threadName = Thread.currentThread().getName();
+                MDC.put("execution.id", UUID.randomUUID().toString());
+                return SSHStepExecution.this.run();
+              }
+            }));
       } catch (Exception e) {
         getContext().onFailure(e);
       } finally {
