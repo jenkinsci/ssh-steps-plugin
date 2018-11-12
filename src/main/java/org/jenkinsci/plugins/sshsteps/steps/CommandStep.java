@@ -30,7 +30,7 @@ public class CommandStep extends BasicSSHStep {
   private boolean sudo = false;
 
   @DataBoundConstructor
-  public CommandStep(final String command) {
+  public CommandStep(String command) {
     this.command = command;
   }
 
@@ -57,8 +57,7 @@ public class CommandStep extends BasicSSHStep {
 
     private static final long serialVersionUID = -5293952534324828128L;
 
-    protected Execution(final CommandStep step, final StepContext context)
-        throws IOException, InterruptedException {
+    protected Execution(CommandStep step, StepContext context) throws IOException, InterruptedException {
       super(step, context);
     }
 
@@ -73,7 +72,7 @@ public class CommandStep extends BasicSSHStep {
 
     private static class CommandCallable extends SSHMasterToSlaveCallable {
 
-      public CommandCallable(final CommandStep step, final TaskListener listener) {
+      public CommandCallable(CommandStep step, TaskListener listener) {
         super(step, listener);
       }
 

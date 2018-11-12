@@ -316,7 +316,7 @@ Get a file or directory from the remote host.
 
 |into
 |String, *Mandatory*
-|file or directory path on current worksapce.
+|file or directory path on current workspace.
 
 |failOnError
 |boolean, default: `true`.
@@ -391,7 +391,7 @@ node {
 
 === withCredentials
 
-An example how these steps can leverage `withCredentails` to read private key from Jenkins credentials store.
+An example how these steps can leverage `withCredentials` to read private key from Jenkins credentials store.
 ```groovy
 def remote = [:]
 remote.name = "node-1"

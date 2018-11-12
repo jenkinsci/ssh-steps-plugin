@@ -11,9 +11,10 @@ import org.hidetake.groovy.ssh.core.ProxyType
  */
 @SuppressFBWarnings
 class Common {
+
     private final PrintStream logger
 
-    Common(final PrintStream logger) {
+    Common(PrintStream logger) {
         this.logger = logger
     }
 

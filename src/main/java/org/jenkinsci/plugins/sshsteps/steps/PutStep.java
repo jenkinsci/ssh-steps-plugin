@@ -29,7 +29,7 @@ public class PutStep extends BasicSSHStep {
   private final String into;
 
   @DataBoundConstructor
-  public PutStep(final String from, final String into) {
+  public PutStep(String from, String into) {
     this.from = from;
     this.into = into;
   }
@@ -57,8 +57,7 @@ public class PutStep extends BasicSSHStep {
 
     private static final long serialVersionUID = -4497192469254138827L;
 
-    protected Execution(final PutStep step, final StepContext context)
-        throws IOException, InterruptedException {
+    protected Execution(PutStep step, StepContext context) throws IOException, InterruptedException {
       super(step, context);
     }
 
@@ -91,7 +90,7 @@ public class PutStep extends BasicSSHStep {
 
       private final String from;
 
-      public PutCallable(final PutStep step, final TaskListener listener, final String from) {
+      public PutCallable(PutStep step, TaskListener listener, String from) {
         super(step, listener);
         this.from = from;
       }

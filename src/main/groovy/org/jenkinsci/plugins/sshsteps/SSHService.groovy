@@ -21,11 +21,11 @@ import java.util.logging.Logger
 @SuppressFBWarnings
 class SSHService implements Serializable {
 
-    private Map remote
-    private boolean failOnError = true
-    private boolean dryRunFlag = false
-    private transient PrintStream logger
-    private transient Service ssh
+    private final Map remote
+    private final boolean failOnError
+    private final boolean dryRunFlag
+    private final transient PrintStream logger
+    private final transient Service ssh
 
     /**
      * Constructor.
@@ -35,21 +35,17 @@ class SSHService implements Serializable {
      * @param dryRun
      * @param logger
      */
-    private SSHService(
-            final Map remote,
-            final boolean failOnError, final boolean dryRun, final PrintStream logger) {
+    private SSHService(Map remote, boolean failOnError, boolean dryRun, PrintStream logger) {
         this.remote = remote
         this.logger = logger
         this.failOnError = failOnError
         this.dryRunFlag = dryRun
         validateRemote()
-        ssh = Ssh.newService();
+        ssh = Ssh.newService()
     }
 
-    static SSHService create(final Map remote,
-                             final boolean failOnError,
-                             final boolean dryRun, final PrintStream logger) {
-        new SSHService(remote, failOnError, dryRun, logger);
+    static SSHService create(Map remote, boolean failOnError, boolean dryRun, PrintStream logger) {
+        new SSHService(remote, failOnError, dryRun, logger)
     }
 
     /**
@@ -60,7 +56,7 @@ class SSHService implements Serializable {
     }
 
     private void validateRemote() {
-        new Common(logger).validateRemote(this.remote);
+        new Common(logger).validateRemote(this.remote)
     }
 
     private void defineRemote(remote) {
@@ -211,11 +207,11 @@ class SSHService implements Serializable {
     }
 
     /**
-     * Get a file from remote.
+     * Gets a file from remote node.
      *
      * @param from location to get file from.
      * @param into location to get file into.
-     * @return
+     * @return response from ssh run.
      */
     def get(String from, String into) {
         registerLogHandler()
@@ -228,7 +224,7 @@ class SSHService implements Serializable {
     }
 
     /**
-     * Remove's a file from remote node.
+     * Removes a file from remote node.
      *
      * @param name name of the file/dir.
      * @return output from ssh's remove operation.

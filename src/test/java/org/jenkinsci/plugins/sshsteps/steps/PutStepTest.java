@@ -86,9 +86,10 @@ public class PutStepTest {
     stepExecution = new PutStep.Execution(step, contextMock);
 
     // Execute and assert Test.
-    assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
-      stepExecution.run();
-    }).withMessage("from is null or empty").withStackTraceContaining("IllegalArgumentException")
+    assertThatExceptionOfType(IllegalArgumentException.class)
+        .isThrownBy(() -> stepExecution.run())
+        .withMessage("from is null or empty")
+        .withStackTraceContaining("IllegalArgumentException")
         .withNoCause();
   }
 
@@ -98,9 +99,10 @@ public class PutStepTest {
     stepExecution = new PutStep.Execution(step, contextMock);
 
     // Execute and assert Test.
-    assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
-      stepExecution.run();
-    }).withMessage("into is null or empty").withStackTraceContaining("IllegalArgumentException")
+    assertThatExceptionOfType(IllegalArgumentException.class)
+        .isThrownBy(() -> stepExecution.run())
+        .withMessage("into is null or empty")
+        .withStackTraceContaining("IllegalArgumentException")
         .withNoCause();
   }
 

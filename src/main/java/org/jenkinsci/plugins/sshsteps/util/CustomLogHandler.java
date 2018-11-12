@@ -12,7 +12,7 @@ import org.slf4j.MDC;
  */
 public class CustomLogHandler extends Handler {
 
-  private PrintStream logger;
+  private final PrintStream logger;
   private String uuid;
 
   /**
@@ -20,7 +20,7 @@ public class CustomLogHandler extends Handler {
    *
    * @param logger PrintStream to print messages to.
    */
-  public CustomLogHandler(final PrintStream logger, final String uuid) {
+  public CustomLogHandler(PrintStream logger, String uuid) {
     this.logger = logger;
     this.uuid = uuid;
   }

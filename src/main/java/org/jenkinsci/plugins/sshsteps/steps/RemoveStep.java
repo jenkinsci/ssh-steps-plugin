@@ -25,7 +25,7 @@ public class RemoveStep extends BasicSSHStep {
   private final String path;
 
   @DataBoundConstructor
-  public RemoveStep(final String path) {
+  public RemoveStep(String path) {
     this.path = path;
   }
 
@@ -52,8 +52,7 @@ public class RemoveStep extends BasicSSHStep {
 
     private static final long serialVersionUID = 862708152481251266L;
 
-    protected Execution(final RemoveStep step, final StepContext context)
-        throws IOException, InterruptedException {
+    protected Execution(RemoveStep step, StepContext context) throws IOException, InterruptedException {
       super(step, context);
     }
 
@@ -69,7 +68,7 @@ public class RemoveStep extends BasicSSHStep {
 
     private static class RemoveCallable extends SSHMasterToSlaveCallable {
 
-      public RemoveCallable(final RemoveStep step, final TaskListener listener) {
+      public RemoveCallable(RemoveStep step, TaskListener listener) {
         super(step, listener);
       }
 

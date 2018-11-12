@@ -1,6 +1,5 @@
 package org.jenkinsci.plugins.sshsteps.util;
 
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import hudson.Launcher;
 import hudson.model.TaskListener;
 import hudson.security.ACL;
@@ -30,14 +29,13 @@ import org.jenkinsci.plugins.workflow.steps.StepExecution;
 public abstract class SSHStepExecution<T> extends StepExecution {
 
   private static ExecutorService executorService;
-  private transient TaskListener listener;
-  private transient Launcher launcher;
+  private final transient TaskListener listener;
+  private final transient Launcher launcher;
   private transient volatile Future<?> task;
   private transient String threadName;
-  private BasicSSHStep step;
+  private final BasicSSHStep step;
 
-  protected SSHStepExecution(final BasicSSHStep step, @Nonnull StepContext context)
-      throws IOException, InterruptedException {
+  protected SSHStepExecution(BasicSSHStep step, @Nonnull StepContext context) throws IOException, InterruptedException {
     super(context);
     listener = context.get(TaskListener.class);
     launcher = context.get(Launcher.class);
@@ -61,27 +59,22 @@ public abstract class SSHStepExecution<T> extends StepExecution {
   protected abstract T run() throws Exception;
 
   @Override
-  public final boolean start() throws Exception {
-    final Authentication auth = Jenkins.getAuthentication();
-    task = getExecutorService().submit(new Runnable() {
-      @SuppressFBWarnings(value = "SE_BAD_FIELD", justification = "not serializing anything here")
-      @Override
-      public void run() {
-        try {
-          getContext().onSuccess(ACL
-              .impersonate(auth, new NotReallyRoleSensitiveCallable<T, Exception>() {
-                @Override
-                public T call() throws Exception {
-                  threadName = Thread.currentThread().getName();
-                  MDC.put("execution.id", UUID.randomUUID().toString());
-                  return SSHStepExecution.this.run();
-                }
-              }));
-        } catch (Exception e) {
-          getContext().onFailure(e);
-        } finally {
-          MDC.clear();
-        }
+  public final boolean start() {
+    Authentication auth = Jenkins.getAuthentication();
+    task = getExecutorService().submit(() -> {
+      try {
+        getContext().onSuccess(ACL.impersonate(auth, new NotReallyRoleSensitiveCallable<T, Exception>() {
+          @Override
+          public T call() throws Exception {
+            threadName = Thread.currentThread().getName();
+            MDC.put("execution.id", UUID.randomUUID().toString());
+            return SSHStepExecution.this.run();
+          }
+        }));
+      } catch (Exception e) {
+        getContext().onFailure(e);
+      } finally {
+        MDC.clear();
       }
     });
     return false;

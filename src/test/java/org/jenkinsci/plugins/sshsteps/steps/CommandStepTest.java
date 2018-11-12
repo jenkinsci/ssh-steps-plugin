@@ -75,9 +75,9 @@ public class CommandStepTest {
     stepExecution = new CommandStep.Execution(step, contextMock);
 
     // Execute and assert Test.
-    assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
-      stepExecution.run();
-    }).withMessage("command is null or empty").withStackTraceContaining("IllegalArgumentException")
+    assertThatExceptionOfType(IllegalArgumentException.class)
+        .isThrownBy(() -> stepExecution.run())
+        .withMessage("command is null or empty").withStackTraceContaining("IllegalArgumentException")
         .withNoCause();
   }
 
