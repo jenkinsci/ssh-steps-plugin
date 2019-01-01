@@ -3,6 +3,8 @@ package org.jenkinsci.plugins.sshsteps.util
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings
 import org.hidetake.groovy.ssh.core.ProxyType
 
+import java.util.logging.Level
+
 /**
  * Basic validation for remote.
  *
@@ -38,6 +40,9 @@ class Common {
         validateUserAuthentication(remote)
         validateHostAuthentication(remote)
         validateProxyConnection(remote)
+        if(remote.logLevel) {
+            validateLogLevel(remote)
+        }
         if (remote.gateway) {
             validateRemote(remote.gateway)
         }
@@ -88,6 +93,19 @@ class Common {
             if (!proxy.user && proxy.password) {
                 logger.println(getPrefix() + "proxy.password is set but proxy.user is null. Credentials are ignored for proxy '${proxy.name}'")
             }
+        }
+    }
+
+    /**
+     * Validate log level.
+     *
+     * @param remote map of values.
+     */
+    private void validateLogLevel(remote) {
+        try {
+            Level.parse(remote.logLevel)
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException(getPrefix() + "Bad log level $remote.logLevel for $remote.name")
         }
     }
 }

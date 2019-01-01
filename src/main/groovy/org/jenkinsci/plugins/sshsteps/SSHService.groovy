@@ -10,6 +10,7 @@ import org.jenkinsci.plugins.sshsteps.util.Common
 import org.jenkinsci.plugins.sshsteps.util.CustomLogHandler
 import org.slf4j.MDC
 
+import java.util.logging.Level
 import java.util.logging.Logger
 
 /**
@@ -56,7 +57,13 @@ class SSHService implements Serializable {
      * Register Log handler for all hidetake's classes.
      */
     private void registerLogHandler() {
-        Logger.getLogger("org.hidetake").addHandler(new CustomLogHandler(logger, MDC.get("execution.id")))
+        Logger rootLogger = Logger.getLogger("org.hidetake")
+        rootLogger.addHandler(new CustomLogHandler(logger, MDC.get("execution.id")))
+        if(remote.logLevel) {
+            rootLogger.setLevel(Level.parse(remote.logLevel))
+        } else {
+            rootLogger.setLevel(Level.SEVERE)
+        }
     }
 
     private void validateRemote() {
@@ -103,14 +110,26 @@ class SSHService implements Serializable {
                 logging = LoggingMethod.none
 
                 // Pipe logs to TaskListener's print stream.
-                interaction = {
-                    when(line: _, from: standardOutput) {
-                        logger.println("$remote.name|$it")
+                if(remote.appendName) {
+                    interaction = {
+                        when(line: _, from: standardOutput) {
+                            logger.println("$remote.name|$it")
+                        }
+                        when(line: _, from: standardError) {
+                            logger.println("$remote.name|$it")
+                        }
                     }
-                    when(line: _, from: standardError) {
-                        logger.println("$remote.name|$it")
+                } else {
+                    interaction = {
+                        when(line: _, from: standardOutput) {
+                            logger.println("$it")
+                        }
+                        when(line: _, from: standardError) {
+                            logger.println("$it")
+                        }
                     }
                 }
+
                 if (remote.pty) {
                     pty = remote.pty
                 }
@@ -165,6 +184,7 @@ class SSHService implements Serializable {
      * @return response from ssh run.
      */
     def executeCommand(String command, boolean sudo) {
+        logger.println("Executing command on $remote.name[$remote.host]: $command sudo: $sudo")
         registerLogHandler()
         defineRemote(remote)
         ssh.run {
@@ -184,6 +204,7 @@ class SSHService implements Serializable {
      * @return response from ssh run.
      */
     def executeScriptFromFile(String pathname) {
+        logger.println("Executing script on $remote.name[$remote.host]: $pathname")
         registerLogHandler()
         defineRemote(remote)
         ssh.run {
@@ -201,6 +222,7 @@ class SSHService implements Serializable {
      * @return response from ssh run.
      */
     def put(String from, String into) {
+        logger.println("Sending a file/directory to $remote.name[$remote.host]: from: $from into: $into")
         registerLogHandler()
         defineRemote(remote)
         ssh.run {
@@ -218,6 +240,7 @@ class SSHService implements Serializable {
      * @return
      */
     def get(String from, String into) {
+        logger.println("Receiving a file/directory from $remote.name[$remote.host]: from: $from into: $into")
         registerLogHandler()
         defineRemote(remote)
         ssh.run {
@@ -234,6 +257,7 @@ class SSHService implements Serializable {
      * @return output from ssh's remove operation.
      */
     def remove(String path) {
+        logger.println("Removing a file/directory on $remote.name[$remote.host]: $path")
         registerLogHandler()
         defineRemote(remote)
         ssh.run {

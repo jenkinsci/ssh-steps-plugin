@@ -2,6 +2,9 @@
 
 == 1.2.0 (Unreleased)
 
+* https://issues.jenkins-ci.org/browse/JENKINS-55194[JENKINS-55194] - Add logLevel to support debugging and also reduce default excessive logging.
+* Code cleanup, update documentation.
+
 == 1.1.1
 
 * https://issues.jenkins-ci.org/browse/JENKINS-53556[JENKINS-53556] - Fix invalid proxy settings and validation.

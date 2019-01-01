@@ -95,7 +95,6 @@ Most of the steps in this plugin require a common step variable called `remote`,
 |String
 |Encoding of input and output on the command or shell execution. Defaults to `UTF-8`.
 
-
 |proxy
 |Proxy, refer below.
 |If this is set, the proxy server is used to reach the remote host. Defaults to no proxy.
@@ -103,6 +102,24 @@ Most of the steps in this plugin require a common step variable called `remote`,
 |gateway
 |Remote
 |Gateway remote host. If this is set, the port-forwarding tunnel is used to reach the remote host. Defaults to no gateway.
+
+|appendName
+|boolean
+|If this is `true`, `name` is prefixed to each line in the log output. New format: `name\|log`.
+
+|logLevel
+|String
+a|Defaults to *SEVERE*
+
+Possible values, refer to java logging https://docs.oracle.com/javase/7/docs/api/java/util/logging/Level.html[levels]
+
+* SEVERE (highest value)
+* WARNING
+* INFO
+* CONFIG
+* FINE
+* FINER
+* FINEST (lowest value)
 |===
 
 === Proxy
