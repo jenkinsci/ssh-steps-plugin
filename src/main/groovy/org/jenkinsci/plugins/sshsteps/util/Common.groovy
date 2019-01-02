@@ -40,7 +40,7 @@ class Common {
         validateUserAuthentication(remote)
         validateHostAuthentication(remote)
         validateProxyConnection(remote)
-        if(remote.logLevel) {
+        if (remote.logLevel) {
             validateLogLevel(remote)
         }
         if (remote.gateway) {
