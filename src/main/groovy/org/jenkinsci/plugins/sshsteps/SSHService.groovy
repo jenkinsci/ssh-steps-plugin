@@ -109,24 +109,15 @@ class SSHService implements Serializable {
                 // Avoid excessive logging in Jenkins master.
                 logging = LoggingMethod.none
 
+                def logPrefix = remote.appendName ? "$remote.name|" : ''
+
                 // Pipe logs to TaskListener's print stream.
-                if(remote.appendName) {
-                    interaction = {
-                        when(line: _, from: standardOutput) {
-                            logger.println("$remote.name|$it")
-                        }
-                        when(line: _, from: standardError) {
-                            logger.println("$remote.name|$it")
-                        }
+                interaction = {
+                    when(line: _, from: standardOutput) {
+                        logger.println("$logPrefix$it")
                     }
-                } else {
-                    interaction = {
-                        when(line: _, from: standardOutput) {
-                            logger.println("$it")
-                        }
-                        when(line: _, from: standardError) {
-                            logger.println("$it")
-                        }
+                    when(line: _, from: standardError) {
+                        logger.println("$logPrefix$it")
                     }
                 }
 
