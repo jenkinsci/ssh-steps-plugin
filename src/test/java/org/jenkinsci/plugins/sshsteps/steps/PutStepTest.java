@@ -36,6 +36,8 @@ import org.powermock.modules.junit4.PowerMockRunner;
 public class PutStepTest {
 
   final String path = "test.sh";
+  final String filterBy = "";
+  final String filterRegex = "";
 
   @Mock
   TaskListener taskListenerMock;
@@ -82,7 +84,7 @@ public class PutStepTest {
 
   @Test
   public void testWithEmptyFromThrowsIllegalArgumentException() throws Exception {
-    final PutStep step = new PutStep("", path);
+    final PutStep step = new PutStep("", path, filterBy, filterRegex);
     stepExecution = new PutStep.Execution(step, contextMock);
 
     // Execute and assert Test.
@@ -95,7 +97,7 @@ public class PutStepTest {
 
   @Test
   public void testWithEmptyIntoThrowsIllegalArgumentException() throws Exception {
-    final PutStep step = new PutStep(path, "");
+    final PutStep step = new PutStep(path, "", filterBy, filterRegex);
     stepExecution = new PutStep.Execution(step, contextMock);
 
     // Execute and assert Test.
@@ -108,7 +110,7 @@ public class PutStepTest {
 
   @Test
   public void testSuccessfulPut() throws Exception {
-    final PutStep step = new PutStep(path, path);
+    final PutStep step = new PutStep(path, path, filterBy, filterRegex);
 
     // Since SSHService is a mock, it is not validating remote.
     stepExecution = new PutStep.Execution(step, contextMock);
@@ -117,6 +119,6 @@ public class PutStepTest {
     stepExecution.run();
 
     // Assert Test
-    verify(sshServiceMock, times(1)).put(path, path);
+    verify(sshServiceMock, times(1)).put(path, path, filterBy, filterRegex);
   }
 }

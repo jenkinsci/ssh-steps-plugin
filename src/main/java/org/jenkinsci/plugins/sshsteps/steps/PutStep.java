@@ -28,10 +28,20 @@ public class PutStep extends BasicSSHStep {
   @Getter
   private final String into;
 
+  @Getter
+  private final String filterRegex;
+
+  @Getter
+  private String filterBy;
+
   @DataBoundConstructor
-  public PutStep(String from, String into) {
+  public PutStep(String from, String into, String filterBy, String filterRegex) {
     this.from = from;
     this.into = into;
+    this.filterRegex = filterRegex;
+    this.filterBy = filterBy;
+    if(Util.fixEmpty(filterRegex) != null && Util.fixEmpty(filterBy) == null)
+      this.filterBy = "name";
   }
 
   @Override
@@ -98,7 +108,7 @@ public class PutStep extends BasicSSHStep {
 
       @Override
       public Object execute() {
-        return getService().put(from, ((PutStep) getStep()).getInto());
+        return getService().put(from, ((PutStep) getStep()).getInto(), ((PutStep) getStep()).getFilterBy(), ((PutStep) getStep()).getFilterRegex());
       }
     }
   }

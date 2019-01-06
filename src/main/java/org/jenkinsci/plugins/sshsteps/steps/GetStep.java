@@ -31,14 +31,24 @@ public class GetStep extends BasicSSHStep {
   private final String into;
 
   @Getter
+  private final String filterRegex;
+
+  @Getter
+  private String filterBy;
+
+  @Getter
   @Setter
   @DataBoundSetter
   private boolean override = false;
 
   @DataBoundConstructor
-  public GetStep(String from, String into) {
+  public GetStep(String from, String into, String filterBy, String filterRegex) {
     this.from = from;
     this.into = into;
+    this.filterRegex = filterRegex;
+    this.filterBy = filterBy;
+    if(Util.fixEmpty(filterRegex) != null && Util.fixEmpty(filterBy) == null)
+      this.filterBy = "name";
   }
 
   @Override
@@ -106,7 +116,7 @@ public class GetStep extends BasicSSHStep {
 
       @Override
       public Object execute() {
-        return getService().get(((GetStep) getStep()).getFrom(), into);
+        return getService().get(((GetStep) getStep()).getFrom(), into, ((GetStep) getStep()).getFilterBy(), ((GetStep) getStep()).getFilterRegex());
       }
     }
   }

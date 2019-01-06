@@ -206,15 +206,20 @@ class SSHService implements Serializable {
      *
      * @param from location to put file to.
      * @param into location to put file from.
+     * @param filterBy put files by a file filter.
+     * @param filterRegex filter regex.
      * @return response from ssh run.
      */
-    def put(String from, String into) {
+    def put(String from, String into, String filterBy, String filterRegex) {
         logger.println("Sending a file/directory to $remote.name[$remote.host]: from: $from into: $into")
         registerLogHandler()
         defineRemote(remote)
         ssh.run {
             session(ssh.remotes."$remote.name") {
-                put from: from, into: into
+                if (filterBy && filterRegex)
+                    put from: from, into: into, filter: { it."$filterBy" =~ filterRegex }
+                else
+                    put from: from, into: into
             }
         }
     }
@@ -224,15 +229,20 @@ class SSHService implements Serializable {
      *
      * @param from location to get file from.
      * @param into location to get file into.
+     * @param filterBy get files by a file filter.
+     * @param filterRegex filter regex.
      * @return response from ssh run.
      */
-    def get(String from, String into) {
+    def get(String from, String into, String filterBy, String filterRegex) {
         logger.println("Receiving a file/directory from $remote.name[$remote.host]: from: $from into: $into")
         registerLogHandler()
         defineRemote(remote)
         ssh.run {
             session(ssh.remotes."$remote.name") {
-                get from: from, into: into
+                if (filterBy && filterRegex)
+                    get from: from, into: into, filter: { it."$filterBy" =~ filterRegex }
+                else
+                    get from: from, into: into
             }
         }
     }
