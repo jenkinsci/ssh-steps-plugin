@@ -40,8 +40,9 @@ public class PutStep extends BasicSSHStep {
     this.into = into;
     this.filterRegex = filterRegex;
     this.filterBy = filterBy;
-    if(Util.fixEmpty(filterRegex) != null && Util.fixEmpty(filterBy) == null)
+    if (Util.fixEmpty(filterRegex) != null && Util.fixEmpty(filterBy) == null) {
       this.filterBy = "name";
+    }
   }
 
   @Override
@@ -108,7 +109,8 @@ public class PutStep extends BasicSSHStep {
 
       @Override
       public Object execute() {
-        return getService().put(from, ((PutStep) getStep()).getInto(), ((PutStep) getStep()).getFilterBy(), ((PutStep) getStep()).getFilterRegex());
+        final PutStep step = (PutStep) getStep();
+        return getService().put(from, step.getInto(), step.getFilterBy(), step.getFilterRegex());
       }
     }
   }

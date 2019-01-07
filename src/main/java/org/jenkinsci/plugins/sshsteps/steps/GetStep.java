@@ -47,8 +47,9 @@ public class GetStep extends BasicSSHStep {
     this.into = into;
     this.filterRegex = filterRegex;
     this.filterBy = filterBy;
-    if(Util.fixEmpty(filterRegex) != null && Util.fixEmpty(filterBy) == null)
+    if (Util.fixEmpty(filterRegex) != null && Util.fixEmpty(filterBy) == null) {
       this.filterBy = "name";
+    }
   }
 
   @Override
@@ -116,7 +117,8 @@ public class GetStep extends BasicSSHStep {
 
       @Override
       public Object execute() {
-        return getService().get(((GetStep) getStep()).getFrom(), into, ((GetStep) getStep()).getFilterBy(), ((GetStep) getStep()).getFilterRegex());
+        final GetStep step = (GetStep) getStep();
+        return getService().get(step.getFrom(), into, step.getFilterBy(), step.getFilterRegex());
       }
     }
   }
