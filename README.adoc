@@ -287,7 +287,7 @@ Put a file or directory into the remote host.
 
 |filterBy
 |String, *Optional*, Defaults to `name`.
-|Put files by a file filter.
+|Put files by a file filter.  Possible values are params on the java File object.
 
 |filterRegex
 |String, *Optional*.
@@ -345,7 +345,7 @@ Get a file or directory from the remote host.
 
 |filterBy
 |String, *Optional*, Defaults to `name`.
-|Get files by a file filter.
+|Get files by a file filter. Possible values are params on the java File object.
 
 |filterRegex
 |String, *Optional*.
