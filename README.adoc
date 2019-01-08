@@ -285,6 +285,14 @@ Put a file or directory into the remote host.
 |String, *Mandatory*
 |file or directory path on the remote node.
 
+|filterBy
+|String, *Optional*, Defaults to `name`.
+|Put files by a file filter.  Possible values are params on the java File object.
+
+|filterRegex
+|String, *Optional*.
+|Put files by a file regex (Groovy syntax). Example: /\.xml$/ - Puts all xml files.
+
 |failOnError
 |boolean, default: `true`.
 |If this is `false`, no job failure would occur though there is an error while running the command.
@@ -334,6 +342,14 @@ Get a file or directory from the remote host.
 |into
 |String, *Mandatory*
 |file or directory path on current workspace.
+
+|filterBy
+|String, *Optional*, Defaults to `name`.
+|Get files by a file filter. Possible values are params on the java File object.
+
+|filterRegex
+|String, *Optional*.
+|Get files by a file regex (Groovy syntax). Example: /\.xml$/ - Gets all xml files.
 
 |failOnError
 |boolean, default: `true`.
