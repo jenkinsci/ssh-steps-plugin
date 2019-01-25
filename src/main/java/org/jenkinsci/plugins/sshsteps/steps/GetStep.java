@@ -31,10 +31,14 @@ public class GetStep extends BasicSSHStep {
   private final String into;
 
   @Getter
-  private final String filterRegex;
+  @Setter
+  @DataBoundSetter
+  private String filterBy = "name";
 
   @Getter
-  private String filterBy;
+  @Setter
+  @DataBoundSetter
+  private String filterRegex;
 
   @Getter
   @Setter
@@ -42,14 +46,9 @@ public class GetStep extends BasicSSHStep {
   private boolean override = false;
 
   @DataBoundConstructor
-  public GetStep(String from, String into, String filterBy, String filterRegex) {
+  public GetStep(String from, String into) {
     this.from = from;
     this.into = into;
-    this.filterRegex = filterRegex;
-    this.filterBy = filterBy;
-    if (Util.fixEmpty(filterRegex) != null && Util.fixEmpty(filterBy) == null) {
-      this.filterBy = "name";
-    }
   }
 
   @Override

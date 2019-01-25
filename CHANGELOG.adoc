@@ -2,6 +2,9 @@
 
 == 1.2.1 (Unreleased)
 
+* https://issues.jenkins-ci.org/browse/JENKINS-55194[JENKINS-55194] - Add logLevel to support debugging and also reduce default excessive logging.
+** Make `filterBy` and `filterRegex` optional.
+
 == 1.2.0
 
 * https://issues.jenkins-ci.org/browse/JENKINS-55194[JENKINS-55194] - Add logLevel to support debugging and also reduce default excessive logging.
