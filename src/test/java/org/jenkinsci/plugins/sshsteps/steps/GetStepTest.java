@@ -36,8 +36,8 @@ import org.powermock.modules.junit4.PowerMockRunner;
 public class GetStepTest {
 
   final String path = "test.sh";
-  final String filterBy = "";
-  final String filterRegex = "";
+  final String filterBy = "name";
+  final String filterRegex = null;
 
   @Mock
   TaskListener taskListenerMock;
@@ -84,7 +84,7 @@ public class GetStepTest {
 
   @Test
   public void testWithEmptyFromThrowsIllegalArgumentException() throws Exception {
-    final GetStep step = new GetStep("", path, filterBy, filterRegex);
+    final GetStep step = new GetStep("", path);
     stepExecution = new GetStep.Execution(step, contextMock);
 
     // Execute and assert Test.
@@ -97,7 +97,7 @@ public class GetStepTest {
 
   @Test
   public void testWithEmptyIntoThrowsIllegalArgumentException() throws Exception {
-    final GetStep step = new GetStep(path, "", filterBy, filterRegex);
+    final GetStep step = new GetStep(path, "");
     step.setOverride(true);
     stepExecution = new GetStep.Execution(step, contextMock);
 
@@ -111,7 +111,7 @@ public class GetStepTest {
 
   @Test
   public void testSuccessfulExecuteScript() throws Exception {
-    final GetStep step = new GetStep(path, path, filterBy, filterRegex);
+    final GetStep step = new GetStep(path, path);
     step.setOverride(true);
 
     // Since SSHService is a mock, it is not validating remote.

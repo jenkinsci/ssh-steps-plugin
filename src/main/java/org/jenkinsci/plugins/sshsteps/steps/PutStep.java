@@ -6,12 +6,14 @@ import hudson.Util;
 import hudson.model.TaskListener;
 import java.io.IOException;
 import lombok.Getter;
+import lombok.Setter;
 import org.jenkinsci.plugins.sshsteps.util.SSHMasterToSlaveCallable;
 import org.jenkinsci.plugins.sshsteps.util.SSHStepDescriptorImpl;
 import org.jenkinsci.plugins.sshsteps.util.SSHStepExecution;
 import org.jenkinsci.plugins.workflow.steps.StepContext;
 import org.jenkinsci.plugins.workflow.steps.StepExecution;
 import org.kohsuke.stapler.DataBoundConstructor;
+import org.kohsuke.stapler.DataBoundSetter;
 
 /**
  * Step to place a file/directory onto a remote node.
@@ -29,20 +31,19 @@ public class PutStep extends BasicSSHStep {
   private final String into;
 
   @Getter
-  private final String filterRegex;
+  @Setter
+  @DataBoundSetter
+  private String filterBy = "name";
 
   @Getter
-  private String filterBy;
+  @Setter
+  @DataBoundSetter
+  private String filterRegex;
 
   @DataBoundConstructor
-  public PutStep(String from, String into, String filterBy, String filterRegex) {
+  public PutStep(String from, String into) {
     this.from = from;
     this.into = into;
-    this.filterRegex = filterRegex;
-    this.filterBy = filterBy;
-    if (Util.fixEmpty(filterRegex) != null && Util.fixEmpty(filterBy) == null) {
-      this.filterBy = "name";
-    }
   }
 
   @Override

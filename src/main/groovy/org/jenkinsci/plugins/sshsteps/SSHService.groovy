@@ -52,12 +52,13 @@ class SSHService implements Serializable {
     /**
      * Register Log handler for all hidetake's classes.
      */
-    private void registerLogHandler() {
+    private void registerLogHandler(message) {
         Logger rootLogger = Logger.getLogger("org.hidetake")
         rootLogger.addHandler(new CustomLogHandler(logger, MDC.get("execution.id")))
         if(remote.logLevel) {
             rootLogger.setLevel(Level.parse(remote.logLevel))
         } else {
+            logger.println(message)
             rootLogger.setLevel(Level.SEVERE)
         }
     }
@@ -171,8 +172,7 @@ class SSHService implements Serializable {
      * @return response from ssh run.
      */
     def executeCommand(String command, boolean sudo) {
-        logger.println("Executing command on $remote.name[$remote.host]: $command sudo: $sudo")
-        registerLogHandler()
+        registerLogHandler("Executing command on $remote.name[$remote.host]: $command sudo: $sudo")
         defineRemote(remote)
         ssh.run {
             session(ssh.remotes."$remote.name") {
@@ -191,8 +191,7 @@ class SSHService implements Serializable {
      * @return response from ssh run.
      */
     def executeScriptFromFile(String pathname) {
-        logger.println("Executing script on $remote.name[$remote.host]: $pathname")
-        registerLogHandler()
+        registerLogHandler("Executing script on $remote.name[$remote.host]: $pathname")
         defineRemote(remote)
         ssh.run {
             session(ssh.remotes."$remote.name") {
@@ -211,8 +210,7 @@ class SSHService implements Serializable {
      * @return response from ssh run.
      */
     def put(String from, String into, String filterBy, String filterRegex) {
-        logger.println("Sending a file/directory to $remote.name[$remote.host]: from: $from into: $into")
-        registerLogHandler()
+        registerLogHandler("Sending a file/directory to $remote.name[$remote.host]: from: $from into: $into")
         defineRemote(remote)
         ssh.run {
             session(ssh.remotes."$remote.name") {
@@ -234,8 +232,7 @@ class SSHService implements Serializable {
      * @return response from ssh run.
      */
     def get(String from, String into, String filterBy, String filterRegex) {
-        logger.println("Receiving a file/directory from $remote.name[$remote.host]: from: $from into: $into")
-        registerLogHandler()
+        registerLogHandler("Receiving a file/directory from $remote.name[$remote.host]: from: $from into: $into")
         defineRemote(remote)
         ssh.run {
             session(ssh.remotes."$remote.name") {
@@ -254,8 +251,7 @@ class SSHService implements Serializable {
      * @return output from ssh's remove operation.
      */
     def remove(String path) {
-        logger.println("Removing a file/directory on $remote.name[$remote.host]: $path")
-        registerLogHandler()
+        registerLogHandler("Removing a file/directory on $remote.name[$remote.host]: $path")
         defineRemote(remote)
         ssh.run {
             session(ssh.remotes."$remote.name") {
