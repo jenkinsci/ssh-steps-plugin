@@ -1,6 +1,9 @@
 = Release Notes.
 
-== 1.2.1 (Unreleased)
+== 1.2.2 (Unreleased)
+
+
+== 1.2.1
 
 * https://issues.jenkins-ci.org/browse/JENKINS-55194[JENKINS-55194] - Add logLevel to support debugging and also reduce default excessive logging.
 ** Make `filterBy` and `filterRegex` optional.
