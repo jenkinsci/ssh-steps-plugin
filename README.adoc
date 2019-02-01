@@ -461,7 +461,7 @@ image::docs/static/images/ExampleWithCredentialsBlueOcean.png[ExampleWithCredent
 
 * https://github.com/nrayapati[Naresh Rayapati]
 * https://github.com/ghenkes[Gabe Henkes]
-* https://github.com/wuchenwang[Wuchen Wang]
+* https://github.com/wwftw[Wuchen Wang]
 
 == Disclaimer
 
