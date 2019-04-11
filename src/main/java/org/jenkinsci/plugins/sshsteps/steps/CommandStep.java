@@ -28,6 +28,10 @@ public class CommandStep extends BasicSSHStep {
   @Getter
   @DataBoundSetter
   private boolean sudo = false;
+  
+  @Getter
+  @DataBoundSetter
+  private boolean pty = true;
 
   @DataBoundConstructor
   public CommandStep(String command) {
@@ -80,7 +84,7 @@ public class CommandStep extends BasicSSHStep {
       @Override
       public Object execute() {
         CommandStep step = (CommandStep) getStep();
-        return getService().executeCommand(step.getCommand(), step.isSudo());
+        return getService().executeCommand(step.getCommand(), step.isSudo(), step.isPty());
       }
     }
   }

@@ -169,17 +169,18 @@ class SSHService implements Serializable {
      *
      * @param command shell command.
      * @param sudo execute it as sudo when true.
+     * @param pty allocate PTY
      * @return response from ssh run.
      */
-    def executeCommand(String command, boolean sudo) {
+    def executeCommand(String command, boolean sudo, boolean pty) {
         registerLogHandler("Executing command on $remote.name[$remote.host]: $command sudo: $sudo")
         defineRemote(remote)
         ssh.run {
             session(ssh.remotes."$remote.name") {
                 if (sudo)
-                    executeSudo command, pty: true
+                    executeSudo command, pty: pty
                 else
-                    execute command, pty: true
+                    execute command, pty: pty
             }
         }
     }

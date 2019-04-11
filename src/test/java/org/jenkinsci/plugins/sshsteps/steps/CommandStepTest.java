@@ -93,6 +93,6 @@ public class CommandStepTest {
     stepExecution.run();
 
     // Assert Test
-    verify(sshServiceMock, times(1)).executeCommand("ls -lrt", false);
+    verify(sshServiceMock, times(1)).executeCommand("ls -lrt", false, true);
   }
 }
