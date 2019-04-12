@@ -196,6 +196,10 @@ This step executes given command on remote node and responds with output.
 |dryRun
 |boolean, default: `false`
 |If this is true, no actual connection or operation is performed.
+
+|pty
+|boolean, default: `true`
+|If this is true, PTY is allocated to run the command. Setting it to `false` can enable running commands on servers running win32-openssh 
 |===
 
 ==== Example

@@ -2,6 +2,7 @@
 
 == 1.2.2 (Unreleased)
 
+* Addition of optional parameter pty to sshCommand.
 
 == 1.2.1
 
