@@ -2,7 +2,7 @@
 
 == 1.2.2 (Unreleased)
 
-* Addition of optional parameter pty to sshCommand.
+* https://issues.jenkins-ci.org/browse/JENKINS-56989[JENKINS-56989] -Addition of optional parameter pty to sshCommand.
 
 == 1.2.1
 
