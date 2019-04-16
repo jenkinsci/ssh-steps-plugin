@@ -2,6 +2,7 @@
 
 == 1.2.2 (Unreleased)
 
+* https://issues.jenkins-ci.org/browse/JENKINS-56989[JENKINS-56989] - Default `pty` to `false` for sshCommand.
 
 == 1.2.1
 

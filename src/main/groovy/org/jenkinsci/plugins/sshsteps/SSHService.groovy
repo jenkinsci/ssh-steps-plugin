@@ -177,9 +177,9 @@ class SSHService implements Serializable {
         ssh.run {
             session(ssh.remotes."$remote.name") {
                 if (sudo)
-                    executeSudo command, pty: true
+                    executeSudo command
                 else
-                    execute command, pty: true
+                    execute command
             }
         }
     }

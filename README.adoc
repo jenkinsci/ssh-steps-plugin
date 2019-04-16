@@ -122,6 +122,10 @@ Possible values, refer to java logging https://docs.oracle.com/javase/7/docs/api
 * FINE
 * FINER
 * FINEST (lowest value)
+
+|pty
+|boolean
+|If this is true, a PTY (pseudo-terminal) is allocated on the command execution. Defaults to `false`.
 |===
 
 === Proxy
