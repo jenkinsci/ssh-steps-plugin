@@ -4,6 +4,7 @@ import hudson.Extension;
 import hudson.FilePath;
 import hudson.Util;
 import hudson.model.TaskListener;
+import hudson.remoting.VirtualChannel;
 import java.io.IOException;
 import lombok.Getter;
 import org.jenkinsci.plugins.sshsteps.util.SSHMasterToSlaveCallable;
@@ -78,8 +79,13 @@ public class ScriptStep extends BasicSSHStep {
         throw new IllegalArgumentException(path.getRemote() + " is a directory.");
       }
 
-      return getLauncher().getChannel()
-          .call(new ScriptCallable(step, getListener(), path.getRemote()));
+      final VirtualChannel channel = getLauncher().getChannel();
+      if (channel == null) {
+        throw new IllegalArgumentException(
+            "Unable to get the channel, Perhaps you forgot to surround the code with a step that provides this, such as: node, dockerNode");
+      }
+
+      return channel.call(new ScriptCallable(step, getListener(), path.getRemote()));
     }
 
     private static class ScriptCallable extends SSHMasterToSlaveCallable {

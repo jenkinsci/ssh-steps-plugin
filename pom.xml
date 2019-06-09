@@ -1,17 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-
   <parent>
     <groupId>org.jenkins-ci.plugins</groupId>
     <artifactId>plugin</artifactId>
-    <version>2.21</version>
+    <version>3.43</version>
   </parent>
-
   <artifactId>ssh-steps</artifactId>
-  <version>1.2.2-SNAPSHOT</version>
+  <version>2.0.0-SNAPSHOT</version>
   <packaging>hpi</packaging>
-
   <name>SSH Pipeline Steps</name>
   <description>SSH Pipeline Steps</description>
   <url>https://wiki.jenkins.io/display/JENKINS/SSH+Steps+Plugin</url>
@@ -27,7 +24,6 @@
       <distribution>repo</distribution>
     </license>
   </licenses>
-
   <developers>
     <developer>
       <id>nrayapati</id>
@@ -36,13 +32,11 @@
       <organizationUrl>https://www.cerner.com/</organizationUrl>
     </developer>
   </developers>
-
   <scm>
     <connection>scm:git:git://github.com/jenkinsci/${project.artifactId}-plugin.git</connection>
-    <developerConnection>scm:git:git@github.com:jenkinsci/${project.artifactId}-plugin.git
-    </developerConnection>
-    <url>http://github.com/jenkinsci/${project.artifactId}-plugin</url>
+    <developerConnection>scm:git:git@github.com:jenkinsci/${project.artifactId}-plugin.git</developerConnection>
     <tag>HEAD</tag>
+    <url>http://github.com/jenkinsci/${project.artifactId}-plugin</url>
   </scm>
   <distributionManagement>
     <repository>
@@ -54,30 +48,25 @@
       <url>https://repo.jenkins-ci.org/snapshots</url>
     </snapshotRepository>
   </distributionManagement>
-
   <properties>
     <java.level>8</java.level>
-    <jenkins.version>2.7.3</jenkins.version>
-    <jenkins-test-harness.version>2.15</jenkins-test-harness.version>
-    <pipeline.version>2.5</pipeline.version>
-    <jsch.version>0.1.54</jsch.version>
+    <jenkins.version>2.121.1</jenkins.version>
+    <jenkins-test-harness.version>2.49</jenkins-test-harness.version>
+    <workflow-step-api-version>2.19</workflow-step-api-version>
     <groovy.version>2.4.11</groovy.version>
-    <groovy.ssh.version>2.9.0</groovy.ssh.version>
-    <lombok.version>1.16.12</lombok.version>
-
-     <!--Test dependency versions-->
-    <wiremock.version>2.3.1</wiremock.version>
+    <groovy.ssh.version>2.10.1</groovy.ssh.version>
+    <lombok.version>1.18.8</lombok.version>
+    <!--Test dependency versions-->
+    <wiremock.version>2.23.2</wiremock.version>
     <mockito.version>1.10.19</mockito.version>
-    <powermock.version>1.6.3</powermock.version>
-    <assertj-core.version>3.6.1</assertj-core.version>
-    <assertj-assertions-generator-maven-plugin.version>2.0.0</assertj-assertions-generator-maven-plugin.version>
+    <powermock.version>1.7.4</powermock.version>
+    <assertj-core.version>3.12.2</assertj-core.version>
   </properties>
-
   <dependencies>
     <dependency>
       <groupId>org.jenkins-ci.plugins.workflow</groupId>
-      <artifactId>workflow-aggregator</artifactId>
-      <version>${pipeline.version}</version>
+      <artifactId>workflow-step-api</artifactId>
+      <version>${workflow-step-api-version}</version>
     </dependency>
     <dependency>
       <groupId>org.projectlombok</groupId>
@@ -86,25 +75,26 @@
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <groupId>com.jcraft</groupId>
-      <artifactId>jsch</artifactId>
-      <version>${jsch.version}</version>
-    </dependency>
-    <dependency>
       <groupId>org.codehaus.groovy</groupId>
       <artifactId>groovy-all</artifactId>
       <version>${groovy.version}</version>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.hidetake</groupId>
       <artifactId>groovy-ssh</artifactId>
       <version>${groovy.ssh.version}</version>
+      <exclusions>
+        <exclusion>
+          <artifactId>groovy-all</artifactId>
+          <groupId>org.codehaus.groovy</groupId>
+        </exclusion>
+      </exclusions>
     </dependency>
     <dependency>
       <groupId>log4j</groupId>
       <artifactId>log4j</artifactId>
     </dependency>
-
     <!-- Test Dependencies -->
     <dependency>
       <groupId>org.mockito</groupId>
@@ -119,8 +109,8 @@
       <scope>test</scope>
       <exclusions>
         <exclusion>
-          <groupId>junit</groupId>
           <artifactId>junit</artifactId>
+          <groupId>junit</groupId>
         </exclusion>
       </exclusions>
     </dependency>
@@ -129,6 +119,12 @@
       <artifactId>powermock-api-mockito</artifactId>
       <version>${powermock.version}</version>
       <scope>test</scope>
+      <exclusions>
+        <exclusion>
+          <artifactId>mockito-core</artifactId>
+          <groupId>org.mockito</groupId>
+        </exclusion>
+      </exclusions>
     </dependency>
     <dependency>
       <groupId>junit</groupId>
@@ -140,6 +136,28 @@
       <artifactId>wiremock</artifactId>
       <version>${wiremock.version}</version>
       <scope>test</scope>
+      <exclusions>
+        <exclusion>
+          <artifactId>jetty-server</artifactId>
+          <groupId>org.eclipse.jetty</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>jetty-servlets</artifactId>
+          <groupId>org.eclipse.jetty</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>jetty-servlet</artifactId>
+          <groupId>org.eclipse.jetty</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>jetty-webapp</artifactId>
+          <groupId>org.eclipse.jetty</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>commons-codec</artifactId>
+          <groupId>commons-codec</groupId>
+        </exclusion>
+      </exclusions>
     </dependency>
     <dependency>
       <groupId>org.assertj</groupId>
@@ -147,14 +165,7 @@
       <version>${assertj-core.version}</version>
       <scope>test</scope>
     </dependency>
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-log4j12</artifactId>
-      <version>${slf4jVersion}</version>
-      <scope>test</scope>
-    </dependency>
   </dependencies>
-
   <repositories>
     <repository>
       <id>repo.jenkins-ci.org</id>
@@ -167,7 +178,6 @@
       <url>https://repo.jenkins-ci.org/public/</url>
     </pluginRepository>
   </pluginRepositories>
-
   <build>
     <plugins>
       <plugin>
@@ -195,7 +205,6 @@
       </plugin>
     </plugins>
   </build>
-
   <profiles>
     <profile>
       <id>doclint-java8-disable</id>
@@ -209,6 +218,13 @@
             <artifactId>maven-javadoc-plugin</artifactId>
             <configuration>
               <additionalparam>-Xdoclint:none</additionalparam>
+            </configuration>
+          </plugin>
+          <plugin>
+            <groupId>org.jenkins-ci.tools</groupId>
+            <artifactId>maven-hpi-plugin</artifactId>
+            <configuration>
+              <compatibleSinceVersion>2.0.0</compatibleSinceVersion>
             </configuration>
           </plugin>
         </plugins>
