@@ -95,8 +95,7 @@ public class PutStep extends BasicSSHStep {
         throw new IllegalArgumentException("into is null or empty");
       }
 
-      return getLauncher().getChannel()
-          .call(new PutCallable(step, getListener(), fromPath.getRemote()));
+      return getChannel().call(new PutCallable(step, getListener(), fromPath.getRemote()));
     }
 
     private static class PutCallable extends SSHMasterToSlaveCallable {

@@ -55,7 +55,7 @@ class SSHService implements Serializable {
     private void registerLogHandler(message) {
         Logger rootLogger = Logger.getLogger("org.hidetake")
         rootLogger.addHandler(new CustomLogHandler(logger, MDC.get("execution.id")))
-        if(remote.logLevel) {
+        if (remote.logLevel) {
             rootLogger.setLevel(Level.parse(remote.logLevel))
         } else {
             logger.println(message)

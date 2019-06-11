@@ -78,8 +78,7 @@ public class ScriptStep extends BasicSSHStep {
         throw new IllegalArgumentException(path.getRemote() + " is a directory.");
       }
 
-      return getLauncher().getChannel()
-          .call(new ScriptCallable(step, getListener(), path.getRemote()));
+      return getChannel().call(new ScriptCallable(step, getListener(), path.getRemote()));
     }
 
     private static class ScriptCallable extends SSHMasterToSlaveCallable {

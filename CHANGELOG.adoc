@@ -1,8 +1,14 @@
 = Release Notes.
 
-== 1.2.2 (Unreleased)
+== 2.0.0 (Unreleased)
 
 * https://issues.jenkins-ci.org/browse/JENKINS-56989[JENKINS-56989] - Default `pty` to `false` for sshCommand.
+** [red]#sshCommand with sudo:true param also requires pty:true with this upgrade.#
+* Upgrade pom dependencies
+** Minimum Jenkins Requirement: 2.121.1
+** Groovy SSH - 2.10.1
+** Parent POM - 3.34.
+** Upgraded few other test dependencies.
 
 == 1.2.1
 

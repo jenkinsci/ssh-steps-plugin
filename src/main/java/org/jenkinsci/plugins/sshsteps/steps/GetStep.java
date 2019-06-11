@@ -101,8 +101,7 @@ public class GetStep extends BasicSSHStep {
             intoPath.getRemote() + " already exist. Please set override to true just in case.");
       }
 
-      return getLauncher().getChannel()
-          .call(new GetCallable(step, getListener(), intoPath.getRemote()));
+      return getChannel().call(new GetCallable(step, getListener(), intoPath.getRemote()));
     }
 
     private static class GetCallable extends SSHMasterToSlaveCallable {

@@ -2,7 +2,10 @@ package org.jenkinsci.plugins.sshsteps.util;
 
 import hudson.Launcher;
 import hudson.model.TaskListener;
+import hudson.remoting.VirtualChannel;
 import hudson.security.ACL;
+import hudson.security.ACLContext;
+import hudson.util.ClassLoaderSanityThreadFactory;
 import hudson.util.DaemonThreadFactory;
 import hudson.util.NamingThreadFactory;
 import java.io.IOException;
@@ -12,7 +15,6 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import javax.annotation.Nonnull;
 import jenkins.model.Jenkins;
-import jenkins.security.NotReallyRoleSensitiveCallable;
 import org.acegisecurity.Authentication;
 import org.apache.log4j.MDC;
 import org.jenkinsci.plugins.sshsteps.steps.BasicSSHStep;
@@ -28,12 +30,14 @@ import org.jenkinsci.plugins.workflow.steps.StepExecution;
  */
 public abstract class SSHStepExecution<T> extends StepExecution {
 
-  private static ExecutorService executorService;
   private final transient TaskListener listener;
   private final transient Launcher launcher;
+  private static ExecutorService executorService;
   private final BasicSSHStep step;
+
   private transient volatile Future<?> task;
   private transient String threadName;
+  private transient Throwable stopCause;
 
   protected SSHStepExecution(BasicSSHStep step, @Nonnull StepContext context)
       throws IOException, InterruptedException {
@@ -45,8 +49,8 @@ public abstract class SSHStepExecution<T> extends StepExecution {
 
   static synchronized ExecutorService getExecutorService() {
     if (executorService == null) {
-      executorService = Executors
-          .newCachedThreadPool(new NamingThreadFactory(new DaemonThreadFactory(),
+      executorService = Executors.newCachedThreadPool(
+          new NamingThreadFactory(new ClassLoaderSanityThreadFactory(new DaemonThreadFactory()),
               "org.jenkinsci.plugins.ssh.util.SSHStepExecution"));
     }
     return executorService;
@@ -59,22 +63,33 @@ public abstract class SSHStepExecution<T> extends StepExecution {
    */
   protected abstract T run() throws Exception;
 
+  protected VirtualChannel getChannel() {
+    final VirtualChannel channel = getLauncher().getChannel();
+    if (channel == null) {
+      throw new IllegalArgumentException(
+          "Unable to get the channel, Perhaps you forgot to surround the code with a step that provides this, such as: node, dockerNode");
+    }
+    return channel;
+  }
+
   @Override
   public final boolean start() {
     Authentication auth = Jenkins.getAuthentication();
     task = getExecutorService().submit(() -> {
+      threadName = Thread.currentThread().getName();
       try {
-        getContext()
-            .onSuccess(ACL.impersonate(auth, new NotReallyRoleSensitiveCallable<T, Exception>() {
-              @Override
-              public T call() throws Exception {
-                threadName = Thread.currentThread().getName();
-                MDC.put("execution.id", UUID.randomUUID().toString());
-                return SSHStepExecution.this.run();
-              }
-            }));
-      } catch (Exception e) {
-        getContext().onFailure(e);
+        MDC.put("execution.id", UUID.randomUUID().toString());
+        T ret;
+        try (ACLContext acl = ACL.as(auth)) {
+          ret = run();
+        }
+        getContext().onSuccess(ret);
+      } catch (Throwable x) {
+        if (stopCause == null) {
+          getContext().onFailure(x);
+        } else {
+          stopCause.addSuppressed(x);
+        }
       } finally {
         MDC.clear();
       }
@@ -86,10 +101,12 @@ public abstract class SSHStepExecution<T> extends StepExecution {
    * If the computation is going synchronously, try to cancel that.
    */
   @Override
-  public void stop(Throwable cause) {
+  public void stop(Throwable cause) throws Exception {
     if (task != null) {
+      stopCause = cause;
       task.cancel(true);
     }
+    super.stop(cause);
   }
 
   @Override

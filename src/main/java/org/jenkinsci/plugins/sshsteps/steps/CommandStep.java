@@ -68,7 +68,8 @@ public class CommandStep extends BasicSSHStep {
       if (Util.fixEmpty(step.getCommand()) == null) {
         throw new IllegalArgumentException("command is null or empty");
       }
-      return getLauncher().getChannel().call(new CommandCallable(step, getListener()));
+
+      return getChannel().call(new CommandCallable(step, getListener()));
     }
 
     private static class CommandCallable extends SSHMasterToSlaveCallable {

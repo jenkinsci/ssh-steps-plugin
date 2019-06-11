@@ -64,7 +64,7 @@ public class RemoveStep extends BasicSSHStep {
         throw new IllegalArgumentException("path is null or empty");
       }
 
-      return getLauncher().getChannel().call(new RemoveCallable(step, getListener()));
+      return getChannel().call(new RemoveCallable(step, getListener()));
     }
 
     private static class RemoveCallable extends SSHMasterToSlaveCallable {
