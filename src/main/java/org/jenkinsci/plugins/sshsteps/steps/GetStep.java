@@ -4,7 +4,6 @@ import hudson.Extension;
 import hudson.FilePath;
 import hudson.Util;
 import hudson.model.TaskListener;
-import hudson.remoting.VirtualChannel;
 import java.io.IOException;
 import lombok.Getter;
 import lombok.Setter;
@@ -102,13 +101,7 @@ public class GetStep extends BasicSSHStep {
             intoPath.getRemote() + " already exist. Please set override to true just in case.");
       }
 
-      final VirtualChannel channel = getLauncher().getChannel();
-      if (channel == null) {
-        throw new IllegalArgumentException(
-            "Unable to get the channel, Perhaps you forgot to surround the code with a step that provides this, such as: node, dockerNode");
-      }
-
-      return channel.call(new GetCallable(step, getListener(), intoPath.getRemote()));
+      return getChannel().call(new GetCallable(step, getListener(), intoPath.getRemote()));
     }
 
     private static class GetCallable extends SSHMasterToSlaveCallable {

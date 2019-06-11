@@ -3,7 +3,6 @@ package org.jenkinsci.plugins.sshsteps.steps;
 import hudson.Extension;
 import hudson.Util;
 import hudson.model.TaskListener;
-import hudson.remoting.VirtualChannel;
 import java.io.IOException;
 import lombok.Getter;
 import org.jenkinsci.plugins.sshsteps.util.SSHMasterToSlaveCallable;
@@ -65,13 +64,7 @@ public class RemoveStep extends BasicSSHStep {
         throw new IllegalArgumentException("path is null or empty");
       }
 
-      final VirtualChannel channel = getLauncher().getChannel();
-      if (channel == null) {
-        throw new IllegalArgumentException(
-            "Unable to get the channel, Perhaps you forgot to surround the code with a step that provides this, such as: node, dockerNode");
-      }
-
-      return channel.call(new RemoveCallable(step, getListener()));
+      return getChannel().call(new RemoveCallable(step, getListener()));
     }
 
     private static class RemoveCallable extends SSHMasterToSlaveCallable {

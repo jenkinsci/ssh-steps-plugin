@@ -2,6 +2,7 @@ package org.jenkinsci.plugins.sshsteps.util;
 
 import hudson.Launcher;
 import hudson.model.TaskListener;
+import hudson.remoting.VirtualChannel;
 import hudson.security.ACL;
 import hudson.security.ACLContext;
 import hudson.util.ClassLoaderSanityThreadFactory;
@@ -61,6 +62,15 @@ public abstract class SSHStepExecution<T> extends StepExecution {
    * When this method returns, a step execution is over.
    */
   protected abstract T run() throws Exception;
+
+  protected VirtualChannel getChannel() {
+    final VirtualChannel channel = getLauncher().getChannel();
+    if (channel == null) {
+      throw new IllegalArgumentException(
+          "Unable to get the channel, Perhaps you forgot to surround the code with a step that provides this, such as: node, dockerNode");
+    }
+    return channel;
+  }
 
   @Override
   public final boolean start() {
