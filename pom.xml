@@ -7,7 +7,7 @@
     <version>3.43</version>
   </parent>
   <artifactId>ssh-steps</artifactId>
-  <version>2.0.0</version>
+  <version>2.0.1-SNAPSHOT</version>
   <packaging>hpi</packaging>
   <name>SSH Pipeline Steps</name>
   <description>SSH Pipeline Steps</description>
@@ -35,7 +35,7 @@
   <scm>
     <connection>scm:git:git://github.com/jenkinsci/${project.artifactId}-plugin.git</connection>
     <developerConnection>scm:git:git@github.com:jenkinsci/${project.artifactId}-plugin.git</developerConnection>
-    <tag>ssh-steps-2.0.0</tag>
+    <tag>HEAD</tag>
     <url>http://github.com/jenkinsci/${project.artifactId}-plugin</url>
   </scm>
   <distributionManagement>
