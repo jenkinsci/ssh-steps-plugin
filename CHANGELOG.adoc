@@ -7,7 +7,7 @@
 
 * https://issues.jenkins-ci.org/browse/JENKINS-56989[JENKINS-56989] - Default `pty` to `false` for sshCommand.
 
-CAUTION: `sshCommand` with `sudo:true` param also requires `pty:true` with this upgrade.
+CAUTION: `sshCommand` with `sudo:true` param also requires `pty:true` on remote config with this upgrade. (This is only applicable for few platforms like Linux so apply this accordingly)
 
 * Upgrade pom dependencies
 ** Minimum Jenkins Requirement: 2.121.1
