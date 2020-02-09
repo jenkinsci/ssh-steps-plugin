@@ -1,0 +1,3 @@
+_extends: .github
+tag-template: ssh-steps-$NEXT_PATCH_VERSION
+version-template: $MAJOR.$MINOR.$PATCH
