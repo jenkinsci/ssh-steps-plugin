@@ -1,4 +1,6 @@
 = SSH Pipeline Steps
+
+image:https://badges.gitter.im/jenkinsci/ssh-steps-plugin.svg[link="https://gitter.im/jenkinsci/ssh-steps-plugin?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge"]
 :toc: macro
 :note-caption: :information_source:
 :tip-caption: :bulb:
