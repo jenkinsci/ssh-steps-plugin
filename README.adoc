@@ -5,7 +5,7 @@
 
 image::docs/static/images/JenkinsPlusSSH.png[Jenkins,300]
 
-link:https://ci.jenkins.io/job/Plugins/job/ssh-steps-plugin/job/master/[image:https://ci.jenkins.io/job/Plugins/job/ssh-steps-plugin/job/master/badge/icon[Build]] image:https://img.shields.io/badge/License-Apache%202.0-blue.svg[License] link:https://plugins.jenkins.io/ssh-steps[image:https://img.shields.io/badge/SSH%20Steps-WIKI-blue.svg[Wiki]]
+link:https://ci.jenkins.io/job/Plugins/job/ssh-steps-plugin/job/master/[image:https://ci.jenkins.io/job/Plugins/job/ssh-steps-plugin/job/master/badge/icon[Build]] image:https://img.shields.io/badge/License-Apache%202.0-blue.svg[License] link:https://plugins.jenkins.io/ssh-steps[image:https://img.shields.io/badge/SSH%20Steps-WIKI-blue.svg[Wiki]] image:https://badges.gitter.im/jenkinsci/ssh-steps-plugin.svg[link="https://gitter.im/jenkinsci/ssh-steps-plugin?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge"]
 
 Jenkins pipeline steps which provides SSH facilities such as command execution or file transfer for continuous delivery. It internally uses the library of https://github.com/int128/groovy-ssh[Groovy SSH].
 
