@@ -191,7 +191,9 @@ This step executes given command on remote node and responds with output.
 
 |sudo
 |boolean, default: `false`.
-|Interactively supplies the password, not required for password less sudo commands.
+|Interactively supplies the password, not required for password less sudo commands. +
+ + 
+ sshCommand with sudo:true param also requires pty:true on remote config with this upgrade. (This is only applicable for few platforms like Linux so apply this accordingly.) 
 
 |failOnError
 |boolean, default: `true`.
