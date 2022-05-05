@@ -1,22 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>org.jenkins-ci.plugins</groupId>
     <artifactId>plugin</artifactId>
-    <version>3.55</version>
+    <version>4.40</version>
   </parent>
   <artifactId>ssh-steps</artifactId>
-  <version>2.0.1-SNAPSHOT</version>
+  <version>${revision}.${changelist}</version>
   <packaging>hpi</packaging>
   <name>SSH Pipeline Steps</name>
-  <description>SSH Pipeline Steps</description>
-  <url>https://github.com/jenkinsci/ssh-steps-plugin</url>
   <inceptionYear>2018</inceptionYear>
-  <organization>
-    <name>Cerner Corporation</name>
-    <url>https://www.cerner.com/</url>
-  </organization>
+  <url>https://github.com/jenkinsci/${project.artifactId}-plugin</url>
+  <properties>
+    <revision>2.0</revision>
+    <changelist>999999-SNAPSHOT</changelist>
+    <java.level>8</java.level>
+    <jenkins.version>2.332.2</jenkins.version>
+    <gitHubRepo>jenkinsci/${project.artifactId}-plugin</gitHubRepo>
+    <groovy.ssh.version>2.10.1</groovy.ssh.version>
+    <lombok.version>1.18.24</lombok.version>
+    <assertj-core.version>3.22.0</assertj-core.version>
+  </properties>
   <licenses>
     <license>
       <name>Apache License, Version 2.0</name>
@@ -28,56 +34,50 @@
     <developer>
       <id>nrayapati</id>
       <name>Naresh Rayapati</name>
-      <organization>Cerner Corporation</organization>
-      <organizationUrl>https://www.cerner.com/</organizationUrl>
     </developer>
   </developers>
-  <scm>
-    <connection>scm:git:git://github.com/jenkinsci/${project.artifactId}-plugin.git</connection>
-    <developerConnection>scm:git:git@github.com:jenkinsci/${project.artifactId}-plugin.git</developerConnection>
-    <tag>HEAD</tag>
-    <url>https://github.com/jenkinsci/${project.artifactId}-plugin</url>
+
+  <scm child.scm.connection.inherit.append.path="false" child.scm.developerConnection.inherit.append.path="false" child.scm.url.inherit.append.path="false">
+    <connection>scm:git:https://github.com/${gitHubRepo}</connection>
+    <developerConnection>scm:git:https://github.com/${gitHubRepo}</developerConnection>
+    <tag>${scmTag}</tag>
+    <url>https://github.com/${gitHubRepo}</url>
   </scm>
-  <distributionManagement>
+
+  <repositories>
     <repository>
       <id>repo.jenkins-ci.org</id>
-      <url>https://repo.jenkins-ci.org/releases</url>
+      <url>https://repo.jenkins-ci.org/public/</url>
     </repository>
-    <snapshotRepository>
-      <id>maven.jenkins-ci.org</id>
-      <url>https://repo.jenkins-ci.org/snapshots</url>
-    </snapshotRepository>
-  </distributionManagement>
-  <properties>
-    <java.level>8</java.level>
-    <jenkins.version>2.121.1</jenkins.version>
-    <jenkins-test-harness.version>2.49</jenkins-test-harness.version>
-    <workflow-step-api-version>2.19</workflow-step-api-version>
-    <groovy.version>2.4.11</groovy.version>
-    <groovy.ssh.version>2.10.1</groovy.ssh.version>
-    <lombok.version>1.18.8</lombok.version>
-    <!--Test dependency versions-->
-    <wiremock.version>2.23.2</wiremock.version>
-    <mockito.version>1.10.19</mockito.version>
-    <powermock.version>1.7.4</powermock.version>
-    <assertj-core.version>3.12.2</assertj-core.version>
-  </properties>
+  </repositories>
+  <pluginRepositories>
+    <pluginRepository>
+      <id>repo.jenkins-ci.org</id>
+      <url>https://repo.jenkins-ci.org/public/</url>
+    </pluginRepository>
+  </pluginRepositories>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <artifactId>bom-2.332.x</artifactId>
+        <groupId>io.jenkins.tools.bom</groupId>
+        <scope>import</scope>
+        <type>pom</type>
+        <version>1342.v729ca_3818e88</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
   <dependencies>
     <dependency>
       <groupId>org.jenkins-ci.plugins.workflow</groupId>
       <artifactId>workflow-step-api</artifactId>
-      <version>${workflow-step-api-version}</version>
     </dependency>
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
       <version>${lombok.version}</version>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.codehaus.groovy</groupId>
-      <artifactId>groovy-all</artifactId>
-      <version>${groovy.version}</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
@@ -98,66 +98,19 @@
     <!-- Test Dependencies -->
     <dependency>
       <groupId>org.mockito</groupId>
-      <artifactId>mockito-all</artifactId>
-      <version>${mockito.version}</version>
+      <artifactId>mockito-inline</artifactId>
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>org.powermock</groupId>
-      <artifactId>powermock-module-junit4</artifactId>
-      <version>${powermock.version}</version>
+      <groupId>net.java.dev.jna</groupId>
+      <artifactId>jna-platform</artifactId>
+      <version>5.8.0</version>
       <scope>test</scope>
-      <exclusions>
-        <exclusion>
-          <artifactId>junit</artifactId>
-          <groupId>junit</groupId>
-        </exclusion>
-      </exclusions>
-    </dependency>
-    <dependency>
-      <groupId>org.powermock</groupId>
-      <artifactId>powermock-api-mockito</artifactId>
-      <version>${powermock.version}</version>
-      <scope>test</scope>
-      <exclusions>
-        <exclusion>
-          <artifactId>mockito-core</artifactId>
-          <groupId>org.mockito</groupId>
-        </exclusion>
-      </exclusions>
     </dependency>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>com.github.tomakehurst</groupId>
-      <artifactId>wiremock</artifactId>
-      <version>${wiremock.version}</version>
-      <scope>test</scope>
-      <exclusions>
-        <exclusion>
-          <artifactId>jetty-server</artifactId>
-          <groupId>org.eclipse.jetty</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>jetty-servlets</artifactId>
-          <groupId>org.eclipse.jetty</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>jetty-servlet</artifactId>
-          <groupId>org.eclipse.jetty</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>jetty-webapp</artifactId>
-          <groupId>org.eclipse.jetty</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>commons-codec</artifactId>
-          <groupId>commons-codec</groupId>
-        </exclusion>
-      </exclusions>
     </dependency>
     <dependency>
       <groupId>org.assertj</groupId>
@@ -166,18 +119,6 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
-  <repositories>
-    <repository>
-      <id>repo.jenkins-ci.org</id>
-      <url>https://repo.jenkins-ci.org/public/</url>
-    </repository>
-  </repositories>
-  <pluginRepositories>
-    <pluginRepository>
-      <id>repo.jenkins-ci.org</id>
-      <url>https://repo.jenkins-ci.org/public/</url>
-    </pluginRepository>
-  </pluginRepositories>
   <build>
     <plugins>
       <plugin>

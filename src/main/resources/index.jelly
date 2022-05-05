@@ -1,0 +1,4 @@
+<?jelly escape-by-default='true'?>
+<div>
+    Jenkins pipeline steps which provides SSH facilities such as command execution or file transfer for continuous delivery.
+</div>

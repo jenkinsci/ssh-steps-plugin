@@ -1,8 +1,8 @@
 package org.jenkinsci.plugins.sshsteps.steps;
 
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyBoolean;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.anyBoolean;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -22,35 +22,16 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.powermock.api.mockito.PowerMockito;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
 
 /**
  * Unit test cases for ScriptStep class.
  *
  * @author Naresh Rayapati
  */
-@RunWith(PowerMockRunner.class)
-@PrepareForTest({ScriptStepTest.class, SSHService.class, FilePath.class})
-public class ScriptStepTest {
+public class ScriptStepTest extends BaseTest {
 
   final String scriptName = "test.sh";
 
-  @Mock
-  TaskListener taskListenerMock;
-  @Mock
-  Run<?, ?> runMock;
-  @Mock
-  EnvVars envVarsMock;
-  @Mock
-  PrintStream printStreamMock;
-  @Mock
-  SSHService sshServiceMock;
-  @Mock
-  StepContext contextMock;
-  @Mock
-  Launcher launcherMock;
   @Mock
   FilePath filePathMock;
 
@@ -59,23 +40,11 @@ public class ScriptStepTest {
   @Before
   public void setup() throws IOException, InterruptedException {
 
-    when(runMock.getCauses()).thenReturn(null);
-    when(taskListenerMock.getLogger()).thenReturn(printStreamMock);
-    doNothing().when(printStreamMock).println();
-    when(launcherMock.getChannel()).thenReturn(new TestVirtualChannel());
-
-    PowerMockito.mockStatic(SSHService.class);
-    when(SSHService.create(any(), anyBoolean(), anyBoolean(), any())).thenReturn(sshServiceMock);
-
     when(filePathMock.child(any())).thenReturn(filePathMock);
     when(filePathMock.exists()).thenReturn(true);
     when(filePathMock.isDirectory()).thenReturn(false);
     when(filePathMock.getRemote()).thenReturn(scriptName);
 
-    when(contextMock.get(Run.class)).thenReturn(runMock);
-    when(contextMock.get(TaskListener.class)).thenReturn(taskListenerMock);
-    when(contextMock.get(EnvVars.class)).thenReturn(envVarsMock);
-    when(contextMock.get(Launcher.class)).thenReturn(launcherMock);
     when(contextMock.get(FilePath.class)).thenReturn(filePathMock);
 
   }
