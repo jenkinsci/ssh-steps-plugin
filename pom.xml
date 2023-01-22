@@ -21,7 +21,7 @@
     <gitHubRepo>jenkinsci/${project.artifactId}-plugin</gitHubRepo>
     <groovy.ssh.version>2.10.1</groovy.ssh.version>
     <lombok.version>1.18.24</lombok.version>
-    <assertj-core.version>3.23.1</assertj-core.version>
+    <assertj-core.version>3.24.1</assertj-core.version>
   </properties>
   <licenses>
     <license>
