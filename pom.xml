@@ -5,7 +5,7 @@
   <parent>
     <groupId>org.jenkins-ci.plugins</groupId>
     <artifactId>plugin</artifactId>
-    <version>4.50</version>
+    <version>4.53</version>
   </parent>
   <artifactId>ssh-steps</artifactId>
   <version>${revision}.${changelist}</version>
@@ -17,7 +17,7 @@
     <revision>2.0</revision>
     <changelist>999999-SNAPSHOT</changelist>
     <java.level>8</java.level>
-    <jenkins.version>2.332.2</jenkins.version>
+    <jenkins.version>2.361.1</jenkins.version>
     <gitHubRepo>jenkinsci/${project.artifactId}-plugin</gitHubRepo>
     <groovy.ssh.version>2.10.1</groovy.ssh.version>
     <lombok.version>1.18.24</lombok.version>
@@ -158,6 +158,7 @@
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-javadoc-plugin</artifactId>
             <configuration>
+              <sourcepath>${project.basedir}/src/main/java;${project.basedir}/target/generated-sources/annotations;${project.basedir}/target/generated-sources/groovy-stubs</sourcepath>
               <additionalparam>-Xdoclint:none</additionalparam>
             </configuration>
           </plugin>
