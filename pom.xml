@@ -22,6 +22,7 @@
     <groovy.ssh.version>2.10.1</groovy.ssh.version>
     <lombok.version>1.18.24</lombok.version>
     <assertj-core.version>3.23.1</assertj-core.version>
+    <maven.javadoc.skip>true</maven.javadoc.skip>
   </properties>
   <licenses>
     <license>
