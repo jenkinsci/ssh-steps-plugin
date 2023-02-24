@@ -66,7 +66,7 @@ public class GetStep extends BasicSSHStep {
 
     @Override
     public String getDisplayName() {
-      return getPrefix() + getFunctionName() + " - Get a file/directory from remote node.";
+      return getPrefix() + getFunctionName() + " - Get a file or directory from remote node.";
     }
   }
 
