@@ -91,7 +91,7 @@ Most of the steps in this plugin require a common step variable called `remote`,
 
 |fileTransfer
 |String
-|File transfer method, that is `SFTP` or `SCP`. Defaults to `SFTP`.
+|File transfer method, that is `sftp` or `scp`. Defaults to `sftp`.
 
 |encoding
 |String
