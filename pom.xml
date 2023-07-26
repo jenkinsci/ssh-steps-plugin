@@ -5,7 +5,7 @@
   <parent>
     <groupId>org.jenkins-ci.plugins</groupId>
     <artifactId>plugin</artifactId>
-    <version>4.54</version>
+    <version>4.71</version>
   </parent>
   <artifactId>ssh-steps</artifactId>
   <version>${revision}.${changelist}</version>
@@ -74,6 +74,13 @@
       <groupId>org.jenkins-ci.plugins.workflow</groupId>
       <artifactId>workflow-step-api</artifactId>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/org.codehaus.groovy/groovy-all -->
+    <dependency>
+      <groupId>org.codehaus.groovy</groupId>
+      <artifactId>groovy</artifactId>
+      <version>3.0.18</version>
+      <scope>provided</scope>      
+    </dependency>
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
@@ -81,13 +88,18 @@
       <scope>provided</scope>
     </dependency>
     <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>2.0.6</version>
+    </dependency>
+    <dependency>
       <groupId>org.hidetake</groupId>
       <artifactId>groovy-ssh</artifactId>
       <version>${groovy.ssh.version}</version>
       <exclusions>
         <exclusion>
-          <artifactId>groovy-all</artifactId>
-          <groupId>org.codehaus.groovy</groupId>
+          <artifactId>org.slf4j</artifactId>
+          <groupId>slf4j-api</groupId>
         </exclusion>
       </exclusions>
     </dependency>
@@ -99,6 +111,7 @@
     <dependency>
       <groupId>org.mockito</groupId>
       <artifactId>mockito-inline</artifactId>
+      <version>5.2.0</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -128,7 +141,6 @@
       <plugin>
         <groupId>org.codehaus.gmavenplus</groupId>
         <artifactId>gmavenplus-plugin</artifactId>
-        <version>2.1.0</version>
         <executions>
           <execution>
             <goals>
