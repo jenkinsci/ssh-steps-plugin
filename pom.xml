@@ -16,8 +16,7 @@
   <properties>
     <revision>2.0</revision>
     <changelist>999999-SNAPSHOT</changelist>
-    <java.level>8</java.level>
-    <jenkins.version>2.361.1</jenkins.version>
+    <jenkins.version>2.361.4</jenkins.version>
     <gitHubRepo>jenkinsci/${project.artifactId}-plugin</gitHubRepo>
     <groovy.ssh.version>2.10.1</groovy.ssh.version>
     <lombok.version>1.18.24</lombok.version>
@@ -60,11 +59,11 @@
   <dependencyManagement>
     <dependencies>
       <dependency>
-        <artifactId>bom-2.332.x</artifactId>
+        <artifactId>bom-2.361.x</artifactId>
         <groupId>io.jenkins.tools.bom</groupId>
         <scope>import</scope>
         <type>pom</type>
-        <version>1763.v092b_8980a_f5e</version>
+        <version>2102.v854b_fec19c92</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
@@ -91,25 +90,16 @@
         </exclusion>
       </exclusions>
     </dependency>
-    <dependency>
-      <groupId>log4j</groupId>
-      <artifactId>log4j</artifactId>
-    </dependency>
     <!-- Test Dependencies -->
     <dependency>
       <groupId>org.mockito</groupId>
-      <artifactId>mockito-inline</artifactId>
+      <artifactId>mockito-core</artifactId>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>net.java.dev.jna</groupId>
       <artifactId>jna-platform</artifactId>
       <version>5.13.0</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
       <scope>test</scope>
     </dependency>
     <dependency>
