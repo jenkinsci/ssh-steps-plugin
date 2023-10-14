@@ -74,6 +74,10 @@
       <artifactId>workflow-step-api</artifactId>
     </dependency>
     <dependency>
+      <groupId>org.jenkins-ci.plugins</groupId>
+      <artifactId>jsch</artifactId>
+    </dependency>
+    <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
       <version>${lombok.version}</version>
@@ -84,6 +88,10 @@
       <artifactId>groovy-ssh</artifactId>
       <version>${groovy.ssh.version}</version>
       <exclusions>
+        <exclusion>
+          <artifactId>*</artifactId>
+          <groupId>com.jcraft</groupId>
+        </exclusion>
         <exclusion>
           <artifactId>groovy-all</artifactId>
           <groupId>org.codehaus.groovy</groupId>
