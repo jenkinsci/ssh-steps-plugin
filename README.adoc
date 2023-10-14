@@ -91,7 +91,7 @@ Most of the steps in this plugin require a common step variable called `remote`,
 
 |fileTransfer
 |String
-|File transfer method, that is `SFTP` or `SCP`. Defaults to `SFTP`.
+|File transfer method, that is `sftp` or `scp`. Defaults to `sftp`.
 
 |encoding
 |String
@@ -373,11 +373,16 @@ node {
   def remote = [:]
   remote.name = 'test'
   remote.host = 'test.domain.com'
+  remote.fileTransfer = 'scp'
   remote.user = 'root'
   remote.password = 'password'
   remote.allowAnyHosts = true
   stage('Remote SSH') {
     sshGet remote: remote, from: 'abc.sh', into: 'abc_get.sh', override: true
+  }
+  stage('Retrieve files with regex') {
+    def regexPattern = ".+\\.(log|csv)\$"
+    sshGet remote: remote, from: '/home/jenkins/', filterRegex: regexPattern, into: 'tests/', override: true
   }
 }
 ```
