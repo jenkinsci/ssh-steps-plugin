@@ -16,7 +16,9 @@
   <properties>
     <revision>2.0</revision>
     <changelist>999999-SNAPSHOT</changelist>
-    <jenkins.version>2.361.4</jenkins.version>
+    <!-- https://www.jenkins.io/doc/developer/plugin-development/choosing-jenkins-baseline/ -->
+    <jenkins.baseline>2.361</jenkins.baseline>
+    <jenkins.version>${jenkins.baseline}.4</jenkins.version>
     <gitHubRepo>jenkinsci/${project.artifactId}-plugin</gitHubRepo>
     <groovy.ssh.version>2.10.1</groovy.ssh.version>
     <lombok.version>1.18.30</lombok.version>
@@ -59,7 +61,7 @@
   <dependencyManagement>
     <dependencies>
       <dependency>
-        <artifactId>bom-2.361.x</artifactId>
+        <artifactId>bom-${jenkins.baseline}.x</artifactId>
         <groupId>io.jenkins.tools.bom</groupId>
         <scope>import</scope>
         <type>pom</type>
