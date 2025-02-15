@@ -1,5 +1,6 @@
 package org.jenkinsci.plugins.sshsteps.util;
 
+import edu.umd.cs.findbugs.annotations.NonNull;
 import hudson.Launcher;
 import hudson.model.TaskListener;
 import hudson.remoting.VirtualChannel;
@@ -13,7 +14,6 @@ import java.util.UUID;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
-import javax.annotation.Nonnull;
 import jenkins.model.Jenkins;
 import org.acegisecurity.Authentication;
 import org.apache.log4j.MDC;
@@ -39,7 +39,7 @@ public abstract class SSHStepExecution<T> extends StepExecution {
   private transient String threadName;
   private transient Throwable stopCause;
 
-  protected SSHStepExecution(BasicSSHStep step, @Nonnull StepContext context)
+  protected SSHStepExecution(BasicSSHStep step, @NonNull StepContext context)
       throws IOException, InterruptedException {
     super(context);
     listener = context.get(TaskListener.class);
@@ -116,7 +116,7 @@ public abstract class SSHStepExecution<T> extends StepExecution {
   }
 
   @Override
-  public @Nonnull
+  public @NonNull
   String getStatus() {
     if (threadName != null) {
       return "running in thread: " + threadName;
