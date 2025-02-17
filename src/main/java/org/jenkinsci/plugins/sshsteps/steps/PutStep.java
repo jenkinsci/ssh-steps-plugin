@@ -1,10 +1,13 @@
 package org.jenkinsci.plugins.sshsteps.steps;
 
+import edu.umd.cs.findbugs.annotations.NonNull;
 import hudson.Extension;
 import hudson.FilePath;
 import hudson.Util;
 import hudson.model.TaskListener;
 import java.io.IOException;
+import java.io.Serial;
+
 import lombok.Getter;
 import lombok.Setter;
 import org.jenkinsci.plugins.sshsteps.util.SSHMasterToSlaveCallable;
@@ -20,22 +23,20 @@ import org.kohsuke.stapler.DataBoundSetter;
  *
  * @author Naresh Rayapati
  */
+@Getter
 public class PutStep extends BasicSSHStep {
 
+  @Serial
   private static final long serialVersionUID = 9183111587222550149L;
 
-  @Getter
   private final String from;
 
-  @Getter
   private final String into;
 
-  @Getter
   @Setter
   @DataBoundSetter
   private String filterBy = "name";
 
-  @Getter
   @Setter
   @DataBoundSetter
   private String filterRegex;
@@ -59,6 +60,7 @@ public class PutStep extends BasicSSHStep {
       return "sshPut";
     }
 
+    @NonNull
     @Override
     public String getDisplayName() {
       return getPrefix() + getFunctionName() + " - Put a file or directory on remote node.";
@@ -67,6 +69,7 @@ public class PutStep extends BasicSSHStep {
 
   public static class Execution extends SSHStepExecution {
 
+    @Serial
     private static final long serialVersionUID = -4497192469254138827L;
 
     protected Execution(PutStep step, StepContext context)
