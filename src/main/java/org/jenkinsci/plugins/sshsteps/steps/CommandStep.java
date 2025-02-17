@@ -1,9 +1,12 @@
 package org.jenkinsci.plugins.sshsteps.steps;
 
+import edu.umd.cs.findbugs.annotations.NonNull;
 import hudson.Extension;
 import hudson.Util;
 import hudson.model.TaskListener;
 import java.io.IOException;
+import java.io.Serial;
+
 import lombok.Getter;
 import org.jenkinsci.plugins.sshsteps.util.SSHMasterToSlaveCallable;
 import org.jenkinsci.plugins.sshsteps.util.SSHStepDescriptorImpl;
@@ -18,14 +21,14 @@ import org.kohsuke.stapler.DataBoundSetter;
  *
  * @author Naresh Rayapati
  */
+@Getter
 public class CommandStep extends BasicSSHStep {
 
+  @Serial
   private static final long serialVersionUID = 7492916747486604582L;
 
-  @Getter
   private final String command;
 
-  @Getter
   @DataBoundSetter
   private boolean sudo = false;
 
@@ -47,6 +50,7 @@ public class CommandStep extends BasicSSHStep {
       return "sshCommand";
     }
 
+    @NonNull
     @Override
     public String getDisplayName() {
       return getPrefix() + getFunctionName() + " - Execute command on remote node.";
@@ -55,6 +59,7 @@ public class CommandStep extends BasicSSHStep {
 
   public static class Execution extends SSHStepExecution {
 
+    @Serial
     private static final long serialVersionUID = -5293952534324828128L;
 
     protected Execution(CommandStep step, StepContext context)

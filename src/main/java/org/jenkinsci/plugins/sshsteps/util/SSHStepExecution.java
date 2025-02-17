@@ -15,14 +15,15 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import jenkins.model.Jenkins;
-import org.acegisecurity.Authentication;
+import lombok.Getter;
 import org.apache.log4j.MDC;
 import org.jenkinsci.plugins.sshsteps.steps.BasicSSHStep;
 import org.jenkinsci.plugins.workflow.steps.StepContext;
 import org.jenkinsci.plugins.workflow.steps.StepExecution;
+import org.springframework.security.core.Authentication;
 
 /**
- * Non blocking step execution for ssh steps.
+ * Non-blocking step execution for ssh steps.
  *
  * @param <T> the type of the return value (may be {@link Void})
  * @author Naresh Rayapati
@@ -30,9 +31,12 @@ import org.jenkinsci.plugins.workflow.steps.StepExecution;
  */
 public abstract class SSHStepExecution<T> extends StepExecution {
 
+  @Getter
   private final transient TaskListener listener;
+  @Getter
   private final transient Launcher launcher;
   private static ExecutorService executorService;
+  @Getter
   private final BasicSSHStep step;
 
   private transient volatile Future<?> task;
@@ -74,13 +78,13 @@ public abstract class SSHStepExecution<T> extends StepExecution {
 
   @Override
   public final boolean start() {
-    Authentication auth = Jenkins.getAuthentication();
+    Authentication auth = Jenkins.getAuthentication2();
     task = getExecutorService().submit(() -> {
       threadName = Thread.currentThread().getName();
       try {
         MDC.put("execution.id", UUID.randomUUID().toString());
         T ret;
-        try (ACLContext acl = ACL.as(auth)) {
+        try (ACLContext acl = ACL.as2(auth)) {
           ret = run();
         }
         getContext().onSuccess(ret);
@@ -101,7 +105,7 @@ public abstract class SSHStepExecution<T> extends StepExecution {
    * If the computation is going synchronously, try to cancel that.
    */
   @Override
-  public void stop(Throwable cause) throws Exception {
+  public void stop(@NonNull Throwable cause) throws Exception {
     if (task != null) {
       stopCause = cause;
       task.cancel(true);
@@ -125,15 +129,4 @@ public abstract class SSHStepExecution<T> extends StepExecution {
     }
   }
 
-  public TaskListener getListener() {
-    return listener;
-  }
-
-  public Launcher getLauncher() {
-    return launcher;
-  }
-
-  public BasicSSHStep getStep() {
-    return step;
-  }
 }

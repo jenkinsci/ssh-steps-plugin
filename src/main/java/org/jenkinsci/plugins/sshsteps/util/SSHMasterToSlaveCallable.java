@@ -5,6 +5,7 @@ import hudson.model.TaskListener;
 import java.io.IOException;
 import java.util.UUID;
 import jenkins.security.MasterToSlaveCallable;
+import lombok.Getter;
 import org.apache.log4j.MDC;
 import org.jenkinsci.plugins.sshsteps.SSHService;
 import org.jenkinsci.plugins.sshsteps.steps.BasicSSHStep;
@@ -16,8 +17,10 @@ import org.jenkinsci.plugins.sshsteps.steps.BasicSSHStep;
  */
 public abstract class SSHMasterToSlaveCallable extends MasterToSlaveCallable<Object, IOException> {
 
+  @Getter
   private final BasicSSHStep step;
   private final TaskListener listener;
+  @Getter
   private SSHService service;
 
   public SSHMasterToSlaveCallable(BasicSSHStep step, TaskListener listener) {
@@ -40,11 +43,4 @@ public abstract class SSHMasterToSlaveCallable extends MasterToSlaveCallable<Obj
 
   protected abstract Object execute();
 
-  public BasicSSHStep getStep() {
-    return step;
-  }
-
-  public SSHService getService() {
-    return service;
-  }
 }

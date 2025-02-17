@@ -1,9 +1,12 @@
 package org.jenkinsci.plugins.sshsteps.steps;
 
+import edu.umd.cs.findbugs.annotations.NonNull;
 import hudson.Extension;
 import hudson.Util;
 import hudson.model.TaskListener;
 import java.io.IOException;
+import java.io.Serial;
+
 import lombok.Getter;
 import org.jenkinsci.plugins.sshsteps.util.SSHMasterToSlaveCallable;
 import org.jenkinsci.plugins.sshsteps.util.SSHStepDescriptorImpl;
@@ -17,11 +20,12 @@ import org.kohsuke.stapler.DataBoundConstructor;
  *
  * @author Naresh Rayapati
  */
+@Getter
 public class RemoveStep extends BasicSSHStep {
 
+  @Serial
   private static final long serialVersionUID = -177489327125117255L;
 
-  @Getter
   private final String path;
 
   @DataBoundConstructor
@@ -42,6 +46,7 @@ public class RemoveStep extends BasicSSHStep {
       return "sshRemove";
     }
 
+    @NonNull
     @Override
     public String getDisplayName() {
       return getPrefix() + getFunctionName() + " - Remove a file or directory from remote node.";
@@ -50,6 +55,7 @@ public class RemoveStep extends BasicSSHStep {
 
   public static class Execution extends SSHStepExecution {
 
+    @Serial
     private static final long serialVersionUID = 862708152481251266L;
 
     protected Execution(RemoveStep step, StepContext context)

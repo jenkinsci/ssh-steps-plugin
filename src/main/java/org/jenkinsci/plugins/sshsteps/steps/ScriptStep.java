@@ -1,10 +1,13 @@
 package org.jenkinsci.plugins.sshsteps.steps;
 
+import edu.umd.cs.findbugs.annotations.NonNull;
 import hudson.Extension;
 import hudson.FilePath;
 import hudson.Util;
 import hudson.model.TaskListener;
 import java.io.IOException;
+import java.io.Serial;
+
 import lombok.Getter;
 import org.jenkinsci.plugins.sshsteps.util.SSHMasterToSlaveCallable;
 import org.jenkinsci.plugins.sshsteps.util.SSHStepDescriptorImpl;
@@ -18,11 +21,12 @@ import org.kohsuke.stapler.DataBoundConstructor;
  *
  * @author Naresh Rayapati
  */
+@Getter
 public class ScriptStep extends BasicSSHStep {
 
+  @Serial
   private static final long serialVersionUID = 7358533459289529723L;
 
-  @Getter
   private final String script;
 
   @DataBoundConstructor
@@ -43,6 +47,7 @@ public class ScriptStep extends BasicSSHStep {
       return "sshScript";
     }
 
+    @NonNull
     @Override
     public String getDisplayName() {
       return getPrefix() + getFunctionName() + " - Execute script(file) on remote node.";
@@ -51,6 +56,7 @@ public class ScriptStep extends BasicSSHStep {
 
   public static class Execution extends SSHStepExecution {
 
+    @Serial
     private static final long serialVersionUID = 6008070200393301960L;
 
     protected Execution(ScriptStep step, StepContext context)
