@@ -1,32 +1,33 @@
 package org.jenkinsci.plugins.sshsteps.steps;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyBoolean;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.when;
-
 import hudson.EnvVars;
 import hudson.Launcher;
 import hudson.model.Run;
 import hudson.model.TaskListener;
-import java.io.IOException;
-import java.io.PrintStream;
 import org.jenkinsci.plugins.sshsteps.SSHService;
 import org.jenkinsci.plugins.sshsteps.util.TestVirtualChannel;
 import org.jenkinsci.plugins.workflow.steps.StepContext;
-import org.junit.After;
-import org.junit.Before;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.mockito.Mock;
 import org.mockito.MockedStatic;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+
+import java.io.IOException;
+import java.io.PrintStream;
+
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyBoolean;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.when;
 
 /**
  * Base Test Class.
  *
  * @author Naresh Rayapati
  */
-public class BaseTest {
+class BaseTest {
 
   @Mock
   TaskListener taskListenerMock;
@@ -46,8 +47,8 @@ public class BaseTest {
   private AutoCloseable closeable;
   private MockedStatic<SSHService> sshService;
 
-  @Before
-  public void setUpBase() throws IOException, InterruptedException {
+  @BeforeEach
+  void setUpBase() throws IOException, InterruptedException {
 
     closeable = MockitoAnnotations.openMocks(this);
 
@@ -65,8 +66,8 @@ public class BaseTest {
     when(contextMock.get(Launcher.class)).thenReturn(launcherMock);
   }
 
-  @After
-  public void tearUpBase() throws Exception {
+  @AfterEach
+  void tearUpBase() throws Exception {
     sshService.close();
     closeable.close();
   }

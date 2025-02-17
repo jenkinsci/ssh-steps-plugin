@@ -4,17 +4,17 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 import java.util.HashMap;
 import java.util.Map;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test cases for SSHService.
  *
  * @author Naresh Rayapati.
  */
-public class SSHServiceTest {
+class SSHServiceTest {
 
   @Test
-  public void testWithEmptyRemoteThrowsAssertionError() {
+  void testWithEmptyRemoteThrowsAssertionError() {
     Map<String, String> remote = new HashMap<>();
 
     assertThatExceptionOfType(AssertionError.class)
@@ -25,20 +25,20 @@ public class SSHServiceTest {
   }
 
   @Test
-  public void testRemoteWithEmptyNameThrowsAssertionError() {
+  void testRemoteWithEmptyNameThrowsAssertionError() {
     Map<String, String> remote = new HashMap<>();
     remote.put("name", "");
 
     assertThatExceptionOfType(AssertionError.class)
         .isThrownBy(() -> SSHService.create(remote, false, false, null))
         .withMessage(
-            "SSH Steps:  a remote (or a gateway) is missing the required field 'name'. Expression: remote.name")
+            "SSH Steps: a remote (or a gateway) is missing the required field 'name'. Expression: remote.name")
         .withStackTraceContaining("AssertionError")
         .withNoCause();
   }
 
   @Test
-  public void testRemoteWithEmptyUserThrowsAssertionError() {
+  void testRemoteWithEmptyUserThrowsAssertionError() {
     Map<String, String> remote = new HashMap<>();
     remote.put("name", "dummy");
 
@@ -50,7 +50,7 @@ public class SSHServiceTest {
   }
 
   @Test
-  public void testRemoteWithOutKnownHostsAndAllowAnyHostsThrowsIllegalArgumentException() {
+  void testRemoteWithOutKnownHostsAndAllowAnyHostsThrowsIllegalArgumentException() {
     Map<String, String> remote = new HashMap<>();
     remote.put("name", "dummy");
     remote.put("user", "dummy");
@@ -63,7 +63,7 @@ public class SSHServiceTest {
   }
 
   @Test
-  public void testRemoteWithMinimumRequiredParams() {
+  void testRemoteWithMinimumRequiredParams() {
     Map<String, Object> remote = new HashMap<>();
     remote.put("name", "dummy");
     remote.put("user", "dummy");
