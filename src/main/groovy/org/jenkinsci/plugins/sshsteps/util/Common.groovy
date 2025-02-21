@@ -31,7 +31,7 @@ class Common {
      */
     void validateRemote(remote) {
         assert remote, getPrefix() + "remote is null or empty"
-        assert remote.name, getPrefix() + " a remote (or a gateway) is missing the required field 'name'"
+        assert remote.name, getPrefix() + "a remote (or a gateway) is missing the required field 'name'"
         if (remote.retryCount)
             assert remote.retryCount >= 0, getPrefix() + "retryCount must be zero or positive ($remote.name)"
         if (remote.retryWaitSec)
