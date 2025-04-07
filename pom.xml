@@ -21,7 +21,7 @@
     <jenkins.version>${jenkins.baseline}.1</jenkins.version>
     <gitHubRepo>jenkinsci/${project.artifactId}-plugin</gitHubRepo>
     <groovy.ssh.version>2.10.1</groovy.ssh.version>
-    <lombok.version>1.18.36</lombok.version>
+    <lombok.version>1.18.38</lombok.version>
     <assertj-core.version>3.27.3</assertj-core.version>
   </properties>
   <licenses>
