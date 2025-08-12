@@ -27,6 +27,7 @@ class SSHService implements Serializable {
     private final boolean dryRunFlag
     private final transient PrintStream logger
     private final transient Service ssh
+    private boolean verbose = false
 
     /**
      * Constructor.
@@ -61,6 +62,10 @@ class SSHService implements Serializable {
             logger.println(message)
             rootLogger.setLevel(Level.SEVERE)
         }
+    }
+
+    void setVerbose(boolean verbose) {
+        this.verbose = verbose
     }
 
     private void validateRemote() {
@@ -234,6 +239,14 @@ class SSHService implements Serializable {
     def get(String from, String into, String filterBy, String filterRegex) {
         registerLogHandler("Receiving a file/directory from $remote.name[$remote.host]: from: $from into: $into")
         defineRemote(remote)
+
+        // Suppress SCP logs unless verbose explicitly enabled
+        if (!verbose && remote.fileTransfer?.equalsIgnoreCase('scp')) {
+            logger.println("Suppressing SCP transfer logs for $from (enable verbose: true for debugging)")
+            ssh.remotes."$remote.name".logging = LoggingMethod.none
+            ssh.remotes."$remote.name".interaction = {}
+        }
+
         ssh.run {
             session(ssh.remotes."$remote.name") {
                 if (filterBy && filterRegex)

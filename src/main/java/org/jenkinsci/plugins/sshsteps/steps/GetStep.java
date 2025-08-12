@@ -45,6 +45,10 @@ public class GetStep extends BasicSSHStep {
   @DataBoundSetter
   private boolean override = false;
 
+  @Setter
+  @DataBoundSetter
+  private boolean verbose = false;
+
   @DataBoundConstructor
   public GetStep(String from, String into) {
     this.from = from;
@@ -118,6 +122,7 @@ public class GetStep extends BasicSSHStep {
       @Override
       public Object execute() {
         final GetStep step = (GetStep) getStep();
+        getService().setVerbose(step.isVerbose());
         return getService().get(step.getFrom(), into, step.getFilterBy(), step.getFilterRegex());
       }
     }
