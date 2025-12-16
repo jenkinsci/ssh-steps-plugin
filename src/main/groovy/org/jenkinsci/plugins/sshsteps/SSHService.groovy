@@ -97,7 +97,7 @@ class SSHService implements Serializable {
         new Common(logger).validateRemote(this.remote)
     }
 
-    private void defineRemote(remote) {
+    private void defineRemote(remote, boolean enableInteraction = true) {
         ssh.remotes {
             "$remote.name" {
                 host = remote.host
@@ -109,7 +109,7 @@ class SSHService implements Serializable {
 
                 // Gateway.
                 if (remote.gateway) {
-                    defineRemote(remote.gateway)
+                    defineRemote(remote.gateway, enableInteraction)
                     gateway = ssh.remotes."$remote.gateway.name"
                 }
 
@@ -138,13 +138,16 @@ class SSHService implements Serializable {
 
                 def logPrefix = remote.appendName ? "$remote.name|" : ''
 
-                // Pipe logs to TaskListener's print stream.
-                interaction = {
-                    when(line: _, from: standardOutput) {
-                        logger.println("$logPrefix$it")
-                    }
-                    when(line: _, from: standardError) {
-                        logger.println("$logPrefix$it")
+                // Pipe logs to TaskListener's print stream for commands/scripts only
+                // Do NOT enable interaction for file transfers to prevent file contents from being printed
+                if (enableInteraction) {
+                    interaction = {
+                        when(line: _, from: standardOutput) {
+                            logger.println("$logPrefix$it")
+                        }
+                        when(line: _, from: standardError) {
+                            logger.println("$logPrefix$it")
+                        }
                     }
                 }
 
@@ -250,7 +253,8 @@ class SSHService implements Serializable {
     def put(String from, String into, String filterBy, String filterRegex) {
         try {
             registerLogHandler("Sending a file/directory to $remote.name[$remote.host]: from: $from into: $into")
-            defineRemote(remote)
+            // Disable interaction for file transfers to prevent file contents from being printed
+            defineRemote(remote, false)
             ssh.run {
                 session(ssh.remotes."$remote.name") {
                     if (filterBy && filterRegex)
@@ -276,7 +280,8 @@ class SSHService implements Serializable {
     def get(String from, String into, String filterBy, String filterRegex) {
         try {
             registerLogHandler("Receiving a file/directory from $remote.name[$remote.host]: from: $from into: $into")
-            defineRemote(remote)
+            // Disable interaction for file transfers to prevent file contents from being printed
+            defineRemote(remote, false)
             ssh.run {
                 session(ssh.remotes."$remote.name") {
                     if (filterBy && filterRegex)
