@@ -146,6 +146,21 @@ class SSHService implements Serializable {
                     when(line: _, from: standardError) {
                         logger.println("$logPrefix$it")
                     }
+                    
+                    // Capture partial output at stream end to prevent truncation
+                    // when commands exit without trailing newlines
+                    when(partial: _, from: standardOutput) {
+                        def output = it?.trim()
+                        if (output && !output.isEmpty()) {
+                            logger.println("$logPrefix$output")
+                        }
+                    }
+                    when(partial: _, from: standardError) {
+                        def output = it?.trim()
+                        if (output && !output.isEmpty()) {
+                            logger.println("$logPrefix$output")
+                        }
+                    }
                 }
 
                 if (remote.pty) {
