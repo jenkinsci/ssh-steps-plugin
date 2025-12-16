@@ -1,7 +1,6 @@
 = Release Notes.
 
-== 2.0.1 (Unreleased)
-
+NOTE: This file is no longer maintained. Please refer to https://github.com/jenkinsci/ssh-steps-plugin/releases[GitHub Releases] for the actual changeset and release notes.
 
 == 2.0.0
 
