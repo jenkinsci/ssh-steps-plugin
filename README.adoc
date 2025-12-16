@@ -123,9 +123,27 @@ Possible values, refer to java logging https://docs.oracle.com/javase/7/docs/api
 * FINER
 * FINEST (lowest value)
 
+|logBufferSize
+|int
+a|Number of log lines to buffer before flushing to console. Defaults to *50*.
+
+Buffering improves performance for high-output commands by reducing console write operations. Set to `1` to disable buffering (immediate output).
+
+|logFlushIntervalMs
+|int
+a|Time in milliseconds between automatic buffer flushes. Defaults to *100*.
+
+Ensures output appears promptly even if buffer isn't full. Lower values provide more real-time output but may reduce performance.
+
+|logRateLimitLinesPerSec
+|int
+a|Maximum number of log lines per second. Defaults to *1000*.
+
+Prevents console saturation from commands with massive output. Set to `0` to disable rate limiting. When limit is exceeded, a warning message is displayed and excess lines are suppressed.
+
 |pty
 |boolean
-|If this is true, a PTY (pseudo-terminal) is allocated on the command execution. Defaults to `false`.
+|If this is `true`, a PTY (pseudo-terminal) is allocated on the command execution. Defaults to `false`.
 |===
 
 === Proxy
@@ -220,6 +238,38 @@ node {
   }
 }
 ```
+
+==== Example with Logging Configuration
+
+```groovy
+node {
+  def remote = [:]
+  remote.name = 'production'
+  remote.host = 'prod.example.com'
+  remote.user = 'deploy'
+  remote.password = 'secret'
+  remote.allowAnyHosts = true
+  
+  // Configure logging for high-volume output
+  remote.logBufferSize = 100              // Buffer up to 100 lines before flushing
+  remote.logFlushIntervalMs = 200         // Flush every 200ms
+  remote.logRateLimitLinesPerSec = 2000   // Allow up to 2000 lines/sec
+  
+  stage('Deploy with Verbose Logging') {
+    // This will be efficiently buffered
+    sshCommand remote: remote, command: "tail -n 1000 /var/log/deploy.log"
+  }
+  
+  stage('Monitor Real-time') {
+    // More real-time output with smaller buffer
+    remote.logBufferSize = 10
+    remote.logFlushIntervalMs = 50
+    sshCommand remote: remote, command: "tail -f /var/log/app.log | head -n 100"
+  }
+}
+```
+
+NOTE: The logging improvements are designed to be thread-safe and work seamlessly with parallel SSH command executions. Each command maintains its own isolated logging context.
 
 === sshScript
 

@@ -49,17 +49,47 @@ class SSHService implements Serializable {
         new SSHService(remote, failOnError, dryRun, logger)
     }
 
+    private transient CustomLogHandler currentHandler
+    
     /**
      * Register Log handler for all hidetake's classes.
      */
     private void registerLogHandler(message) {
         Logger rootLogger = Logger.getLogger("org.hidetake")
-        rootLogger.addHandler(new CustomLogHandler(logger, MDC.get("execution.id")))
+        
+        // Add new handler with buffering configuration from remote settings
+        def bufferSize = remote.logBufferSize ?: 50
+        def flushIntervalMs = remote.logFlushIntervalMs ?: 100
+        def rateLimitLinesPerSec = remote.logRateLimitLinesPerSec ?: 1000
+        
+        currentHandler = new CustomLogHandler(logger, MDC.get("execution.id"), 
+                                               bufferSize, flushIntervalMs, rateLimitLinesPerSec)
+        rootLogger.addHandler(currentHandler)
+        
         if (remote.logLevel) {
             rootLogger.setLevel(Level.parse(remote.logLevel))
         } else {
             logger.println(message)
             rootLogger.setLevel(Level.SEVERE)
+        }
+    }
+    
+    /**
+     * Clean up the log handler for this service instance.
+     * Called when the SSH operation completes.
+     */
+    private void cleanupLogHandler() {
+        if (currentHandler != null) {
+            try {
+                Logger rootLogger = Logger.getLogger("org.hidetake")
+                rootLogger.removeHandler(currentHandler)
+                currentHandler.close()
+            } catch (Exception e) {
+                // Ignore cleanup errors
+                log.debug("Error cleaning up log handler", e)
+            } finally {
+                currentHandler = null
+            }
         }
     }
 
@@ -172,15 +202,19 @@ class SSHService implements Serializable {
      * @return response from ssh run.
      */
     def executeCommand(String command, boolean sudo) {
-        registerLogHandler("Executing command on $remote.name[$remote.host]: $command sudo: $sudo")
-        defineRemote(remote)
-        ssh.run {
-            session(ssh.remotes."$remote.name") {
-                if (sudo)
-                    executeSudo command
-                else
-                    execute command
+        try {
+            registerLogHandler("Executing command on $remote.name[$remote.host]: $command sudo: $sudo")
+            defineRemote(remote)
+            ssh.run {
+                session(ssh.remotes."$remote.name") {
+                    if (sudo)
+                        executeSudo command
+                    else
+                        execute command
+                }
             }
+        } finally {
+            cleanupLogHandler()
         }
     }
 
@@ -191,12 +225,16 @@ class SSHService implements Serializable {
      * @return response from ssh run.
      */
     def executeScriptFromFile(String pathname) {
-        registerLogHandler("Executing script on $remote.name[$remote.host]: $pathname")
-        defineRemote(remote)
-        ssh.run {
-            session(ssh.remotes."$remote.name") {
-                executeScript new File(pathname)
+        try {
+            registerLogHandler("Executing script on $remote.name[$remote.host]: $pathname")
+            defineRemote(remote)
+            ssh.run {
+                session(ssh.remotes."$remote.name") {
+                    executeScript new File(pathname)
+                }
             }
+        } finally {
+            cleanupLogHandler()
         }
     }
 
@@ -210,15 +248,19 @@ class SSHService implements Serializable {
      * @return response from ssh run.
      */
     def put(String from, String into, String filterBy, String filterRegex) {
-        registerLogHandler("Sending a file/directory to $remote.name[$remote.host]: from: $from into: $into")
-        defineRemote(remote)
-        ssh.run {
-            session(ssh.remotes."$remote.name") {
-                if (filterBy && filterRegex)
-                    put from: from, into: into, filter: { it."$filterBy" =~ filterRegex }
-                else
-                    put from: from, into: into
+        try {
+            registerLogHandler("Sending a file/directory to $remote.name[$remote.host]: from: $from into: $into")
+            defineRemote(remote)
+            ssh.run {
+                session(ssh.remotes."$remote.name") {
+                    if (filterBy && filterRegex)
+                        put from: from, into: into, filter: { it."$filterBy" =~ filterRegex }
+                    else
+                        put from: from, into: into
+                }
             }
+        } finally {
+            cleanupLogHandler()
         }
     }
 
@@ -232,15 +274,19 @@ class SSHService implements Serializable {
      * @return response from ssh run.
      */
     def get(String from, String into, String filterBy, String filterRegex) {
-        registerLogHandler("Receiving a file/directory from $remote.name[$remote.host]: from: $from into: $into")
-        defineRemote(remote)
-        ssh.run {
-            session(ssh.remotes."$remote.name") {
-                if (filterBy && filterRegex)
-                    get from: from, into: into, filter: { it."$filterBy" =~ filterRegex }
-                else
-                    get from: from, into: into
+        try {
+            registerLogHandler("Receiving a file/directory from $remote.name[$remote.host]: from: $from into: $into")
+            defineRemote(remote)
+            ssh.run {
+                session(ssh.remotes."$remote.name") {
+                    if (filterBy && filterRegex)
+                        get from: from, into: into, filter: { it."$filterBy" =~ filterRegex }
+                    else
+                        get from: from, into: into
+                }
             }
+        } finally {
+            cleanupLogHandler()
         }
     }
 
@@ -251,12 +297,16 @@ class SSHService implements Serializable {
      * @return output from ssh's remove operation.
      */
     def remove(String path) {
-        registerLogHandler("Removing a file/directory on $remote.name[$remote.host]: $path")
-        defineRemote(remote)
-        ssh.run {
-            session(ssh.remotes."$remote.name") {
-                remove path
+        try {
+            registerLogHandler("Removing a file/directory on $remote.name[$remote.host]: $path")
+            defineRemote(remote)
+            ssh.run {
+                session(ssh.remotes."$remote.name") {
+                    remove path
+                }
             }
+        } finally {
+            cleanupLogHandler()
         }
     }
 }
