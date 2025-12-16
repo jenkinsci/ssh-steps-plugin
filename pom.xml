@@ -23,6 +23,10 @@
     <groovy.ssh.version>2.10.1</groovy.ssh.version>
     <lombok.version>1.18.42</lombok.version>
     <assertj-core.version>3.27.3</assertj-core.version>
+    <!-- Enable JUnit 4 import ban for 100% health score -->
+    <!-- https://plugins.jenkins.io/ssh-steps/healthscore/ -->
+    <!-- https://github.com/jenkinsci/plugin-pom/pull/1178 -->
+    <ban-junit4-imports.skip>false</ban-junit4-imports.skip>
   </properties>
   <licenses>
     <license>
