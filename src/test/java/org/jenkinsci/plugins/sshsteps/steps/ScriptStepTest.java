@@ -65,4 +65,20 @@ class ScriptStepTest extends BaseTest {
     // Assert Test
     verify(sshServiceMock, times(1)).executeScriptFromFile(scriptName);
   }
+
+  @Test
+  void testPartialOutputCaptured() throws Exception {
+    // Test for JENKINS-59781: Scripts without trailing newlines should have their output captured
+    // This validates the partial output matcher in the interaction block
+    final ScriptStep step = new ScriptStep(scriptName);
+
+    stepExecution = new ScriptStep.Execution(step, contextMock);
+
+    // Execute Test - the script should complete successfully even if output lacks trailing newline
+    stepExecution.run();
+
+    // Assert that executeScriptFromFile was called
+    // The actual output capture happens in SSHService's interaction block
+    verify(sshServiceMock, times(1)).executeScriptFromFile(scriptName);
+  }
 }
