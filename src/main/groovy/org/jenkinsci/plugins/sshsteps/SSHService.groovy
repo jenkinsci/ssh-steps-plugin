@@ -138,13 +138,6 @@ class SSHService implements Serializable {
 
                 def logPrefix = remote.appendName ? "$remote.name|" : ''
                 
-                // Reusable closure for logging output with prefix
-                def logOutput = { output ->
-                    if (output) {
-                        logger.println("$logPrefix$output")
-                    }
-                }
-
                 // Pipe logs to TaskListener's print stream for commands/scripts only
                 // Do NOT enable interaction for file transfers to prevent file contents from being printed
                 if (enableInteraction) {
@@ -155,12 +148,23 @@ class SSHService implements Serializable {
                         when(line: _, from: standardError) {
                             logger.println("$logPrefix$it")
                         }
+
+                        // Reusable closure for logging output with prefix
+                        def logOutput = { output ->
+                            if (output) {
+                                logger.println("$logPrefix$output")
+                            }
+                        }
+
+                        // Capture partial output at stream end to prevent truncation
+                        // when commands exit without trailing newlines
+                        when(partial: _, from: standardOutput) {
+                            logOutput(it)
+                        }
+                        when(partial: _, from: standardError) {
+                            logOutput(it)
+                        }
                     }
-                    
-                    // Capture partial output at stream end to prevent truncation
-                    // when commands exit without trailing newlines
-                    when(partial: _, from: standardOutput, logOutput)
-                    when(partial: _, from: standardError, logOutput)
                 }
 
                 if (remote.pty) {
