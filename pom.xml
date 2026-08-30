@@ -129,6 +129,9 @@
         <groupId>org.codehaus.gmavenplus</groupId>
         <artifactId>gmavenplus-plugin</artifactId>
         <version>5.1.0</version>
+        <configuration>
+          <targetBytecode>1.8</targetBytecode>
+        </configuration>
         <executions>
           <execution>
             <goals>
